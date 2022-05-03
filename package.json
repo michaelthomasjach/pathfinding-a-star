@@ -1,0 +1,30 @@
+{
+  "name": "pathfinding-a-star",
+  "version": "0.0.1",
+  "description": "Pathfinding A*",
+  "main": "application.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node --loader ts-node/esm src/application.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelthomasjach/pathfinding-a-star.git"
+  },
+  "author": "michaelthomasjach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelthomasjach/pathfinding-a-star/issues"
+  },
+  "homepage": "https://github.com/michaelthomasjach/pathfinding-a-star#readme",
+  "dependencies": {
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.31"
+  }
+}
