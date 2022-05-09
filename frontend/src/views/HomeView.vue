@@ -1,8 +1,8 @@
 <template>
   <div class="home">
+    <div>test => {{ label }}</div>
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-    <div>test => {{ label }}</div>
   </div>
 </template>
 
@@ -29,8 +29,10 @@ export default class HomeView extends Vue {
   }
 
   mounted() {
-    this.requestGrid();
-    this.text = this.getGrid;
+    this.requestGrid().then((res: string) => {
+      console.log("RES", res);
+      this.text = this.getGrid;
+    });
   }
 
   /*

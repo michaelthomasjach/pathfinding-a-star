@@ -1,11 +1,18 @@
-import {Grid} from "../views/Grid";
-import { Request, Response } from 'express';
-
+import { Grid } from "../views/Grid";
+import { Request, Response } from "express";
 
 export class GridController {
-    constructor () {}
+  constructor() {}
 
-    getGrid = (req: Request, res: Response) => {
-        res.send(new Grid().getGrid());
-    }
+  getGrid = (req: Request, res: Response) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+    );
+    res.send(new Grid().getGrid());
+  };
 }
