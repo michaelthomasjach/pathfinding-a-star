@@ -5,8 +5,8 @@ const GridController_1 = require("../../controller/GridController");
 class Route {
     constructor(app) {
         this.routes = () => {
-            this.app.get('/', (req, res) => {
-                console.log("OK");
+            this.app.get("/grid", (req, res) => {
+                console.log("Réponse backend /grid");
                 return new GridController_1.GridController().getGrid(req, res);
             });
         };
