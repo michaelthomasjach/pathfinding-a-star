@@ -8,11 +8,16 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+// import { Getter, Action } from 'vuex-class';
 
 @Options({
   components: {
     HelloWorld,
   },
 })
-export default class HomeView extends Vue {}
+export default class HomeView extends Vue {
+  // @Getter('getAllFlights') getAllFlights!: typeof iFlightState.allFlightList;
+  // @Action('setSelectedFlight') setSelectedFlight: any;
+
+}
 </script>
