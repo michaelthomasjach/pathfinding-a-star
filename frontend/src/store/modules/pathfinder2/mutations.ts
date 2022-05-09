@@ -1,18 +1,26 @@
-import { getDefaultState } from "./state";
 import { IExampleState } from "./interfaces";
 import { IExample } from "../interfaces";
 
-export const ACTION_TYPES = {
-  setAllExample: "setAllExample",
-  resetExampleState: "resetExampleState",
-};
+export default class Mutations {
+  private getDefaultState;
 
-// Mutations
-export default {
-  [ACTION_TYPES.setAllExample](state: IExampleState, example: IExample[]) {
-    state.allExample = example;
-  },
-  [ACTION_TYPES.resetExampleState](state: IExampleState) {
-    Object.assign(state, getDefaultState());
-  },
-};
+  private MUTATION_METHODS_NAMES = {
+    setAllExample: "setAllExample",
+    resetExampleState: "resetExampleState",
+  };
+
+  constructor(getDefaultState: any) {
+    this.getDefaultState = getDefaultState;
+  }
+
+  getMutationsMethodsNames = () => this.MUTATION_METHODS_NAMES;
+
+  getMutations = () => ({
+    [this.MUTATION_METHODS_NAMES.setAllExample]: (state: IExampleState, example: IExample[]) => {
+      state.allExample = example;
+    },
+    [this.MUTATION_METHODS_NAMES.resetExampleState]: (state: IExampleState) => {
+      Object.assign(state, this.getDefaultState());
+    },
+  });
+}

@@ -1,7 +1,7 @@
-import state from "./state";
+import State from "./State";
 import Actions from "./Actions";
-import getters from "./getters";
-import mutations from "./mutations";
+import Getters from "./Getters";
+import Mutations from "./Mutations";
 
 export default class Pathfinder {
   private state: any;
@@ -10,10 +10,11 @@ export default class Pathfinder {
   private mutations: any;
 
   constructor(axios: any) {
-    this.state = state;
-    this.actions = new Actions(axios).getActions();
-    this.getters = getters;
-    this.mutations = mutations;
+    this.state = new State().getState();
+    const mutationsInstance = new Mutations(this.state.getDefaultState);
+    this.mutations = mutationsInstance.getMutations();
+    this.actions = new Actions(axios, mutationsInstance.getMutationsMethodsNames()).getActions();
+    this.getters = new Getters().getGetters();
   }
 
   getStore = () => ({
