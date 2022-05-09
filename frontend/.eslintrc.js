@@ -40,6 +40,7 @@ module.exports = {
       },
     ],
     "implicit-arrow-linebreak": 0,
+    "lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
   },
   overrides: [
     {
