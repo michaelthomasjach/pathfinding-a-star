@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseHttpClient = axios.create({
   baseURL: process.env.VUE_APP_BASE_URL,
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 const axiosHttpClient = {
@@ -11,8 +11,12 @@ const axiosHttpClient = {
       .get(endpoint, {
         headers: {
           ...headers,
-          Accept: "application/json; charset=utf-8",
-          "Access-Control-Allow-Origin": "http://localhost:3000/",
+          // Accept: "application/json; charset=utf-8",
+          // credentials: "include",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+          // "Access-Control-Allow-Credentials": "true",
         },
       })
       .then(({ data }) => data),
@@ -31,4 +35,4 @@ const axiosHttpClient = {
     }),
 };
 
-export default { axiosHttpClient };
+export default axiosHttpClient;
