@@ -1,10 +1,18 @@
 import { IExampleState } from "./interfaces";
 
-const getDefaultState = (): IExampleState => ({
-  allExample: [],
-});
+export default class State {
+  private state;
 
-const state = getDefaultState();
-export { getDefaultState };
+  constructor() {
+    this.state = this.getDefaultState();
+  }
 
-export default state;
+  private getDefaultState = (): IExampleState => ({
+    allExample: [],
+  });
+
+  getState = () => ({
+    state: this.state,
+    getDefaultState: this.getDefaultState(),
+  });
+}

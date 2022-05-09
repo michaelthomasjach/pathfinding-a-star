@@ -1,62 +1,30 @@
-import axios from "axios";
+export default class Actions {
+  private axiosHttpClient: any;
+  private MUTATION_METHODS_NAMES: any;
 
-import { ACTION_TYPES } from "./mutations";
+  constructor(axiosHttpClient: any, mutationMethodsNames: any) {
+    this.axiosHttpClient = axiosHttpClient;
+    this.MUTATION_METHODS_NAMES = mutationMethodsNames;
+  }
 
-const baseHttpClient = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
-  // withCredentials: true,
-});
-
-const axiosHttpClient = {
-  get: (endpoint: string, headers = {}) =>
-    baseHttpClient
-      .get(endpoint, {
-        /*
-        headers: {
-          ...headers,
-          Accept: "application/json; charset=utf-8",
-        },
-        */
-        headers: {
-          ...headers,
-          // Accept: "application/json; charset=utf-8",
-          // credentials: "include",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-          // "Access-Control-Allow-Credentials": "true",
-        },
-      })
-      .then(({ data }) => data),
-  put: (endpoint: string, data: Record<string, never>, headers = {}) =>
-    baseHttpClient.put(endpoint, data, {
-      headers,
-    }),
-  post: (endpoint: string, data: Record<string, never>, headers = {}) =>
-    baseHttpClient.post(endpoint, data, { headers }),
-  delete: (endpoint: string, headers = {}) =>
-    baseHttpClient.delete(endpoint, {
-      headers: {
-        ...headers,
-        Accept: "application/json; charset=utf-8",
-      },
-    }),
-};
-
-export default {
-  requestGrid({ commit }: any) {
+  // eslint-disable-next-line arrow-body-style
+  private requestGrid = ({ commit }: any) => {
     return new Promise((result, reject) => {
-      axiosHttpClient
+      this.axiosHttpClient
         .get("/grid")
-        .then((grid) => {
+        .then((grid: any) => {
           console.log("/grid", grid);
-          commit(ACTION_TYPES.setAllExample, grid);
+          commit(this.MUTATION_METHODS_NAMES.setAllExample, grid);
           result(result);
         })
-        .catch((error) => {
+        .catch((error: any) => {
           reject(error);
           throw new Error(error);
         });
     });
-  },
-};
+  };
+
+  getActions = () => ({
+    requestGrid: this.requestGrid,
+  });
+}
