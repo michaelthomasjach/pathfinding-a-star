@@ -15,7 +15,7 @@ export default class Actions {
         .then((grid: any) => {
           console.log("/grid", grid);
           commit(this.MUTATION_METHODS_NAMES.setAllExample, grid);
-          result(result);
+          result(grid);
         })
         .catch((error: any) => {
           reject(error);

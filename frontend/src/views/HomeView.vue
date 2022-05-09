@@ -1,6 +1,15 @@
 <template>
   <div class="home">
-    <div>test => {{ label }}</div>
+    <div class="grid-wrapper">
+      <div v-for="row in grid" v-bind:key="row.rowIndex" class="row">
+        <div v-for="(block) in row"
+          v-bind:key="block.blockIndex"
+          class="block"
+          :class="block == 'EMPTY' ? 'empty' : 'wall'">
+            x
+        </div>
+      </div>
+    </div>
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
@@ -18,30 +27,48 @@ import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
   },
 })
 export default class HomeView extends Vue {
-  private text = "test";
+  private gridArray = [];
 
   @Action("requestGrid") requestGrid: any;
 
   @Getter("getGrid") getGrid: any;
 
-  get label() {
-    return this.text;
+  get grid() {
+    return this.gridArray;
   }
 
   mounted() {
-    this.requestGrid().then((res: string) => {
-      console.log("RES", res);
-      this.text = this.getGrid;
+    this.requestGrid().then((res: []) => {
+      // this.text = this.getGrid;
+      this.gridArray = res;
     });
   }
-
-  /*
-
-  test = () => {
-    // this.$store.commit('increment');
-    // console.log(this.$store.state.count);
-  };
-
-  */
 }
 </script>
+
+<style scoped lang="scss">
+.grid-wrapper {
+  display: block;
+  margin: auto;
+
+  .row {
+    display: flex;
+    margin: auto;
+    height: auto;
+    width: auto;
+
+    .block {
+      width: 30px;
+      height: 30px;
+      border: 1px solid #000;
+
+      &.empty {
+        background: green;
+      }
+      &.wall {
+        background: red;
+      }
+    }
+  }
+}
+</style>
