@@ -5,7 +5,7 @@
         <div v-for="(cell) in row"
           v-bind:key="cell.blockIndex"
           class="block"
-          :class="cell.status == 'EMPTY' ? 'empty' : 'wall'">
+          :class="cell.status.toLowerCase()">
             {{ cell }}
         </div>
       </div>
@@ -63,10 +63,16 @@ export default class HomeView extends Vue {
       border: 1px solid #000;
 
       &.empty {
-        background: green;
+        background: white;
       }
       &.wall {
         background: red;
+      }
+      &.start {
+        background: green;
+      }
+      &.end {
+        background: yellow;
       }
     }
   }

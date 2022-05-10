@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GridBuilder = void 0;
 const Cell_1 = require("./Cell");
 class GridBuilder {
-    constructor(width = 10, height = 10) {
+    constructor(cols = 10, rows = 10) {
         this.create = () => {
             const grid = [];
             let start = false;
@@ -23,6 +23,8 @@ class GridBuilder {
                 }
                 grid.push(row);
             }
+            grid[0][0].setStart();
+            grid[this.rows - 1][this.cols - 1].setEnd();
             return grid;
         };
         this.createStart = () => {
@@ -36,8 +38,8 @@ class GridBuilder {
         this.getGrid = () => {
             return this.grid;
         };
-        this.cols = width;
-        this.rows = height;
+        this.cols = cols;
+        this.rows = rows;
         this.grid = this.create();
     }
     getRandomInt(max) {

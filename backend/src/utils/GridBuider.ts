@@ -5,9 +5,9 @@ export class GridBuilder {
   private rows: number; // height of grid
   private grid: Cell[][];
 
-  constructor(width: number = 10, height: number = 10) {
-    this.cols = width;
-    this.rows = height;
+  constructor(cols: number = 10, rows: number = 10) {
+    this.cols = cols;
+    this.rows = rows;
     this.grid = this.create();
   }
 
@@ -31,6 +31,8 @@ export class GridBuilder {
       }
       grid.push(row);
     }
+    grid[0][0].setStart();
+    grid[this.rows - 1][this.cols - 1].setEnd();
     return grid;
   };
 
