@@ -7,9 +7,17 @@ export enum CellStatus {
 
 export class Cell {
   private id: number;
+  private x: number;
+  private y: number;
+  private f: number = 0;
+  private g: number = 0;
+  private h: number = 0;
+
   private status: CellStatus | null = null;
-  constructor(id: number) {
-    this.id = id;
+  constructor(rowIndex: number, colIndex: number) {
+    this.id = rowIndex * colIndex;
+    this.y = rowIndex;
+    this.x = colIndex;
   }
 
   setWall = () => {
@@ -36,12 +44,5 @@ export class Cell {
     return this.id;
   };
 
-  getCell = () => ({
-    id: this.id,
-    cell: this.status,
-  });
-
-  getInstance = () => {
-    return this;
-  };
+  getCell = () => this;
 }

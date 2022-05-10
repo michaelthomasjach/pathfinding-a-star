@@ -20,7 +20,7 @@ export class GridBuilder {
       const row: Array<Cell> = [];
 
       for (let colIndex = 1; colIndex < this.cols + 1; colIndex++) {
-        const cell = new Cell(rowIndex * colIndex);
+        const cell = new Cell(rowIndex, colIndex);
         if (this.getRandomInt(10) > 8) {
           cell.setWall();
           row.push(cell);
@@ -34,16 +34,6 @@ export class GridBuilder {
     grid[0][0].setStart();
     grid[this.rows - 1][this.cols - 1].setEnd();
     return grid;
-  };
-
-  private createStart = () => {
-    const start = this.getRandomInt(this.cols * this.rows);
-  };
-
-  private getBlock = (block: number, grid: Cell[][]) => {
-    const row = Math.floor(block / this.cols);
-    const line = block % this.cols;
-    return grid[row][line];
   };
 
   private getRandomInt(max: number) {

@@ -58,8 +58,8 @@ export default class HomeView extends Vue {
     width: auto;
 
     .block {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
       border: 1px solid #000;
 
       &.empty {

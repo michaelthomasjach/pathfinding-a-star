@@ -9,7 +9,10 @@ var CellStatus;
     CellStatus["END"] = "END";
 })(CellStatus = exports.CellStatus || (exports.CellStatus = {}));
 class Cell {
-    constructor(id) {
+    constructor(rowIndex, colIndex) {
+        this.f = 0;
+        this.g = 0;
+        this.h = 0;
         this.status = null;
         this.setWall = () => {
             this.status = CellStatus.WALL;
@@ -29,14 +32,10 @@ class Cell {
         this.getId = () => {
             return this.id;
         };
-        this.getCell = () => ({
-            id: this.id,
-            cell: this.status,
-        });
-        this.getInstance = () => {
-            return this;
-        };
-        this.id = id;
+        this.getCell = () => this;
+        this.id = rowIndex * colIndex;
+        this.y = rowIndex;
+        this.x = colIndex;
     }
 }
 exports.Cell = Cell;
