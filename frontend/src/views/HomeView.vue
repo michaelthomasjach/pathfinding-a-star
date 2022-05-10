@@ -2,11 +2,18 @@
   <div class="home">
     <div class="grid-wrapper">
       <div v-for="row in grid" v-bind:key="row.rowIndex" class="row">
-        <div v-for="(cell) in row"
+        <div
+          v-for="cell in row"
           v-bind:key="cell.blockIndex"
           class="block"
-          :class="cell.status.toLowerCase()">
-            {{ cell }}
+          :class="cell.status.toLowerCase()"
+        >
+          <div>id: {{ cell.id }}</div>
+          <div>x: {{ cell.x }}</div>
+          <div>y: {{ cell.y }}</div>
+          <div v-for="neighbor in cell.neighbors" v-bind:key="neighbor">
+            neighborID: {{ neighbor.id }}
+          </div>
         </div>
       </div>
     </div>
@@ -50,6 +57,7 @@ export default class HomeView extends Vue {
 .grid-wrapper {
   display: block;
   margin: auto;
+  font-size: 12px;
 
   .row {
     display: flex;
@@ -58,8 +66,8 @@ export default class HomeView extends Vue {
     width: auto;
 
     .block {
-      width: 120px;
-      height: 120px;
+      width: 180px;
+      height: 180px;
       border: 1px solid #000;
 
       &.empty {

@@ -12,13 +12,18 @@ export class Cell {
   private f: number = 0;
   private g: number = 0;
   private h: number = 0;
+  private neighbors: Object[] = [];
 
   private status: CellStatus | null = null;
-  constructor(rowIndex: number, colIndex: number) {
-    this.id = rowIndex * colIndex;
+  constructor(id: number, rowIndex: number, colIndex: number) {
+    this.id = id;
     this.y = rowIndex;
     this.x = colIndex;
   }
+
+  addNeighbor = (cell: Cell) => {
+    this.neighbors.push(cell);
+  };
 
   setWall = () => {
     this.status = CellStatus.WALL;
@@ -36,13 +41,39 @@ export class Cell {
     this.status = CellStatus.END;
   };
 
+  getNeighbors = (): Cell[] => {
+    return this.neighbors;
+  };
+
   getZone = (): CellStatus | null => {
     return this.status;
   };
 
-  getId = () => {
+  getId = (): number => {
     return this.id;
   };
 
+  getX = (): number => {
+    return this.x;
+  };
+
+  getY = (): number => {
+    return this.y;
+  };
+
+  getF = (): number => {
+    return this.f;
+  };
+
+  getG = (): number => {
+    return this.g;
+  };
+
+  getH = (): number => {
+    return this.h;
+  };
+
   getCell = () => this;
+
+  getCellJSON = () => JSON.parse(JSON.stringify(this));
 }
