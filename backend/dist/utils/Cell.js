@@ -10,28 +10,28 @@ var CellStatus;
 })(CellStatus = exports.CellStatus || (exports.CellStatus = {}));
 class Cell {
     constructor(id) {
-        this.cell = null;
+        this.status = null;
         this.setWall = () => {
-            this.cell = CellStatus.WALL;
+            this.status = CellStatus.WALL;
         };
         this.setEmpty = () => {
-            this.cell = CellStatus.EMPTY;
+            this.status = CellStatus.EMPTY;
         };
         this.setStart = () => {
-            this.cell = CellStatus.START;
+            this.status = CellStatus.START;
         };
         this.setEnd = () => {
-            this.cell = CellStatus.END;
+            this.status = CellStatus.END;
         };
         this.getZone = () => {
-            return this.cell;
+            return this.status;
         };
         this.getId = () => {
             return this.id;
         };
         this.getCell = () => ({
             id: this.id,
-            cell: this.cell,
+            cell: this.status,
         });
         this.getInstance = () => {
             return this;

@@ -1,24 +1,32 @@
-import { Block, Zone } from "./Block";
+import { Cell, CellStatus } from "./Cell";
 
 export class GridBuilder {
-  private width: number;
-  private height: number;
-  private grid: Zone[][];
+  private cols: number; // width of grid
+  private rows: number; // height of grid
+  private grid: Cell[][];
+
   constructor(width: number = 10, height: number = 10) {
-    this.width = width;
-    this.height = height;
+    this.cols = width;
+    this.rows = height;
     this.grid = this.create();
   }
 
-  private create = (): Zone[][] => {
+  private create = (): Cell[][] => {
     const grid = [];
-    for (let height = 0; height < this.height; height++) {
-      const row: Array<Zone> = [];
-      for (let i = 0; i < this.width; i++) {
+    let start = false;
+    let end = false;
+
+    for (let rowIndex = 1; rowIndex < this.rows + 1; rowIndex++) {
+      const row: Array<Cell> = [];
+
+      for (let colIndex = 1; colIndex < this.cols + 1; colIndex++) {
+        const cell = new Cell(rowIndex * colIndex);
         if (this.getRandomInt(10) > 8) {
-          row.push(new Block().Wall());
+          cell.setWall();
+          row.push(cell);
         } else {
-          row.push(new Block().Empty());
+          cell.setEmpty();
+          row.push(cell);
         }
       }
       grid.push(row);
@@ -26,11 +34,21 @@ export class GridBuilder {
     return grid;
   };
 
+  private createStart = () => {
+    const start = this.getRandomInt(this.cols * this.rows);
+  };
+
+  private getBlock = (block: number, grid: Cell[][]) => {
+    const row = Math.floor(block / this.cols);
+    const line = block % this.cols;
+    return grid[row][line];
+  };
+
   private getRandomInt(max: number) {
     return Math.floor(Math.random() * max);
   }
 
-  getGrid = (): Zone[][] => {
+  getGrid = (): Cell[][] => {
     return this.grid;
   };
 }

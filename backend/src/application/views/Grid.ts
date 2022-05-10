@@ -1,4 +1,4 @@
-import { Zone } from "../../utils/Block";
+import { Cell } from "../../utils/Cell";
 import { GridBuilder } from "../../utils/GridBuider";
 
 export class Grid {
@@ -7,7 +7,7 @@ export class Grid {
     this.grid = this.createGrid();
   }
 
-  private createGrid = (): Zone[][] => {
+  private createGrid = (): Cell[][] => {
     return new GridBuilder(10, 10).getGrid();
   };
 

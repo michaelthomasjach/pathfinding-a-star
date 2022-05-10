@@ -2,11 +2,11 @@
   <div class="home">
     <div class="grid-wrapper">
       <div v-for="row in grid" v-bind:key="row.rowIndex" class="row">
-        <div v-for="(block) in row"
-          v-bind:key="block.blockIndex"
+        <div v-for="(cell) in row"
+          v-bind:key="cell.blockIndex"
           class="block"
-          :class="block == 'EMPTY' ? 'empty' : 'wall'">
-            x
+          :class="cell.status == 'EMPTY' ? 'empty' : 'wall'">
+            {{ cell }}
         </div>
       </div>
     </div>
@@ -58,8 +58,8 @@ export default class HomeView extends Vue {
     width: auto;
 
     .block {
-      width: 30px;
-      height: 30px;
+      width: 100px;
+      height: 100px;
       border: 1px solid #000;
 
       &.empty {
