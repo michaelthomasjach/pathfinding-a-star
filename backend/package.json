@@ -9,7 +9,8 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "preserve": "npm run build",
-    "serve": "cross-env PORT=3000 NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q dist/application.js\"",
+    "serve": "PORT=3000 NODE_ENV=development nodemon --watch src --ext ts --exec ts-node src/application.ts",
+    "debug": "nodemon --inspect=0.0.0.0:3000 --exec 'ts-node src/application.ts'",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production node dist/application.js",
     "test": "echo \"Error: no test specified\" && exit 1"

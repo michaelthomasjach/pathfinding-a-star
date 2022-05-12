@@ -1,21 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GridBuilder = void 0;
+const AStar_1 = require("./AStar");
 const Cell_1 = require("./Cell");
 class GridBuilder {
     constructor(cols = 10, rows = 10) {
         this.create = () => {
             const grid = new Array(this.rows);
-            console.log("grid => ", grid);
-            let start = false;
-            let end = false;
+            // console.log("grid => ", grid);
             let cellId = 0;
             for (let rowIndex = 0; rowIndex < this.rows; rowIndex++) {
                 grid[rowIndex] = new Array(this.cols);
                 for (let colIndex = 0; colIndex < this.cols; colIndex++) {
                     const cell = new Cell_1.Cell(cellId++, rowIndex, colIndex);
                     if (this.getRandomInt(10) > 8) {
-                        cell.setWall();
+                        cell.setEmpty();
                     }
                     else {
                         cell.setEmpty();
@@ -23,62 +22,61 @@ class GridBuilder {
                     grid[rowIndex][colIndex] = cell;
                 }
             }
-            grid[0][0].setStart();
-            grid[this.rows - 1][this.cols - 1].setEnd();
+            const start = grid[0][0];
+            start.setStart();
+            const end = grid[this.rows - 1][this.cols - 1];
+            end.setEnd();
             for (let rowIndex = 0; rowIndex < this.rows; rowIndex++) {
                 for (let colIndex = 0; colIndex < this.cols; colIndex++) {
                     // Ajout du voisin du dessous
                     if (rowIndex < this.rows - 1) {
-                        const cell = grid[rowIndex + 1][colIndex].getCellJSON();
-                        delete cell.neighbors;
+                        const cell = grid[rowIndex + 1][colIndex].getCell().getId();
                         grid[rowIndex][colIndex].addNeighbor(cell);
                     }
                     // Ajout du voisin du dessus
                     if (rowIndex > 0) {
-                        const cell = grid[rowIndex - 1][colIndex].getCellJSON();
-                        delete cell.neighbors;
+                        const cell = grid[rowIndex - 1][colIndex].getCell().getId();
                         grid[rowIndex][colIndex].addNeighbor(cell);
                     }
                     // Ajout du voisin de droite
                     if (colIndex < this.cols - 1) {
-                        const cell = grid[rowIndex][colIndex + 1].getCellJSON();
-                        delete cell.neighbors;
+                        const cell = grid[rowIndex][colIndex + 1].getCell().getId();
                         grid[rowIndex][colIndex].addNeighbor(cell);
                     }
                     // Ajout du voisin de gauche
                     if (colIndex > 0) {
-                        const cell = grid[rowIndex][colIndex - 1].getCellJSON();
-                        delete cell.neighbors;
+                        const cell = grid[rowIndex][colIndex - 1].getCell().getId();
                         grid[rowIndex][colIndex].addNeighbor(cell);
                     }
                     // DIAGONALE
                     // Ajout du voisin du dessous a gauche
                     if (rowIndex < this.rows - 1 && colIndex > 0) {
-                        const cell = grid[rowIndex + 1][colIndex - 1].getCellJSON();
-                        delete cell.neighbors;
+                        const cell = grid[rowIndex + 1][colIndex - 1].getCell().getId();
                         grid[rowIndex][colIndex].addNeighbor(cell);
                     }
                     // Ajout du voisin du dessous a droite
                     if (rowIndex < this.rows - 1 && colIndex < this.cols - 1) {
-                        const cell = grid[rowIndex + 1][colIndex + 1].getCellJSON();
-                        delete cell.neighbors;
+                        const cell = grid[rowIndex + 1][colIndex + 1].getCell().getId();
                         grid[rowIndex][colIndex].addNeighbor(cell);
                     }
                     // Ajout du voisin du dessus a gauche
                     if (rowIndex > 0 && colIndex > 0) {
-                        const cell = grid[rowIndex - 1][colIndex - 1].getCellJSON();
-                        delete cell.neighbors;
+                        const cell = grid[rowIndex - 1][colIndex - 1].getCell().getId();
                         grid[rowIndex][colIndex].addNeighbor(cell);
                     }
                     // Ajout du voisin du dessus a droite
                     if (rowIndex > 0 && colIndex < this.cols - 1) {
-                        const cell = grid[rowIndex - 1][colIndex + 1].getCellJSON();
-                        delete cell.neighbors;
+                        const cell = grid[rowIndex - 1][colIndex + 1].getCell().getId();
                         grid[rowIndex][colIndex].addNeighbor(cell);
                     }
                 }
             }
-            return grid;
+            // console.log(start.getCellJSON().f);
+            // console.log(grid);
+            const astar = new AStar_1.AStar(grid, start, end);
+            const finalPath = astar.getFinalPath();
+            // const finalPath: any = [];
+            return { grid, astar: finalPath ? finalPath : [] };
         };
         this.getGrid = () => {
             return this.grid;
