@@ -84,8 +84,8 @@ export default class HomeView extends Vue {
 
     .block {
       position: relative;
-      width: 180px;
-      height: 180px;
+      width: 100px;
+      height: 100px;
       border: 1px solid #000;
 
       .path-wrapper {

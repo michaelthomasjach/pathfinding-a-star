@@ -1,14 +1,13 @@
-import { Cell } from "./Cell";
+import {Cell, CellStatus} from "./Cell";
 
 export class AStar {
-  private lowestFIndex = 0;
   private grid : Cell[][];
   // private openSet: Cell[] = [];
   private openSet: Cell[] = [];
   private closedSet: Cell[] = [];
-
   private readonly end: Cell;
   private readonly finalPath: Cell[] = [];
+  private solutionFound = false;
 
   constructor(grid: Cell[][], start: Cell, end: Cell) {
     this.openSet.push(start);
@@ -39,6 +38,7 @@ export class AStar {
 
       // On cherche à savoir si la cellule ACTUELLE est égale à la cellule d'arrivée
       if (current.getId() === this.end.getId()) {
+        this.solutionFound = true;
         this.setFinalPath(current);
         console.log("Chemin trouvé");
       }
@@ -55,8 +55,9 @@ export class AStar {
       for (let i = 0; i < neighborsIDs.length; i++) {
         const neighborCell = this.retrieveCellFromID(neighborsIDs[i]);
 
-        // Si la cellule VOISINE n'est présente dans la liste [closedSet]
-        if (!this.closedSet.includes(neighborCell)) {
+        // Si la cellule VOISINE n'est présente dans la liste [closedSet] et que la cellule VOISINE n'est pas un obstacle
+        if (!this.closedSet.includes(neighborCell)
+            && neighborCell.getStatus() !== CellStatus.WALL) {
 
           /**
            * Pour aller de la cellule ACTUELLE à la cellule VOISINE on se déplace de 1 donc =>
@@ -83,6 +84,10 @@ export class AStar {
         }
       }
     }
+    if (!this.solutionFound) {
+      console.log("Aucune solution trouvée !")
+      return [];
+    }
     return this.finalPath;
   };
 
@@ -102,12 +107,13 @@ export class AStar {
   };
 
   private findCellWithTheSmallestDistanceF = (): Cell => {
+    let lowestFIndex = 0;
     for (let i = 0; i < this.openSet.length; i++) {
-      if (this.openSet[i].getF() < this.openSet[this.lowestFIndex].getF()) {
-        this.lowestFIndex = i;
+      if (this.openSet[i].getF() < this.openSet[lowestFIndex].getF()) {
+        lowestFIndex = i;
       }
     }
-    return this.openSet[this.lowestFIndex];
+    return this.openSet[lowestFIndex];
   }
 
   private setFinalPath = (current: Cell) => {
@@ -115,12 +121,7 @@ export class AStar {
     let temp: Cell | null = current;
     this.finalPath.push(temp);
     while (temp != null && temp.getPreviousCell() != null) {
-      //console.log("Current Node", temp.getId());
-      //console.log("Previous Node", temp.getPreviousCell()?.getId());
-      //console.log("--")
-
       this.finalPath.push(<Cell>temp.getPreviousCell());
-      //console.log("finalPath :", this.finalPath);
       temp = temp.getPreviousCell();
     }
   }

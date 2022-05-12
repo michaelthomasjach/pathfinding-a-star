@@ -78,7 +78,7 @@ export class Cell {
     return this.neighborsIDs;
   };
 
-  getZone = (): CellStatus | null => {
+  getStatus = (): CellStatus | null => {
     return this.status;
   };
 

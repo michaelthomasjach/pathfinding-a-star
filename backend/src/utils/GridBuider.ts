@@ -22,8 +22,8 @@ export class GridBuilder {
 
       for (let colIndex = 0; colIndex < this.cols; colIndex++) {
         const cell = new Cell(cellId++, rowIndex, colIndex);
-        if (this.getRandomInt(10) > 8) {
-          cell.setEmpty();
+        if (this.getRandomInt(10) > 5) {
+          cell.setWall();
         } else {
           cell.setEmpty();
         }
@@ -35,6 +35,10 @@ export class GridBuilder {
     start.setStart();
     const end = grid[this.rows - 1][this.cols - 1];
     end.setEnd();
+
+    // grid[0][1].setWall();
+    // grid[1][1].setWall();
+    // grid[2][1].setWall();
 
     for (let rowIndex = 0; rowIndex < this.rows; rowIndex++) {
       for (let colIndex = 0; colIndex < this.cols; colIndex++) {
