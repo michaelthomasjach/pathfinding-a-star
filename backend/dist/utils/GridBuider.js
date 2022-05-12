@@ -76,7 +76,7 @@ class GridBuilder {
             const astar = new AStar_1.AStar(grid, start, end);
             const finalPath = astar.getFinalPath();
             // const finalPath: any = [];
-            return { grid, astar: finalPath ? finalPath : [] };
+            return { grid: astar.getGrid(), astar: finalPath ? finalPath : [] };
         };
         this.getGrid = () => {
             return this.grid;

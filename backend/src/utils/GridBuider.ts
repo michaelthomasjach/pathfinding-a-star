@@ -89,7 +89,7 @@ export class GridBuilder {
     // const finalPath: any = [];
 
 
-    return {grid, astar: finalPath ? finalPath : [] };
+    return {grid: astar.getGrid(), astar: finalPath ? finalPath : [] };
   };
 
   private getRandomInt(max: number) {

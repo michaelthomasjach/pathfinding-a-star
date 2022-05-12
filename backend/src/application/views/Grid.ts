@@ -8,7 +8,7 @@ export class Grid {
   }
 
   private createGrid = (): {grid: Cell[][], astar: any} => {
-    return new GridBuilder(3, 3).getGrid();
+    return new GridBuilder(10, 10).getGrid();
   };
 
   getGrid = () => {

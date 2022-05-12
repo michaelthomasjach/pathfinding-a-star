@@ -14,14 +14,18 @@
           </div>
 
           <div>id: {{ cell.id }}</div>
+          <div>G: {{ cell.g }}</div>
+          <div>H: {{ cell.h }}</div>
+          <div>F: {{ cell.f }}</div>
           <!--
             <div>x: {{ cell.x }}</div>
             <div>y: {{ cell.y }}</div>
-          -->
+
           neighborIDs =
           <span v-for="neighbor in cell.neighborsIDs" v-bind:key="neighbor">
              {{ neighbor }} /
           </span>
+          -->
         </div>
       </div>
     </div>
