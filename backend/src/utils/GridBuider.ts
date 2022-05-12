@@ -22,7 +22,7 @@ export class GridBuilder {
 
       for (let colIndex = 0; colIndex < this.cols; colIndex++) {
         const cell = new Cell(cellId++, rowIndex, colIndex);
-        if (this.getRandomInt(10) > 5) {
+        if (this.getRandomInt(100) > 80) {
           cell.setWall();
         } else {
           cell.setEmpty();
