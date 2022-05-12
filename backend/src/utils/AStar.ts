@@ -65,22 +65,28 @@ export class AStar {
            */
           let tempG = current.getG() + 1;
 
+
           // Si la cellule VOISINE fait partie de la liste [openSet]
+          let newPath = false;
           if (this.openSet.includes(neighborCell)) {
             // Si la valeur de G calculée est inférieure à celle de la valeur de G de la cellule VOISINE alors on remplace sa valeur
             if (tempG < neighborCell.getG()) {
               neighborCell.setG(tempG);
+              newPath = true;
             }
           } else {
             // Si la cellule VOISINE ne fait pas partie de la liste [openSet]
             // On initialise la valeur de G de la cellule VOISINE & on ajoute la cellule VOISINE à la liste [openSet]
             neighborCell.setG(tempG);
+            newPath = true;
             this.openSet.push(neighborCell);
           }
 
-          neighborCell.setH(this.heuristic(neighborCell, this.end));
-          neighborCell.setF(neighborCell.getG() + neighborCell.getH());
-          neighborCell.setPreviousCell(current);
+          if (newPath) {
+            neighborCell.setH(this.heuristic(neighborCell, this.end));
+            neighborCell.setF(neighborCell.getG() + neighborCell.getH());
+            neighborCell.setPreviousCell(current);
+          }
         }
       }
     }
@@ -117,7 +123,6 @@ export class AStar {
   }
 
   private setFinalPath = (current: Cell) => {
-    console.log(this.grid);
     let temp: Cell | null = current;
     this.finalPath.push(temp);
     while (temp != null && temp.getPreviousCell() != null) {

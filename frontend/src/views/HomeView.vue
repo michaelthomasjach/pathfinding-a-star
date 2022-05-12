@@ -12,12 +12,12 @@
           <div class="path-wrapper" v-for="(path, idx) in astarRes" v-bind:key="idx">
             <div class="path" v-if="path.id == cell.id"></div>
           </div>
-
+          <!--
           <div>id: {{ cell.id }}</div>
           <div>G: {{ cell.g }}</div>
           <div>H: {{ cell.h }}</div>
           <div>F: {{ cell.f }}</div>
-          <!--
+
             <div>x: {{ cell.x }}</div>
             <div>y: {{ cell.y }}</div>
 
@@ -84,8 +84,8 @@ export default class HomeView extends Vue {
 
     .block {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 20px;
+      height: 20px;
       border: 1px solid #000;
 
       .path-wrapper {
