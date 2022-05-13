@@ -123,7 +123,7 @@ export class AStar {
     return openSet[lowestFIndex];
   }
 
-  // Private|
+  // Private
   setFinalPath = (current: Cell) => {
     let temp: Cell | null = current;
     this.finalPath.push(temp);
@@ -152,6 +152,4 @@ export class AStar {
   getGrid = () => {
     return this.grid;
   }
-
-
 }
