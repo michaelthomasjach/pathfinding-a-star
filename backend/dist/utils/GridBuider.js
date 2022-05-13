@@ -26,9 +26,6 @@ class GridBuilder {
             start.setStart();
             const end = grid[this.rows - 1][this.cols - 1];
             end.setEnd();
-            // grid[0][1].setWall();
-            // grid[1][1].setWall();
-            // grid[2][1].setWall();
             for (let rowIndex = 0; rowIndex < this.rows; rowIndex++) {
                 for (let colIndex = 0; colIndex < this.cols; colIndex++) {
                     // Ajout du voisin du dessous
@@ -77,8 +74,8 @@ class GridBuilder {
             // console.log(start.getCellJSON().f);
             // console.log(grid);
             const astar = new AStar_1.AStar(grid, start, end);
+            astar.init();
             const finalPath = astar.getFinalPath();
-            // const finalPath: any = [];
             return { grid: astar.getGrid(), astar: finalPath ? finalPath : [] };
         };
         this.getGrid = () => {

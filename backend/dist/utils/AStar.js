@@ -75,12 +75,13 @@ class AStar {
             }
             return this.finalPath;
         };
-        // calcule la distance entre le voisin et l'objectif
-        // private heuristic = (a: Cell, b: Cell) => {
+        // Private
         this.heuristic = (cell, end) => {
+            // calcule la distance entre le voisin et l'objectif
             const distance = Math.sqrt(Math.pow(cell.getX() - end.getX(), 2) + Math.pow(cell.getY() - end.getY(), 2));
             return distance;
         };
+        // Private
         this.removeFromArray = (array, element) => {
             for (let i = array.length - 1; i >= 0; i--) {
                 if (array[i] == element) {
@@ -88,15 +89,17 @@ class AStar {
                 }
             }
         };
-        this.findCellWithTheSmallestDistanceF = () => {
+        // Private
+        this.findCellWithTheSmallestDistanceF = (openSet) => {
             let lowestFIndex = 0;
-            for (let i = 0; i < this.openSet.length; i++) {
-                if (this.openSet[i].getF() < this.openSet[lowestFIndex].getF()) {
+            for (let i = 0; i < openSet.length; i++) {
+                if (openSet[i].getF() < openSet[lowestFIndex].getF()) {
                     lowestFIndex = i;
                 }
             }
-            return this.openSet[lowestFIndex];
+            return openSet[lowestFIndex];
         };
+        // Private
         this.setFinalPath = (current) => {
             let temp = current;
             this.finalPath.push(temp);
@@ -105,12 +108,7 @@ class AStar {
                 temp = temp.getPreviousCell();
             }
         };
-        this.getFinalPath = () => {
-            return this.finalPath;
-        };
-        this.getGrid = () => {
-            return this.grid;
-        };
+        // Private
         this.retrieveCellFromID = (cellId) => {
             const flatGrid = this.grid.flat();
             let retrieveCell;
@@ -121,11 +119,16 @@ class AStar {
             });
             return retrieveCell;
         };
+        this.getFinalPath = () => {
+            return this.finalPath;
+        };
+        this.getGrid = () => {
+            return this.grid;
+        };
         this.openSet.push(start);
         this.end = end;
         this.grid = grid;
         this.finalPath = [];
-        this.init();
     }
 }
 exports.AStar = AStar;
