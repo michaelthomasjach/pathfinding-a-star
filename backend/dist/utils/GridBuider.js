@@ -13,8 +13,8 @@ class GridBuilder {
                 grid[rowIndex] = new Array(this.cols);
                 for (let colIndex = 0; colIndex < this.cols; colIndex++) {
                     const cell = new Cell_1.Cell(cellId++, rowIndex, colIndex);
-                    if (this.getRandomInt(10) > 8) {
-                        cell.setEmpty();
+                    if (this.getRandomInt(100) > 70) {
+                        cell.setWall();
                     }
                     else {
                         cell.setEmpty();
@@ -26,6 +26,9 @@ class GridBuilder {
             start.setStart();
             const end = grid[this.rows - 1][this.cols - 1];
             end.setEnd();
+            // grid[0][1].setWall();
+            // grid[1][1].setWall();
+            // grid[2][1].setWall();
             for (let rowIndex = 0; rowIndex < this.rows; rowIndex++) {
                 for (let colIndex = 0; colIndex < this.cols; colIndex++) {
                     // Ajout du voisin du dessous

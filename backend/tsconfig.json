@@ -12,7 +12,12 @@
     "src",
     "src/*/*.ts",
     "src/**/*.tsx",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    // "tests/**/*.ts",
+    // "tests/**/*.tsx"
   ],
+  "exclude": [
+    "./tests/",
+    "./node_modules/",
+    "./dist/"
+  ]
 }

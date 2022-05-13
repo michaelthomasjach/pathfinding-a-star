@@ -14,7 +14,6 @@ export class AStar {
     this.end = end;
     this.grid = grid;
     this.finalPath = [];
-    this.init();
   }
 
   init = (): Cell[] => {
@@ -33,7 +32,7 @@ export class AStar {
 
     while (this.openSet.length > 0) {
       // Pour chaque cellule présente dans l'openSet on cherche à récupérer la cellule avec la valeur F la plus petite
-      let current: Cell = this.findCellWithTheSmallestDistanceF();
+      let current: Cell = this.findCellWithTheSmallestDistanceF(this.openSet);
 
 
       // On cherche à savoir si la cellule ACTUELLE est égale à la cellule d'arrivée
@@ -97,14 +96,15 @@ export class AStar {
     return this.finalPath;
   };
 
-  // calcule la distance entre le voisin et l'objectif
-  // private heuristic = (a: Cell, b: Cell) => {
-  private heuristic = (cell: Cell, end: Cell) => {
+  // Private
+  heuristic = (cell: Cell, end: Cell) => {
+    // calcule la distance entre le voisin et l'objectif
     const distance = Math.sqrt(Math.pow(cell.getX() - end.getX(), 2) + Math.pow(cell.getY() - end.getY(), 2));
     return distance;
   };
 
-  private removeFromArray = (array: any[], element: any) => {
+  // Private
+  removeFromArray = (array: any[], element: any) => {
     for (let i = array.length - 1; i >= 0; i--) {
       if (array[i] == element) {
         array.splice(i, 1);
@@ -112,23 +112,37 @@ export class AStar {
     }
   };
 
-  private findCellWithTheSmallestDistanceF = (): Cell => {
+  // Private
+  findCellWithTheSmallestDistanceF = (openSet: Cell[]): Cell => {
     let lowestFIndex = 0;
-    for (let i = 0; i < this.openSet.length; i++) {
-      if (this.openSet[i].getF() < this.openSet[lowestFIndex].getF()) {
+    for (let i = 0; i < openSet.length; i++) {
+      if (openSet[i].getF() < openSet[lowestFIndex].getF()) {
         lowestFIndex = i;
       }
     }
-    return this.openSet[lowestFIndex];
+    return openSet[lowestFIndex];
   }
 
-  private setFinalPath = (current: Cell) => {
+  // Private|
+  setFinalPath = (current: Cell) => {
     let temp: Cell | null = current;
     this.finalPath.push(temp);
     while (temp != null && temp.getPreviousCell() != null) {
       this.finalPath.push(<Cell>temp.getPreviousCell());
       temp = temp.getPreviousCell();
     }
+  }
+
+  // Private
+  retrieveCellFromID = (cellId: number): Cell => {
+    const flatGrid: Cell[] = this.grid.flat()
+    let retrieveCell: Cell | undefined;
+    flatGrid.some((cell) => {
+      if (cell.getId() == cellId) {
+        retrieveCell = cell;
+      }
+    })
+    return <Cell>retrieveCell;
   }
 
   getFinalPath = () => {
@@ -139,14 +153,5 @@ export class AStar {
     return this.grid;
   }
 
-  private retrieveCellFromID = (cellId: number): Cell => {
-    const flatGrid: Cell[] = this.grid.flat()
-    let retrieveCell: Cell | undefined;
-    flatGrid.some((cell) => {
-      if (cell.getId() == cellId) {
-        retrieveCell = cell;
-      }
-    })
-    return <Cell>retrieveCell;
-  }
+
 }

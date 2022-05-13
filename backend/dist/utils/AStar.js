@@ -1,13 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AStar = void 0;
+const Cell_1 = require("./Cell");
 class AStar {
     constructor(grid, start, end) {
-        this.lowestFIndex = 0;
         // private openSet: Cell[] = [];
         this.openSet = [];
         this.closedSet = [];
         this.finalPath = [];
+        this.solutionFound = false;
         this.init = () => {
             /**
              *  G = distance entre la cellule de départ et la cellule (chaque déplacement de cellule vaut 1)
@@ -21,9 +22,10 @@ class AStar {
              */
             while (this.openSet.length > 0) {
                 // Pour chaque cellule présente dans l'openSet on cherche à récupérer la cellule avec la valeur F la plus petite
-                let current = this.findCellWithTheSmallestDistanceF();
+                let current = this.findCellWithTheSmallestDistanceF(this.openSet);
                 // On cherche à savoir si la cellule ACTUELLE est égale à la cellule d'arrivée
                 if (current.getId() === this.end.getId()) {
+                    this.solutionFound = true;
                     this.setFinalPath(current);
                     console.log("Chemin trouvé");
                 }
@@ -35,38 +37,48 @@ class AStar {
                 // Pour chaque cellule VOISINE
                 for (let i = 0; i < neighborsIDs.length; i++) {
                     const neighborCell = this.retrieveCellFromID(neighborsIDs[i]);
-                    // Si la cellule VOISINE n'est présente dans la liste [closedSet]
-                    if (!this.closedSet.includes(neighborCell)) {
+                    // Si la cellule VOISINE n'est présente dans la liste [closedSet] et que la cellule VOISINE n'est pas un obstacle
+                    if (!this.closedSet.includes(neighborCell)
+                        && neighborCell.getStatus() !== Cell_1.CellStatus.WALL) {
                         /**
                          * Pour aller de la cellule ACTUELLE à la cellule VOISINE on se déplace de 1 donc =>
                          * G = G + 1 par rapport à la valeur de G de la cellule ACTUELLE
                          */
                         let tempG = current.getG() + 1;
                         // Si la cellule VOISINE fait partie de la liste [openSet]
+                        let newPath = false;
                         if (this.openSet.includes(neighborCell)) {
                             // Si la valeur de G calculée est inférieure à celle de la valeur de G de la cellule VOISINE alors on remplace sa valeur
                             if (tempG < neighborCell.getG()) {
                                 neighborCell.setG(tempG);
+                                newPath = true;
                             }
                         }
                         else {
                             // Si la cellule VOISINE ne fait pas partie de la liste [openSet]
                             // On initialise la valeur de G de la cellule VOISINE & on ajoute la cellule VOISINE à la liste [openSet]
                             neighborCell.setG(tempG);
+                            newPath = true;
                             this.openSet.push(neighborCell);
                         }
-                        neighborCell.setH(this.heuristic(neighborCell, this.end));
-                        neighborCell.setF(neighborCell.getG() + neighborCell.getH());
-                        neighborCell.setPreviousCell(current);
+                        if (newPath) {
+                            neighborCell.setH(this.heuristic(neighborCell, this.end));
+                            neighborCell.setF(neighborCell.getG() + neighborCell.getH());
+                            neighborCell.setPreviousCell(current);
+                        }
                     }
                 }
+            }
+            if (!this.solutionFound) {
+                console.log("Aucune solution trouvée !");
+                return [];
             }
             return this.finalPath;
         };
         // calcule la distance entre le voisin et l'objectif
         // private heuristic = (a: Cell, b: Cell) => {
         this.heuristic = (cell, end) => {
-            const distance = Math.sqrt(Math.pow(cell.getX() - cell.getX(), 2) + Math.pow(end.getY() - end.getY(), 2));
+            const distance = Math.sqrt(Math.pow(cell.getX() - end.getX(), 2) + Math.pow(cell.getY() - end.getY(), 2));
             return distance;
         };
         this.removeFromArray = (array, element) => {
@@ -77,23 +89,19 @@ class AStar {
             }
         };
         this.findCellWithTheSmallestDistanceF = () => {
+            let lowestFIndex = 0;
             for (let i = 0; i < this.openSet.length; i++) {
-                if (this.openSet[i].getF() < this.openSet[this.lowestFIndex].getF()) {
-                    this.lowestFIndex = i;
+                if (this.openSet[i].getF() < this.openSet[lowestFIndex].getF()) {
+                    lowestFIndex = i;
                 }
             }
-            return this.openSet[this.lowestFIndex];
+            return this.openSet[lowestFIndex];
         };
         this.setFinalPath = (current) => {
-            console.log(this.grid);
             let temp = current;
             this.finalPath.push(temp);
             while (temp != null && temp.getPreviousCell() != null) {
-                //console.log("Current Node", temp.getId());
-                //console.log("Previous Node", temp.getPreviousCell()?.getId());
-                //console.log("--")
                 this.finalPath.push(temp.getPreviousCell());
-                //console.log("finalPath :", this.finalPath);
                 temp = temp.getPreviousCell();
             }
         };

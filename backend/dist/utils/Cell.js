@@ -49,7 +49,7 @@ class Cell {
         this.getNeighborsIDs = () => {
             return this.neighborsIDs;
         };
-        this.getZone = () => {
+        this.getStatus = () => {
             return this.status;
         };
         this.getId = () => {
