@@ -1,6 +1,7 @@
 <template>
   <div>
-    Component du CV
+    <img alt="Vue logo" src="@/assets/logo.png" />
+    <div>Component du CV</div>
     <div>{{ msg }}</div>
   </div>
 

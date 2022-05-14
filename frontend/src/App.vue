@@ -1,8 +1,12 @@
 <template>
-  <div>
+  <div class="app-wrapper">
     <HeaderComponent class="header"/>
-    <div class="page">
-      <router-view/>
+    <div class="page-wrapper">
+      <div class="page">
+        <div class="page-content">
+          <router-view/>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -23,26 +27,59 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
-body {
+html, body {
+  position: relative;
+  height: 100%;
   margin: 0;
   padding: 0;
+}
+body {
   #app {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+
+    .app-wrapper {
+      position: relative;
+      display: block;
+      margin: auto;
+      width: 100%;
+      height: 100%;
+      background-attachment: fixed;
+      background-image: url("@/assets/birds.jpg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
   }
   .header {
     z-index: 1;
   }
-  .page {
+  .page-wrapper {
     position: relative;
     display: block;
-    padding: 50px;
-    margin-top: 92px;
-    height: 5000px;
+    margin: auto;
+    padding-top: 130px;
+    height: calc(100% - 180px);
+    width: 1500px;
+    background: transparent;
 
+    .page {
+      padding-top: 100px;
+      padding-bottom: 500px;
+      height: 100%;
+      overflow: auto;
+
+      .page-content {
+        padding: 50px 50px 0px 50px;
+        background-color: #f5f5f5;
+      }
+    }
   }
 }
 

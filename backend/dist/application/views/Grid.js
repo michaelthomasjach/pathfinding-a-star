@@ -5,7 +5,7 @@ const GridBuider_1 = require("../../utils/GridBuider");
 class Grid {
     constructor() {
         this.createGrid = () => {
-            return new GridBuider_1.GridBuilder(50, 50).getGrid();
+            return new GridBuider_1.GridBuilder(15, 15).getGrid();
         };
         this.getGrid = () => {
             return this.grid;

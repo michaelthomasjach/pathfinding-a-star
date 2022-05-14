@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <ResumeComponent msg="Mon cv via props" />
+    <ResumeComponent msg="Mon cv via props" />
+    <ResumeComponent msg="Mon cv via props" />
+    <ResumeComponent msg="Mon cv via props" />
+    <ResumeComponent msg="Mon cv via props" />
     <ResumeComponent msg="Mon cv via props" />
   </div>
 </template>
