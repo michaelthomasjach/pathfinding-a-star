@@ -27,11 +27,15 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 html, body {
   position: relative;
   height: 100%;
   margin: 0;
   padding: 0;
+
+  font-family: 'Roboto', sans-serif;
 }
 body {
   #app {
@@ -39,7 +43,6 @@ body {
     display: block;
     width: 100%;
     height: 100%;
-    font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -52,7 +55,7 @@ body {
       width: 100%;
       height: 100%;
       background-attachment: fixed;
-      background-image: url("@/assets/birds.jpg");
+      background-image: url("@/assets/light.jpg");
       background-repeat: no-repeat;
       background-position: center;
     }
@@ -76,7 +79,7 @@ body {
       overflow: auto;
 
       .page-content {
-        padding: 50px 50px 0px 50px;
+        padding: 0px;
         background-color: #f5f5f5;
       }
     }

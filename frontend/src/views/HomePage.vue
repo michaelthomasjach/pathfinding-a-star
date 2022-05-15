@@ -1,10 +1,5 @@
 <template>
-  <div class="home">
-    <ResumeComponent msg="Mon cv via props" />
-    <ResumeComponent msg="Mon cv via props" />
-    <ResumeComponent msg="Mon cv via props" />
-    <ResumeComponent msg="Mon cv via props" />
-    <ResumeComponent msg="Mon cv via props" />
+  <div class="home-page">
     <ResumeComponent msg="Mon cv via props" />
   </div>
 </template>
