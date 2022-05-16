@@ -7,6 +7,15 @@
           <div class="adress">Toulouse</div>
         </div>
       </div>
+      <div class="left-side-content-align">
+        <div class="name">Michael<br/>Jach</div>
+        <div class="resume-section-title">
+          <div class="title">
+            Education
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="right-side">
       <div class="resume-header">
@@ -18,15 +27,52 @@
           </div>
         </div>
       </div>
+      <div class="right-side-content-align">
+        <div class="resume-section">
+          <div class="resume-section-title">
+            <div class="title">
+              Profil
+            </div>
+          </div>
+          <div class="resume-section-content">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Animi aperiam cum cupiditate eligendi harum ipsum maiores nostrum quaerat,
+            quod ratione rem repellendus veritatis. Iste, porro.
+          </div>
+        </div>
 
-      <div class="resume-section">
-        <div class="resume-section-title">
-          <div class="title">
-            Profil
+        <div class="resume-section">
+          <div class="resume-section-title">
+            <div class="title">
+              Experience
+            </div>
+          </div>
+          <div class="resume-section-content">
+            <div class="subtitle">Job title goes here</div>
+            <div class="subtitle">Company name</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Animi aperiam cum cupiditate eligendi harum ipsum maiores nostrum quaerat,
+              quod ratione rem repellendus veritatis. Iste, porro.
+            </div>
+            <div>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Commodi corporis cumque dignissimos inventore omnis quam quos tempora.
+              Deserunt doloremque eveniet excepturi libero magni rem repudiandae ut.
+              Asperiores dignissimos ea explicabo illo!
+              A accusamus accusantium animi deserunt ducimus facilis
+              harum maiores minus optio quasi reiciendis reprehenderit saepe,
+              sapiente suscipit tempora voluptatibus.
+              <ul>
+                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, qui.</li>
+                <li>Aspernatur atque eaque illo molestias quaerat recusandae sit suscipit
+                  voluptatibus?
+                </li>
+                <li>Dolorem ea fugit ipsa, libero nihil nostrum quos similique voluptatem?</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-      <div>{{ msg }}</div>
     </div>
     <!--
     <img alt="Vue logo" src="@/assets/logo.png" />
@@ -54,6 +100,29 @@ export default class HomePage extends Vue {
 .icon {
   font-size: 22px;
 }
+.resume-section-title {
+  position: relative;
+  display: block;
+  text-transform: uppercase;
+  margin-bottom: 35px;
+  text-align: left;
+
+  .title {
+    font-size: 27px;
+    margin-left: 0px;
+    font-weight: 900;
+    color: #454545;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: -75px;
+    bottom: -17px;
+    height: 2px;
+    width: 150px;
+    background-color: #454545;
+  }
+}
 
 .resume-wrapper {
   position: relative;
@@ -61,8 +130,9 @@ export default class HomePage extends Vue {
     position: absolute;
     top: 0;
     left: 0;
-    width: 450px;
+    width: 350px;
     background-color: #CAC9C7;
+    background-image: url("@/assets/resume/texture-left.png");
     min-height: 500px;
 
     .location {
@@ -72,7 +142,7 @@ export default class HomePage extends Vue {
       .vertical-bar {
         position: absolute;
         top: 0px;
-        left: 150px;
+        left: 75px;
         width: 20px;
         height: 165px;
         background-color: #5C5C5E;
@@ -90,13 +160,39 @@ export default class HomePage extends Vue {
         }
       }
     }
+
+    .left-side-content-align {
+      position: relative;
+      display: block;
+      text-align: left;
+      margin-top: 250px;
+      margin-left: 75px;
+
+      .name {
+        font-size: 50px;
+        text-transform: uppercase;
+        font-weight: 900;
+        margin-bottom: 50px;
+      }
+
+      .resume-section-title {
+        &::after {
+          bottom: -10px ;
+          left: 0px;
+          width: 40px;
+          height: 1px;
+        }
+      }
+    }
+
   }
   .right-side {
     position: absolute;
     top: 0;
-    left: 450px;
+    left: 350px;
     right: 0px;
     background-color: #E6E4E7;
+    background-image: url("@/assets/resume/texture-right.png");
     min-height: 500px;
 
     .resume-header {
@@ -126,31 +222,40 @@ export default class HomePage extends Vue {
       }
     }
 
-    .resume-section {
+    .right-side-content-align {
       position: relative;
       display: block;
-      margin-top: 50px;
       text-align: left;
-      width: 100%;
+      margin-top: 50px;
+      margin-left: 75px;
+      margin-right: 75px;
 
-      .resume-section-title {
+      .resume-section {
         position: relative;
         display: block;
-        font-size: 30px;
-        text-transform: uppercase;
-
-        .title {
-          margin-left: 75px;
-          font-weight: 900;
+        margin-top: 50px;
+        text-align: left;
+        width: 100%;
+        &:first-child {
+          margin-top: 0px;
         }
-        &::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: -10px;
-          height: 3px;
-          width: 150px;
-          background-color: #5C5C5E;
+        &:last-child {
+          margin-bottom: 50px;
+        }
+
+        .resume-section-content {
+          position: relative;
+          margin: 0px;
+          display: block;
+          font-size: 15px;
+
+          .subtitle {
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 15px;
+            margin-bottom: 5px;
+            color: #454545;
+          }
         }
       }
     }
