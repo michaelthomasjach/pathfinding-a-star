@@ -9,7 +9,9 @@
       <span class="routes">
         <router-link to="/">Home</router-link>
         <div>|</div>
-        <router-link to="/a-star">A star</router-link>
+        <router-link to="/astar">A star</router-link>
+        <div>|</div>
+        <router-link to="/admin">Admin</router-link>
       </span>
     </div>
   </nav>

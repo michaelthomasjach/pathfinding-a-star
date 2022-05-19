@@ -11,9 +11,8 @@ export default class Actions {
   private requestGrid = ({ commit }: any) => {
     return new Promise((result, reject) => {
       this.axiosHttpClient
-        .get("/grid")
+        .get("/astar")
         .then((grid: any) => {
-          console.log("/grid", grid);
           commit(this.MUTATION_METHODS_NAMES.setAllExample, grid);
           result(grid);
         })

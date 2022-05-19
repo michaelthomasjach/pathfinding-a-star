@@ -11,10 +11,9 @@ process.on("SIGINT", function () {
   process.kill(process.pid, "SIGINT");
 });
 
-const application = new BuildDev(systemTimer);
-application
+const applicationDev = new BuildDev(systemTimer);
+applicationDev
   .getApplication()
   .listen(port, () =>
     console.log(`Pathfinding ASTAR est up sur le port ${port}`)
   );
-// .listen(port, () => console.log(`SysPEO est up sur le port ${port}`));;

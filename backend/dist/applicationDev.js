@@ -10,8 +10,7 @@ process.on("SIGINT", function () {
     // this is only called on ctrl+c, not restart
     process.kill(process.pid, "SIGINT");
 });
-const application = new BuildDev_1.BuildDev(Timer_1.systemTimer);
-application
+const applicationDev = new BuildDev_1.BuildDev(Timer_1.systemTimer);
+applicationDev
     .getApplication()
     .listen(port, () => console.log(`Pathfinding ASTAR est up sur le port ${port}`));
-// .listen(port, () => console.log(`SysPEO est up sur le port ${port}`));;

@@ -1,4 +1,4 @@
-import { Grid } from "../views/Grid";
+import { Grid } from "../../boundedContext/grid/Grid";
 import { Request, Response } from "express";
 
 export class GridController {

@@ -9,10 +9,34 @@
       </div>
       <div class="left-side-content-align">
         <div class="name">Michael<br/>Jach</div>
-        <div class="resume-section-title">
-          <div class="title">
-            Education
+        <div class="resume-section-wrapper">
+          <div class="resume-section-title">
+            <div class="title">
+              Education
+            </div>
           </div>
+          <div class="subtitle">Ingénieur</div>
+          <div class="subtitle">CESI</div>
+          <div class="subtitle">2013-2018</div>
+
+          <div class="subtitle m-t-50">BTS GC</div>
+          <div class="subtitle">Lycée Louis Vicat</div>
+          <div class="subtitle">2011-2013</div>
+
+          <div class="subtitle m-t-50">BAC</div>
+          <div class="subtitle">Lycée Louis Vicat</div>
+          <div class="subtitle">2010</div>
+        </div>
+
+        <div class="resume-section-wrapper">
+          <div class="resume-section-title">
+            <div class="title">
+              Compétences
+            </div>
+          </div>
+          <div class="subtitle">Ingénieur</div>
+          <div class="subtitle">CESI</div>
+          <div class="subtitle">2013-2018</div>
         </div>
       </div>
 
@@ -71,6 +95,15 @@
               </ul>
             </div>
           </div>
+
+          <div class="resume-section-content m-t-50">
+            <div class="subtitle">Job title goes here</div>
+            <div class="subtitle">Company name</div>
+            <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Animi aperiam cum cupiditate eligendi harum ipsum maiores nostrum quaerat,
+              quod ratione rem repellendus veritatis. Iste, porro.
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -89,7 +122,7 @@ import { Options, Vue } from "vue-class-component";
     msg: String,
   },
 })
-export default class HomePage extends Vue {
+export default class ResumeComponent extends Vue {
   get msg(): string {
     return this.msg;
   }
@@ -99,6 +132,9 @@ export default class HomePage extends Vue {
 <style lang="scss">
 .icon {
   font-size: 22px;
+}
+.m-t-50 {
+  margin-top: 50px !important;
 }
 .resume-section-title {
   position: relative;
@@ -122,6 +158,13 @@ export default class HomePage extends Vue {
     width: 150px;
     background-color: #454545;
   }
+}
+.subtitle {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: #454545;
 }
 
 .resume-wrapper {
@@ -175,14 +218,26 @@ export default class HomePage extends Vue {
         margin-bottom: 50px;
       }
 
-      .resume-section-title {
-        &::after {
-          bottom: -10px ;
-          left: 0px;
-          width: 40px;
-          height: 1px;
+      .resume-section-wrapper {
+        postion: relative;
+        margin-top: 50px;
+        &:first-child {
+          margin: 0px;
+        }
+        &:last-child {
+          margin-bottom: 50px;
+        }
+        .resume-section-title {
+          margin-bottom: 20px;
+          &::after {
+            bottom: -10px ;
+            left: 0px;
+            width: 40px;
+            height: 1px;
+          }
         }
       }
+
     }
 
   }
@@ -245,17 +300,9 @@ export default class HomePage extends Vue {
 
         .resume-section-content {
           position: relative;
-          margin: 0px;
+          margin: 0;
           display: block;
           font-size: 15px;
-
-          .subtitle {
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 15px;
-            margin-bottom: 5px;
-            color: #454545;
-          }
         }
       }
     }

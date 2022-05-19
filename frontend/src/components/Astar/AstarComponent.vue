@@ -22,7 +22,7 @@ import { Action, Getter } from "s-vuex-class";
 @Options({
   components: { },
 })
-export default class HomeView extends Vue {
+export default class AstarComponent extends Vue {
   private gridArray = [];
   private astarArray = [];
 
