@@ -11,6 +11,8 @@
         <div>|</div>
         <router-link to="/astar">A star</router-link>
         <div>|</div>
+        <router-link to="/login">Login</router-link>
+        <div>|</div>
         <router-link to="/admin">Admin</router-link>
       </span>
     </div>

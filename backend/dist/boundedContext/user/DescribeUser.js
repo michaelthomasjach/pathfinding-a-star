@@ -27,7 +27,7 @@ class DescribeUser {
                         new ChangeBirdHazardLevelCommandHandler(controlDataRepository)
                     )
                     */
-                    .addQuery(UserNameFromUserIdQueryHandler_1.USER_FROM_USER_ID, "Récupère l'utilisateur", new UserNameFromUserIdQueryHandler_1.UserFromUserIdQueryHandler(this.repositories.userRepository))
+                    .addQuery(UserNameFromUserIdQueryHandler_1.USER_EXIST, "Récupère l'utilisateur", new UserNameFromUserIdQueryHandler_1.UserExistQueryHandler(this.repositories.userRepository))
                     .build(),
             ];
         };

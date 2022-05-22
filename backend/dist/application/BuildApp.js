@@ -17,10 +17,7 @@ class BuildApp {
         this.getBuildApp = () => {
             return this.app;
         };
-        this.createQueryBus = () => {
-            const createQueryBus = () => new AggregateIdValidationQueryBusMiddleware_1.AggregateIdValidationQueryBusMiddleware(new QueryBus_1.QueryBus());
-            return createQueryBus();
-        };
+        this.createQueryBus = () => new AggregateIdValidationQueryBusMiddleware_1.AggregateIdValidationQueryBusMiddleware(new QueryBus_1.QueryBus());
         this.createEventBus = (stdoutLog, timer) => new LogEventBusMiddleware_1.LogEventBusMiddleware(new EventBus_1.BasicEventBus(), stdoutLog, timer);
         this.createCommandBus = (logger, eventBus, queryBus) => {
             const commandBus = new CommandBus_1.CommandBus();

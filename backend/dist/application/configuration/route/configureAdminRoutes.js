@@ -5,7 +5,7 @@ const http_status_codes_1 = require("http-status-codes");
 const UserRoles_1 = require("../middleware/UserRoles");
 const formatUser = (queryBus, user) => {
     const userId = user.id;
-    const formattedUser = { role: user.role };
+    const formattedUser = user;
     if (user.role === UserRoles_1.UserRoles.DEV)
         return formattedUser;
     if (userId === undefined)
@@ -22,10 +22,12 @@ class ConfigureAdminRoutes {
             // @ts-ignore
             // const user = req.user;
             const user = {
-                "id": "1",
-                "firstname": "Mike",
-                "lastname": "Jach",
-                "role": "ADMIN"
+                id: "1",
+                firstname: "Mike",
+                lastname: "Jach",
+                email: "michael.thomas.jach@gmail.com",
+                password: "password",
+                role: "ADMIN",
             };
             const userIsAuthenticated = user !== undefined;
             if (!userIsAuthenticated)
@@ -35,4 +37,3 @@ class ConfigureAdminRoutes {
     }
 }
 exports.ConfigureAdminRoutes = ConfigureAdminRoutes;
-;

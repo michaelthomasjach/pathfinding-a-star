@@ -9,7 +9,7 @@ class ConfigureDevRepositories {
                 userRepository: this.userRepository
             };
         };
-        this.userRepository = new ReadOnlyFileRepository_1.ReadOnlyFileRepository("./storage/configuration/user.json");
+        this.userRepository = new ReadOnlyFileRepository_1.ReadOnlyFileRepository("./storage/user.json");
     }
 }
 exports.ConfigureDevRepositories = ConfigureDevRepositories;

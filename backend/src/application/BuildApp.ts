@@ -36,10 +36,7 @@ export class BuildApp {
         return this.app;
     }
 
-    createQueryBus = (): QueryBus => {
-        const createQueryBus = () => new AggregateIdValidationQueryBusMiddleware(new QueryBus());
-        return createQueryBus();
-    }
+    createQueryBus = (): QueryBus => new AggregateIdValidationQueryBusMiddleware(new QueryBus());
 
     createEventBus = (stdoutLog: LoggerStdout, timer: Timer) =>
         new LogEventBusMiddleware(new BasicEventBus(), stdoutLog, timer);

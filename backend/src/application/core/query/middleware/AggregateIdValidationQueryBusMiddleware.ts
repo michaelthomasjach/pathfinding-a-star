@@ -13,11 +13,14 @@ export class AggregateIdValidationQueryBusMiddleware extends QueryBus {
         this.queryBus.subscribe(type, handler);
     }
 
-    dispatch(query: Query): QueryResponse<any> {
-        // @ts-ignore
-        const {userId} = query;
-        if (this.userIsAdmin(userId)) return this.queryBus.dispatch(query);
-        return failure("L'utilisateur n'est pas administrateur");
+    dispatch(query: Query, userShouldBeAuthenticatedToExecuteQuery: boolean = false): QueryResponse<any> {
+        if (userShouldBeAuthenticatedToExecuteQuery) {
+            // @ts-ignore
+            const {userId} = query;
+            if (this.userIsAdmin(userId)) return this.queryBus.dispatch(query);
+            return failure("L'utilisateur n'est pas administrateur");
+        }
+        return this.queryBus.dispatch(query);
     }
 
     userIsAdmin(userId: string): boolean {

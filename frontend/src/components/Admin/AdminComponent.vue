@@ -1,31 +1,31 @@
 <template>
-  <div>
-    admin
-    <div>{{ userInfo }}</div>
-  </div>
-
+  <div><button @click="changeUserInformations()">changeUserInformations</button></div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Action } from "s-vuex-class";
-import { IUser } from "@/store/modules/interfaces";
+import { Action, Getter } from "s-vuex-class";
 
 @Options({
   components: { },
 })
 export default class AdminComponent extends Vue {
-  private user: any = {};
-
+  @Getter("getUser") getUser: any;
   @Action("requestUserInformations") requestUserInformations: any;
 
-  get userInfo(): IUser {
-    return this.user;
-  }
-
+  /*
   mounted() {
     this.requestUserInformations().then((res: any) => {
       this.user = res;
+    });
+  }
+  */
+
+  changeUserInformations = () => {
+    this.requestUserInformations({
+      token: "this.getUser().token",
+    }).then((res: any) => {
+      console.log("RESPONSE :", res);
     });
   }
 }

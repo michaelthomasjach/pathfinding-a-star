@@ -8,11 +8,13 @@ class UserRepository {
     get(userId) {
         return this.userRepository.get(userId);
     }
-    save(userId, firstname, lastname, role) {
+    save(userId, firstname, lastname, email, password, role) {
         this.userRepository.save(userId, {
             id: userId,
             firstname,
             lastname,
+            email,
+            password,
             role
         });
     }

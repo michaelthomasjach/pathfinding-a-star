@@ -5,6 +5,7 @@ const configureAdminRoutes_1 = require("./configureAdminRoutes");
 const configureAstarRoutes_1 = require("./configureAstarRoutes");
 const http_status_codes_1 = require("http-status-codes");
 const UserRoles_1 = require("../middleware/UserRoles");
+const configureLoginRoutes_1 = require("./configureLoginRoutes");
 class ConfigureRoutes {
     constructor(app, queryBus, commandBus, logger, timer) {
         this.app = app;
@@ -28,9 +29,9 @@ class ConfigureRoutes {
                 return next();
             res.sendStatus(http_status_codes_1.StatusCodes.FORBIDDEN);
         };
+        new configureLoginRoutes_1.ConfigureLoginRoutes(app, queryBus);
         new configureAstarRoutes_1.ConfigureAstarRoutes(app, queryBus);
         new configureAdminRoutes_1.ConfigureAdminRoutes(app, queryBus, this.userAuthorisationMiddleware(this.queryBus));
     }
 }
 exports.ConfigureRoutes = ConfigureRoutes;
-;

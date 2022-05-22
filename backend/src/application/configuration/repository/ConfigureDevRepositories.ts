@@ -8,7 +8,7 @@ export class ConfigureDevRepositories {
 
     constructor() {
         this.userRepository = new ReadOnlyFileRepository<User>(
-            "./storage/configuration/user.json"
+            "./storage/user.json"
         )
     }
 

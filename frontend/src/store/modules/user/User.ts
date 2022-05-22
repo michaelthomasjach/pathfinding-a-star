@@ -3,7 +3,7 @@ import Actions from "./Actions";
 import Getters from "./Getters";
 import Mutations from "./Mutations";
 
-export default class Admin {
+export default class User {
   private readonly state: any;
   private readonly actions: any;
   private readonly getters: any;

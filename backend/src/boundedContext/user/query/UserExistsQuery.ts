@@ -2,12 +2,12 @@ import {Query} from "../../../application/core/query/Query";
 import {Repository} from "../../../infra/repository/Repository";
 import {QueryHandler, QueryResponse} from "../../../application/core/query/QueryHandler";
 import {failure, success} from "../../../application/core/Result";
-import {UserDescription} from "../domain/aggregate/UserDescription";
+import {User} from "../valueObject/User";
 
 export const USER_EXISTS = "USER_EXISTS";
 
 export class UserExistsQueryHandler extends QueryHandler<UserExistsQuery, boolean> {
-    constructor(private userRepository: Repository<UserDescription>) {
+    constructor(private userRepository: Repository<User>) {
         super();
     }
     execute(query: UserExistsQuery): QueryResponse<boolean> {

@@ -9,7 +9,7 @@ import {
 } from "../../application/core/domain/model/collaborator/CollaboratorDescriptionBuilder";
 import {CollaboratorDescription} from "../../application/core/domain/model/collaborator/CollaboratorDescription";
 import {Repositories} from "../../application/configuration/repository/Repositories";
-import {USER_FROM_USER_ID, UserFromUserIdQueryHandler} from "./query/UserNameFromUserIdQueryHandler";
+import {USER_EXIST, UserExistQueryHandler} from "./query/UserNameFromUserIdQueryHandler";
 
 export class DescribeUser {
     private queryBus: QueryBus;
@@ -53,7 +53,8 @@ export class DescribeUser {
                     new ChangeBirdHazardLevelCommandHandler(controlDataRepository)
                 )
                 */
-                .addQuery(USER_FROM_USER_ID, "Récupère l'utilisateur", new UserFromUserIdQueryHandler(this.repositories.userRepository))
+
+                .addQuery(USER_EXIST, "Récupère l'utilisateur", new UserExistQueryHandler(this.repositories.userRepository))
                 .build(),
         ];
     }
