@@ -13,13 +13,13 @@ const formatUser = (queryBus, user) => {
     return Object.assign({}, formattedUser);
 };
 class ConfigureAstarRoutes {
-    constructor(app, queryBus) {
+    constructor(BASE_ROUTE, app, queryBus) {
+        this.BASE_ROUTE = BASE_ROUTE;
         this.app = app;
         this.queryBus = queryBus;
-        this.app.get("/astar", (req, res) => {
+        this.app.get(`${this.BASE_ROUTE}/astar`, (req, res) => {
             return new GridController_1.GridController().getGrid(req, res);
         });
     }
 }
 exports.ConfigureAstarRoutes = ConfigureAstarRoutes;
-;

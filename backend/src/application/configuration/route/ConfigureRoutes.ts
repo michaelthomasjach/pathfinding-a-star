@@ -9,6 +9,7 @@ import { StatusCodes } from "http-status-codes";
 import { User } from "../../../boundedContext/user/valueObject/User";
 import { UserRoles } from "../middleware/UserRoles";
 import { ConfigureLoginRoutes } from "./configureLoginRoutes";
+import { CreateJsonWebToken } from "../../../infra/authentication/CreateJsonWebToken";
 
 export class ConfigureRoutes {
   constructor(
@@ -48,4 +49,10 @@ export class ConfigureRoutes {
       if (this.isAuthorised(queryBus, req.user, req.params)) return next();
       res.sendStatus(StatusCodes.FORBIDDEN);
     };
+
+  extractHeaderAuthorization = (req: Request): User | null => {
+    const token = req.headers.get("authorization");
+    if (token === null) return null;
+    return new CreateJsonWebToken().decodeToken(token);
+  };
 }

@@ -4,14 +4,6 @@ import { User } from "../../../boundedContext/user/valueObject/User";
 import { QueryBus } from "../../core/query/QueryBus";
 import { UserRoles } from "../middleware/UserRoles";
 
-const formatUser = (queryBus: QueryBus, user: User) => {
-  const userId = user.id;
-  const formattedUser = user;
-  if (user.role === UserRoles.DEV) return formattedUser;
-  if (userId === undefined) return { ...formattedUser };
-  return { ...formattedUser };
-};
-
 // TODO Faire une vraie authentification avec token JWT
 export class ConfigureAdminRoutes {
   constructor(
@@ -20,20 +12,27 @@ export class ConfigureAdminRoutes {
     private queryBus: QueryBus,
     private userAuthorisationMiddleware: any
   ) {
-    this.app.get(`${this.BASE_ROUTE}/admin`, (req, res) => {
-      // @ts-ignore
-      // const user = req.user;
-      const user = {
-        id: "1",
-        firstname: "Mike",
-        lastname: "Jach",
-        email: "michael.thomas.jach@gmail.com",
-        password: "password",
-        role: "ADMIN",
-      };
-      const userIsAuthenticated = user !== undefined;
-      if (!userIsAuthenticated) return res.sendStatus(StatusCodes.NOT_FOUND);
-      res.status(StatusCodes.OK).send(formatUser(queryBus, user));
-    });
+    this.app.get(
+      `${this.BASE_ROUTE}/admin`,
+      this.userAuthorisationMiddleware,
+      (req, res) => {
+        // @ts-ignore
+        // const user = req.user;
+        console.log("HEADERS :", req);
+        const user: any = req.header;
+
+        const userIsAuthenticated = user !== undefined;
+        if (!userIsAuthenticated) return res.sendStatus(StatusCodes.NOT_FOUND);
+        res.status(StatusCodes.OK).send(this.formatUser(queryBus, user));
+      }
+    );
   }
+
+  formatUser = (queryBus: QueryBus, user: User) => {
+    const userId = user.id;
+    const formattedUser = user;
+    if (user.role === UserRoles.DEV) return formattedUser;
+    if (userId === undefined) return { ...formattedUser };
+    return { ...formattedUser };
+  };
 }

@@ -13,12 +13,12 @@ const formatUser = (queryBus, user, token) => {
 };
 // TODO Faire une vraie authentification avec token JWT
 class ConfigureLoginRoutes {
-    constructor(app, queryBus) {
+    constructor(BASE_ROUTE, app, queryBus) {
+        this.BASE_ROUTE = BASE_ROUTE;
         this.app = app;
         this.queryBus = queryBus;
-        this.app.post("/login", (req, res) => {
+        this.app.post(`${this.BASE_ROUTE}/login`, (req, res) => {
             const user = new LoginController_1.UserController(this.queryBus).getUser(req, res);
-            console.log("USER", user);
             // @ts-ignore
             const userIsAuthenticated = user !== undefined;
             if (!userIsAuthenticated)

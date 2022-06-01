@@ -21,7 +21,6 @@ export class ConfigureLoginRoutes {
   ) {
     this.app.post(`${this.BASE_ROUTE}/login`, (req, res) => {
       const user = new UserController(this.queryBus).getUser(req, res);
-      console.log("USER", user);
       // @ts-ignore
       const userIsAuthenticated = user !== undefined;
       if (!userIsAuthenticated) return res.sendStatus(StatusCodes.NOT_FOUND);

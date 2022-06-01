@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateJsonWebToken = void 0;
 const fs = __importStar(require("fs"));
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 class CreateJsonWebToken {
     constructor() {
         this.generateToken = (user) => {
@@ -33,7 +33,10 @@ class CreateJsonWebToken {
             delete formattedUser.password;
             return jwt.sign(formattedUser, this.privateKey);
         };
-        this.privateKey = JSON.stringify(fs.readFileSync(__dirname + '/private.key'));
+        this.decodeToken = (token) => {
+            return jwt.verify(token, this.privateKey);
+        };
+        this.privateKey = JSON.stringify(fs.readFileSync(__dirname + "/private.key"));
     }
 }
 exports.CreateJsonWebToken = CreateJsonWebToken;

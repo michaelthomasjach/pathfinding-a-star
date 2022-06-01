@@ -41,6 +41,7 @@ export default class Actions {
         .then((response: any) => {
           const userData: IUser = jwt_decode(response.data.token);
           const user = { ...userData, token: `Bearer ${response.data.token}` };
+          localStorage.setItem("jwt-token", `Bearer ${response.data.token}`);
           commit(this.MUTATION_METHODS_NAMES.setUserInformations, user);
           result(user);
         })
@@ -51,8 +52,15 @@ export default class Actions {
     });
   };
 
+  // eslint-disable-next-line arrow-body-style
+  private requestLogout = ({ commit }: any) => {
+    localStorage.removeItem("jwt-token");
+    commit(this.MUTATION_METHODS_NAMES.setUserInformations, undefined);
+  };
+
   getActions = () => ({
     requestUserInformations: this.requestUserInformations,
     requestLogin: this.requestLogin,
+    requestLogout: this.requestLogout,
   });
 }

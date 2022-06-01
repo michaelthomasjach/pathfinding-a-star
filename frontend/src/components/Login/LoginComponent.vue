@@ -2,7 +2,7 @@
   <div class="home-page">
     <div>
       admin
-      <div>{{ userInfo }}</div>
+      <div>{{ getUser }}</div>
       <label for="email">
         <input id="email"
                type="text"
@@ -20,6 +20,7 @@
         Password
       </label>
       <button type="button" v-on:click="login()">Login</button>
+      <button type="button" v-on:click="logout()">Logout</button>
       <button v-on:click="changeUserInformations()">ChangerUserInfo</button>
     </div>
   </div>
@@ -27,7 +28,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Action } from "s-vuex-class";
+import { Action, Getter } from "s-vuex-class";
 import { IUser } from "@/store/modules/interfaces"; // @ is an alias to /src
 
 @Options({
@@ -41,6 +42,8 @@ export default class LoginComponent extends Vue {
   }
 
   @Action("requestLogin") requestLogin: any;
+  @Action("requestLogout") requestLogout: any;
+  @Getter("getUser") getUser: any;
 
   get userInfo(): IUser {
     return this.email;
@@ -58,6 +61,10 @@ export default class LoginComponent extends Vue {
     } else {
       console.log("A email and password must be present");
     }
+  }
+
+  logout() {
+    this.requestLogout();
   }
 }
 </script>
