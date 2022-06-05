@@ -3,7 +3,7 @@
     <div class="header-wrapper">
       <div class="avatar-wrapper">
         <div class="avatar"></div>
-        <span class="name">Michael Jach</span>
+        <span class="name">{{ getUser ? `${getUser.firstname} ${getUser.lastname}` : ""}}</span>
       </div>
 
       <span class="routes">
@@ -21,9 +21,15 @@
 
 <script lang="ts">
 import { Vue } from "vue-class-component";
+import { Getter } from "s-vuex-class";
 
 export default class HeaderComponent extends Vue {
+  @Getter("getUser") getUser: any;
 
+  get user() {
+    if (this.$store.getters.getUser === undefined) return "";
+    return this.$store.getters.getUser.Firstname;
+  }
 }
 </script>
 
