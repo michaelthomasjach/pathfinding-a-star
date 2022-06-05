@@ -44,7 +44,7 @@ export default class Router {
       path: "/admin",
       name: "admin",
       meta: {
-        // requiresAuth: true,
+        requiresAuth: true,
       },
       component: () => import(/* webpackChunkName: "about" */ "../views/AdminPage.vue"),
     },
