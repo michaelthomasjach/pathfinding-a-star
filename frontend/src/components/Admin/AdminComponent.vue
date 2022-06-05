@@ -1,5 +1,8 @@
 <template>
-  <div><button @click="changeUserInformations()">changeUserInformations</button></div>
+  <div>
+    {{ getUser }}
+    <button @click="changeUserInformations()">changeUserInformations</button>
+    </div>
 </template>
 
 <script lang="ts">
@@ -13,17 +16,13 @@ export default class AdminComponent extends Vue {
   @Getter("getUser") getUser: any;
   @Action("requestUserInformations") requestUserInformations: any;
 
-  /*
-  mounted() {
-    this.requestUserInformations().then((res: any) => {
-      this.user = res;
-    });
-  }
-  */
-
-  changeUserInformations = () => {
+  changeUserInformations() {
+    if (this.$store.getters.getUser === undefined) {
+      console.warn("Vous devez être connecté pour effectuer cette action.");
+      return;
+    }
     this.requestUserInformations({
-      token: "this.getUser().token",
+      token: this.$store.getters.getUser.token,
     }).then((res: any) => {
       console.log("RESPONSE :", res);
     });

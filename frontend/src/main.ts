@@ -1,9 +1,13 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import Router from "./router/Router";
-import store from "./store";
+import Store from "./store/Store";
 
+const store = new Store().getStore();
 const router = new Router(store).getRouter();
 
 // eslint-disable-next-line newline-per-chained-call
-createApp(App).use(store).use(router).mount("#app");
+const app = createApp(App);
+app.use(store);
+app.use(router);
+app.mount("#app");

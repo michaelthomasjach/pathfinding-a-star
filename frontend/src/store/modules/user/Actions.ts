@@ -12,19 +12,12 @@ export default class Actions {
   }
 
   // eslint-disable-next-line arrow-body-style
-  private requestUserInformations = ({ commit }: any) => {
+  private requestUserInformations = ({ commit }: any, token: string) => {
     return new Promise((result, reject) => {
-      const user = {
-        id: 1,
-        firstname: "Mike",
-        lastname: "Jach",
-        role: "ADMIN",
-      };
       this.axiosHttpClient
-        .get("/api/admin", user)
-        .then((admin: any) => {
-          commit(this.MUTATION_METHODS_NAMES.setUserInformations, admin);
-          result(admin);
+        .get("/api/admin", token)
+        .then((response: any) => {
+          result(response);
         })
         .catch((error: any) => {
           reject(error);

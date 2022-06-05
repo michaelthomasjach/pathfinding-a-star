@@ -1,4 +1,4 @@
-import { Application, Response } from "express";
+import { Application, Response, Request, NextFunction } from "express";
 import { QueryBus } from "../../core/query/QueryBus";
 import { CommandBus } from "../../core/command/CommandBus";
 import { Logger } from "../../core/Logger";
@@ -10,6 +10,7 @@ import { User } from "../../../boundedContext/user/valueObject/User";
 import { UserRoles } from "../middleware/UserRoles";
 import { ConfigureLoginRoutes } from "./configureLoginRoutes";
 import { CreateJsonWebToken } from "../../../infra/authentication/CreateJsonWebToken";
+import { UserExistByIdQuery } from "../../../boundedContext/user/query/UserExistByIdQuery";
 
 export class ConfigureRoutes {
   constructor(
@@ -37,22 +38,31 @@ export class ConfigureRoutes {
   isAdminUser = (user: User) =>
     user !== undefined && user.role === UserRoles.ADMIN;
 
-  isAuthorised = (queryBus: QueryBus, user: User, params: any) => {
+  isAuthorised = (queryBus: QueryBus, user: User) => {
     if (this.isDevUser(user)) return true;
     if (this.isAdminUser(user)) return true;
     return false;
   };
 
   checkUserAuthorisationMiddleware =
-    (queryBus: QueryBus) => (req: Request, res: Response, next: any) => {
-      // @ts-ignore
-      if (this.isAuthorised(queryBus, req.user, req.params)) return next();
+    (queryBus: QueryBus) =>
+    (req: Request, res: Response, next: NextFunction) => {
+      const user = this.extractHeaderAuthorization(req);
+      if (user) {
+        const result = queryBus.dispatch(new UserExistByIdQuery(user.id));
+        // @ts-ignore
+        if (this.isAuthorised(queryBus, user)) {
+          req.user = user;
+          return next();
+        }
+      }
       res.sendStatus(StatusCodes.FORBIDDEN);
     };
 
   extractHeaderAuthorization = (req: Request): User | null => {
-    const token = req.headers.get("authorization");
-    if (token === null) return null;
+    const headers: any = req.headers;
+    const token = headers.token.split(" ")[1];
+    if (token === null || typeof token == "undefined") return null;
     return new CreateJsonWebToken().decodeToken(token);
   };
 }

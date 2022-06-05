@@ -6,11 +6,10 @@ import { UserRoles } from "../middleware/UserRoles";
 import { GridController } from "../../controller/GridController";
 
 const formatUser = (queryBus: QueryBus, user: User) => {
-  const userId = user.id;
   const formattedUser = { role: user.role };
   if (user.role === UserRoles.DEV) return formattedUser;
-  if (userId === undefined) return { ...formattedUser };
-  return { ...formattedUser };
+  if (user.id === undefined) return formattedUser;
+  return formattedUser;
 };
 
 export class ConfigureAstarRoutes {

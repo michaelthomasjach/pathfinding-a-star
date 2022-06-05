@@ -17,22 +17,20 @@ export class ConfigureAdminRoutes {
       this.userAuthorisationMiddleware,
       (req, res) => {
         // @ts-ignore
-        // const user = req.user;
-        console.log("HEADERS :", req);
-        const user: any = req.header;
+        const user: any = req.user;
+        // const user: any = req.header;
 
         const userIsAuthenticated = user !== undefined;
-        if (!userIsAuthenticated) return res.sendStatus(StatusCodes.NOT_FOUND);
-        res.status(StatusCodes.OK).send(this.formatUser(queryBus, user));
+        if (!userIsAuthenticated) return res.sendStatus(StatusCodes.FORBIDDEN);
+        res.sendStatus(StatusCodes.OK);
       }
     );
   }
 
   formatUser = (queryBus: QueryBus, user: User) => {
-    const userId = user.id;
     const formattedUser = user;
     if (user.role === UserRoles.DEV) return formattedUser;
-    if (userId === undefined) return { ...formattedUser };
+    if (user.id === undefined) return { ...formattedUser };
     return { ...formattedUser };
   };
 }

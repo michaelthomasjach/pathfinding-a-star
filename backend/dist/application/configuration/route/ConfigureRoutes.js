@@ -17,7 +17,7 @@ class ConfigureRoutes {
         this.userAuthorisationMiddleware = (queryBus) => this.checkUserAuthorisationMiddleware(queryBus);
         this.isDevUser = (user) => user !== undefined && user.role === UserRoles_1.UserRoles.DEV;
         this.isAdminUser = (user) => user !== undefined && user.role === UserRoles_1.UserRoles.ADMIN;
-        this.isAuthorised = (queryBus, user, params) => {
+        this.isAuthorised = (queryBus, user) => {
             if (this.isDevUser(user))
                 return true;
             if (this.isAdminUser(user))
@@ -25,14 +25,21 @@ class ConfigureRoutes {
             return false;
         };
         this.checkUserAuthorisationMiddleware = (queryBus) => (req, res, next) => {
-            // @ts-ignore
-            if (this.isAuthorised(queryBus, req.user, req.params))
-                return next();
+            const user = this.extractHeaderAuthorization(req);
+            if (user) {
+                // @ts-ignore
+                console.log("USER :", user);
+                if (this.isAuthorised(queryBus, user)) {
+                    req.user = user;
+                    return next();
+                }
+            }
             res.sendStatus(http_status_codes_1.StatusCodes.FORBIDDEN);
         };
         this.extractHeaderAuthorization = (req) => {
-            const token = req.headers.get("authorization");
-            if (token === null)
+            const headers = req.headers;
+            const token = headers.token.split(" ")[1];
+            if (token === null || typeof token == "undefined")
                 return null;
             return new CreateJsonWebToken_1.CreateJsonWebToken().decodeToken(token);
         };

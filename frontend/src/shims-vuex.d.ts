@@ -1,7 +1,8 @@
-import Store from "@/store"; // path to store file
+import Store from "@/store/Store"; // path to store file
+import User from "./store/modules/user/User";
 
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
-    $store: Store;
+    $store: Store<User>;
   }
 }

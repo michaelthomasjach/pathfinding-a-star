@@ -11,7 +11,7 @@ const axiosHttpClient = {
       .get(endpoint, {
         headers: {
           ...headers,
-          // Accept: "application/json; charset=utf-8",
+          Accept: "application/json; charset=utf-8",
           // credentials: "include",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",

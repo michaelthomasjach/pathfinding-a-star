@@ -15,9 +15,8 @@ export default class Mutations {
   getMutationsMethodsNames = () => this.MUTATION_METHODS_NAMES;
 
   getMutations = () => ({
-    [this.MUTATION_METHODS_NAMES.setUserInformations]:
-      (state: IUserState, user: IUser) => {
-        state.user = user;
-      },
+    [this.MUTATION_METHODS_NAMES.setUserInformations]: (state: IUserState, user: IUser) => {
+      state.user = user;
+    },
   });
 }
