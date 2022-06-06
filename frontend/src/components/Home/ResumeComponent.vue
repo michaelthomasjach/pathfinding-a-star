@@ -1,7 +1,8 @@
 <template>
   <section class="p-b-30 p-t-40 bg-master-lighter">
     <div class="container">
-      <div class="wrapper bg-cream p-l-70 p-r-70 p-b-70 p-t-70">
+      <div class="wrapper relative no-overflow bg-cream p-l-70 p-r-70 p-b-70 p-t-70">
+        <div class="picture"></div>
         <div class="row padding-15 m-b-50">
           <section>
             <div class="name m-b-30">
@@ -209,7 +210,7 @@
                 <p>
                   Reconnu dans la communauté française comme étant l'un des plus gros contributeur
                   de contenu sur la formation de logiciel liés à la DAO.
-                  <br/>
+                  <br />
                 </p>
                 <p class="hint-text font-arial small-text m-b-0">
                   Suite Autodesk, Photoshop, After Effect, Lumion, ...
@@ -351,6 +352,20 @@ $cream-color: #fff;
 .wrapper {
   &.bg-cream {
     background-color: $cream-color;
+  }
+  .picture {
+    position: absolute;
+    bottom: -200px;
+    right: -250px;
+    height: 1000px;
+    width: 1000px;
+    border-radius: 50%;
+    background: #000;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("@/assets/resume/mike.jpeg");
+    opacity: 0.5;
   }
   .name {
     text-align: center;
