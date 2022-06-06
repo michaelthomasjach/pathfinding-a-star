@@ -1,5 +1,6 @@
 <template>
   <div class="app-wrapper">
+    <HeaderComponent/>
     <div class="page-wrapper">
       <div class="page">
         <div class="page-content">
@@ -12,7 +13,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HeaderComponent from "@/components/PageStructure/Header/HeaderComponent.vue"; // @ is an alias to /src
+import HeaderComponent from "@/components/PageStructure/Admin/HeaderComponent.vue"; // @ is an alias to /src
 
 @Options({
   components: {

@@ -5,17 +5,9 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import HeaderComponent from "@/components/PageStructure/Header/HeaderComponent.vue"; // @ is an alias to /src
+import { Vue } from "vue-class-component";
 
-@Options({
-  components: {
-    HeaderComponent,
-  },
-})
-export default class App extends Vue {
-
-}
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">

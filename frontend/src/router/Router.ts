@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import PublicWrapper from "../components/PageStructure/PublicWrapper.vue";
-import AdminWrapper from "../components/PageStructure/AdminWrapper.vue";
+import PublicWrapper from "../components/PageStructure/Public/PublicWrapper.vue";
+import AdminWrapper from "../components/PageStructure/Admin/AdminWrapper.vue";
 import HomePage from "../views/HomePage.vue";
 import LoginPage from "../views/LoginPage.vue";
 

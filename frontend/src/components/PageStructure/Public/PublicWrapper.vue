@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HeaderComponent from "@/components/PageStructure/Header/HeaderComponent.vue"; // @ is an alias to /src
+import HeaderComponent from "@/components/PageStructure/Public/HeaderComponent.vue"; // @ is an alias to /src
 
 @Options({
   components: {
