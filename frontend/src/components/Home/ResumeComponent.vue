@@ -2,7 +2,12 @@
   <section class="p-b-30 p-t-40 bg-master-lighter">
     <div class="container">
       <div class="wrapper relative no-overflow bg-cream p-l-70 p-r-70 p-b-70 p-t-70">
-        <div class="picture"></div>
+        <div class="picture-top">
+          <div class="outline"></div>
+        </div>
+        <div class="picture-bottom">
+          <div class="outline"></div>
+        </div>
         <div class="row padding-15 m-b-50">
           <section>
             <div class="name m-b-30">
@@ -321,6 +326,7 @@
             </div>
           </section>
         </div>
+        <div class="blank-space"></div>
       </div>
     </div>
   </section>
@@ -353,7 +359,31 @@ $cream-color: #fff;
   &.bg-cream {
     background-color: $cream-color;
   }
-  .picture {
+  .picture-top {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    margin: auto;
+    border-radius: 50%;
+    background: #000;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("@/assets/resume/mike-3.jpg");
+    opacity: 1;
+    .outline {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      z-index: 1;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: transparent;
+      box-shadow: 0px 0px 0px #000;
+    }
+  }
+  .picture-bottom {
     position: absolute;
     bottom: -200px;
     right: -250px;
@@ -366,6 +396,19 @@ $cream-color: #fff;
     background-repeat: no-repeat;
     background-image: url("@/assets/resume/mike.jpeg");
     opacity: 0.5;
+
+    .outline {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      z-index: 1;
+      width: 950px;
+      height: 950px;
+      border-radius: 50%;
+      border: 22px solid white;
+      background: transparent;
+      box-shadow: 0px 0px 0px #000;
+    }
   }
   .name {
     text-align: center;
@@ -380,6 +423,9 @@ $cream-color: #fff;
     background: #626262;
     width: 15%;
     opacity: 0.5;
+  }
+  .blank-space {
+    margin-bottom: 200px;
   }
 }
 </style>
