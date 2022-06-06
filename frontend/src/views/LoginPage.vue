@@ -1,5 +1,5 @@
 <template>
-  <LoginComponent/>
+  <LoginComponent />
 </template>
 
 <script lang="ts">
@@ -11,5 +11,16 @@ import LoginComponent from "@/components/Login/LoginComponent.vue"; // @ is an a
     LoginComponent,
   },
 })
-export default class LoginPage extends Vue { }
+export default class LoginPage extends Vue {}
 </script>
+<style lang="scss">
+body {
+  height: 100%;
+  #app {
+    height: 100%;
+    .app-wrapper {
+      height: 100%;
+    }
+  }
+}
+</style>

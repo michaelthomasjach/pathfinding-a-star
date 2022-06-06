@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import PublicWrapper from "../components/PageStructure/PublicWrapper.vue";
+import AdminWrapper from "../components/PageStructure/AdminWrapper.vue";
 import HomePage from "../views/HomePage.vue";
 import LoginPage from "../views/LoginPage.vue";
 
@@ -33,20 +35,35 @@ export default class Router {
     {
       path: "/",
       name: "home",
-      component: HomePage,
-    },
-    {
-      path: "/astar",
-      name: "astar",
-      component: () => import(/* webpackChunkName: "about" */ "../views/AstarPage.vue"),
+      component: PublicWrapper,
+      children: [
+        {
+          // UserProfile will be rendered inside User's <router-view>
+          // when /user/:id/profile is matched
+          path: "/",
+          component: HomePage,
+        },
+        {
+          path: "/astar",
+          name: "astar",
+          component: () => import(/* webpackChunkName: "about" */ "../views/AstarPage.vue"),
+        },
+      ],
     },
     {
       path: "/admin",
       name: "admin",
-      meta: {
-        requiresAuth: true,
-      },
-      component: () => import(/* webpackChunkName: "about" */ "../views/AdminPage.vue"),
+      component: AdminWrapper,
+      children: [
+        {
+          path: "/admin",
+          name: "admin",
+          meta: {
+            requiresAuth: true,
+          },
+          component: () => import(/* webpackChunkName: "about" */ "../views/AdminPage.vue"),
+        },
+      ],
     },
     {
       path: "/login",

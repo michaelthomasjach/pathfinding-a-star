@@ -221,7 +221,9 @@
                   Suite Autodesk, Photoshop, After Effect, Lumion, ...
                 </p>
                 <p class="hint-text font-arial small-text p-b-15">
-                  https://www.youtube.com/c/cyborggraphics
+                  <a href="https://www.youtube.com/c/cyborggraphics" target="blank">
+                    https://www.youtube.com/c/cyborggraphics
+                  </a>
                 </p>
               </div>
             </div>
