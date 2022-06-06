@@ -56,7 +56,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-6 no-padding sm-p-l-10">
-              <div class="form-check m-t-5">
+              <div class="form-check m-t-15">
                 <label for="checkbox1">
                   <input type="checkbox" value="1" id="checkbox1" />
                   Se souvenir
