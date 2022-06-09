@@ -54,6 +54,6 @@ export default class JumbotronComponent extends Vue {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("@/assets/images/hero_mount.jpg");
+  background-image: url("@/assets/public/images/hero_mount.jpg");
 }
 </style>

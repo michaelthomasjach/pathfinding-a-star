@@ -355,7 +355,7 @@ $cream-color: #fff;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("@/assets/images/hero_mount.jpg");
+  background-image: url("@/assets/public/images/hero_mount.jpg");
 }
 .wrapper {
   &.bg-cream {
@@ -370,7 +370,7 @@ $cream-color: #fff;
     background: #000;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url("@/assets/resume/mike-3.jpg");
+    background-image: url("@/assets/public/images/cv/mike-cv-header.jpg");
     opacity: 1;
     .outline {
       position: absolute;
@@ -396,7 +396,7 @@ $cream-color: #fff;
 
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url("@/assets/resume/mike.jpeg");
+    background-image: url("@/assets/public/images/cv/mike-cv-bottom.jpeg");
     opacity: 0.5;
 
     .outline {

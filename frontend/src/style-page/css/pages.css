@@ -7086,7 +7086,7 @@ section.last:before {
   z-index: 10;
 }
 .gradient-overlay:before {
-  background-image: url("../../assets/images/linear_gradient.png");
+  background-image: url("src/assets/public/images/linear_gradient.png");
   background-repeat: repeat-x;
   background-size: contain;
   content: " ";
@@ -7392,7 +7392,7 @@ sup.dollar {
   position: absolute;
 }
 #demo-content-3 .demo-shadow {
-  background-image: url("../../assets/images/shadow.png");
+  background-image: url("src/assets/public/images/shadow.png");
   background-position: center bottom;
   background-repeat: no-repeat;
   bottom: 0;

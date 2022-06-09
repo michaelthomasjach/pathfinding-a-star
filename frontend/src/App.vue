@@ -14,7 +14,8 @@ export default class App extends Vue {}
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 @import './src/styles/core.scss';
 
-$base-img-url: "./assets/@pages-public/pages/images" ;
+$base-img-url: "./assets/public/@pages/pages/images" ;
+$base-page-ressource: "./assets/public/@pages" ;
 $assets-url: "./assets" ;
 
 @import "./src/styles/modules/_layout.scss";
