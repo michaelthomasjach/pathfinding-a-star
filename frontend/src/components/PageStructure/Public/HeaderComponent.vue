@@ -4,7 +4,7 @@
       <div class="top-left z-index-10">
         <div class="bg-white p-l-20 p-r-20 p-t-20 p-b-20">
           <img
-            src="assets/images/logo_b.png"
+            src="@/assets/images/logo_b.png"
             data-src-retina="assets/images/logo_b_2x.png"
             class=""
             alt=""
@@ -20,7 +20,7 @@
       data-pages-autofixed="true"
     >
       <img
-        src="assets/images/brush_stroke.png"
+        src="@/assets/images/brush_stroke.png"
         class="demo-brush bottom-left"
         alt=""
       />
@@ -28,7 +28,7 @@
         <div class="pull-left">
           <div class="header-inner">
             <img
-              src="assets/images/logo_b.png"
+              src="@/assets/images/logo_b.png"
               data-src-retina="assets/images/logo_b_2x.png"
               class=""
               alt=""
