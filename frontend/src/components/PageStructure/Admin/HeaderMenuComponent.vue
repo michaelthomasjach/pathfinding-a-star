@@ -25,6 +25,7 @@ export default class SideMenuComponent extends Vue {
   color: #4b4b4b;
   padding-left: 70px;
   align-items: center;
+  z-index: 1;
 
   .title {
     position: relative;
