@@ -1,13 +1,18 @@
 <template>
   <div
-    :class="color"
+    :class="[
+      switchBtn ? 'switch' : '',
+      switchBtnLarge ? 'switch switch-lg' : '',
+      disabled ? '' : color
+    ]"
     class="form-check">
     <input
-      :indeterminate=indeterminate
-      type="checkbox"
-      :id=idLabel
       ref=idLabel
-      :checked=checked>
+      :indeterminate=indeterminate
+      :id=idLabel
+      :checked=checked
+      :disabled=disabled
+      type="checkbox">
     <label :for=idLabel>
       {{ label }}
       <input style="display: none">
@@ -30,7 +35,10 @@ enum CheckboxColor {
     label: String,
     checked: Boolean,
     color: CheckboxColor,
+    switchBtn: Boolean,
+    switchBtnLarge: Boolean,
     indeterminate: Boolean,
+    disabled: Boolean,
   },
 })
 export default class CheckboxComponent extends Vue {
@@ -120,6 +128,89 @@ button, input, optgroup, select, textarea {
     background-color: #fff;
   }
 
+  &.switch {
+    input[type="checkbox"][disabled] + label:after {
+      background: #ececec !important;
+    }
+    &.switch-lg {
+      input[type="checkbox"] + label {
+        padding-left: 42px;
+      }
+
+      input[type="checkbox"] + label:before {
+        width: 34px;
+        height: 22px;
+        top: 0px;
+      }
+
+      input[type="checkbox"] + label:after {
+        width: 18px;
+        height: 18px;
+        top: 2px;
+      }
+
+      &.complete input[type="checkbox"] + label:before {
+        background-image: linear-gradient(to right, #0072EC 0%,
+          #0f8ff9 44%, rgba(0, 0, 0, 0.14) 62%, rgba(0, 0, 0, 0.04) 97%);
+      }
+    }
+
+    input[type="checkbox"] + label {
+      padding-left: 34px;
+    }
+
+    input[type="checkbox"]:checked + label:before {
+      background-position: left;
+      box-shadow: inset 0px 0px 0px 1px rgb(0 0 0 / 12%);
+    }
+
+    input[type="checkbox"] + label:before {
+      cursor: pointer;
+      width: 26px;
+      height: 18px;
+      top: 2px;
+      background-image: -webkit-linear-gradient(to right, #7252D3 0%,
+        #845ae0 44%, rgba(0, 0, 0, 0.14) 62%, rgba(0, 0, 0, 0.04) 97%);
+      background-image: -moz-linear-gradient(to right, #7252D3 0%,
+        #845ae0 44%, rgba(0, 0, 0, 0.14) 62%, rgba(0, 0, 0, 0.04) 97%);
+      background-image: linear-gradient(to right, #7252D3 0%,
+        #845ae0 44%, rgba(0, 0, 0, 0.14) 62%, rgba(0, 0, 0, 0.04) 97%);
+      background-size: 300%;
+      background-position: right;
+      border-radius: 50px;
+      border: none;
+      box-shadow: inset 0px 0px 0px 1px rgb(0 0 0 / 12%);
+      transition: background 310ms, box-shadow 250ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    input[type="checkbox"]:checked + label:after {
+      transform: translateX(calc(100% - 6px));
+      box-shadow: 1px 1px 0px rgb(0 0 0 / 8%), -3px 3px 6px rgb(0 0 0 / 30%);
+    }
+
+    input[type="checkbox"] + label:after {
+      transform: translateX(0%);
+      background: #fff;
+      top: 4px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 9px;
+      box-shadow: 1px 0px 1px 0.5px rgb(0 0 0 / 12%), 2px 4px 6px rgb(0 0 0 / 20%);
+      transition: transform, box-shadow;
+      transition-duration: 250ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+
+  input[type="checkbox"][disabled] + label:before {
+    cursor: not-allowed !important;
+    background: #ececec !important;
+  }
+  input[type="checkbox"][disabled] + label:after {
+    cursor: not-allowed !important;
+  }
   input[type="checkbox"] {
     position: absolute;
     margin: 0;

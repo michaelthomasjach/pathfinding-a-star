@@ -33,9 +33,38 @@
         checked
       />
       <CheckboxComponent
+        label="Complete checkbox checked disabled"
+        color="complete"
+        checked
+        disabled
+      />
+      <CheckboxComponent
         label="Primary checkbox indeterminate"
         color="primary"
         indeterminate
+      />
+      <CheckboxComponent
+        label="Switch"
+        color="primary"
+        switch-btn
+      />
+      <CheckboxComponent
+        label="Switch large"
+        color="primary"
+        switch-btn-large
+      />
+      <CheckboxComponent
+        label="Switch large checked"
+        color="complete"
+        switch-btn-large
+        checked
+      />
+      <CheckboxComponent
+        label="Switch large checked disabled"
+        color="complete"
+        switch-btn-large
+        checked
+        disabled
       />
     </CardComponent>
     <TextAeraComponent label="test" input-type="text"/>
