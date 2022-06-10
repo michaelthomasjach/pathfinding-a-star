@@ -9,9 +9,7 @@
       ref=idLabel
       :checked=checked>
     <label :for=idLabel>
-      {{ label }} - {{
-        idLabel
-      }}
+      {{ label }}
       <input style="display: none">
     </label>
   </div>
