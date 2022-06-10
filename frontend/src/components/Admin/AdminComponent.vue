@@ -1,26 +1,26 @@
 <template>
   <div>
-    <InputComponent label="Normal" input-type="text"/>
-    <InputComponent label="Disabled" input-type="text" disabled/>
-    <InputComponent label="Required" input-type="text" required/>
-    <InputComponent label="Password" input-type="password"/>
-    <InputComponent label="Email" input-type="email"/>
-    <InputComponent
-      label="Placeholder"
-      placeholder="Lorem ipsum dolor sit amet."
-      input-type="text"/>
-    <InputComponent
-      label="Value"
-      value="Lorem ipsum dolor sit amet."
-      input-type="text"/>
-
-    <CardComponent title="Option 1">
-      <h4>Pages default text-field design</h4>
+    <CardComponent title="Input">
+      <h4>Exemples d'input disponibles</h4>
       <p>Pages Form Elements reshaped the conventional text-fields in aim to improve usability and
         create a fun, unique and exciting experience.</p>
+
+      <InputComponent label="Normal" input-type="text"/>
+      <InputComponent label="Disabled" input-type="text" disabled/>
+      <InputComponent label="Required" input-type="text" required/>
+      <InputComponent label="Password" input-type="password"/>
+      <InputComponent label="Email" input-type="email"/>
+      <InputComponent
+        label="Placeholder"
+        placeholder="Lorem ipsum dolor sit amet."
+        input-type="text"/>
+      <InputComponent
+        label="Value"
+        value="Lorem ipsum dolor sit amet."
+        input-type="text"/>
     </CardComponent>
 
-    <CardComponent title="Option 1">
+    <CardComponent title="Checkbox">
       <CheckboxComponent
         label="Default checkbox"/>
       <CheckboxComponent
@@ -40,7 +40,9 @@
     </CardComponent>
     <TextAeraComponent label="test" input-type="text"/>
 
-    {{ getUser }}
+    <CardComponent title="Infos de l'utilisateur">
+      {{ getUser }}
+    </CardComponent>
     <button @click="changeUserInformations()">changeUserInformations</button>
   </div>
 </template>

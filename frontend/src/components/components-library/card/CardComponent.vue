@@ -1,6 +1,6 @@
 <template>
   <div class="card card-default">
-    <div class="card-header ">
+    <div v-if="title" class="card-header ">
       <div class="card-title">
         {{title}}
       </div>
