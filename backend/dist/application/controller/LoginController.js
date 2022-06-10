@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
-const UserNameFromUserIdQueryHandler_1 = require("../../boundedContext/user/query/UserNameFromUserIdQueryHandler");
+const UserExistByEmailAndPasswordQuery_1 = require("../../boundedContext/user/query/UserExistByEmailAndPasswordQuery");
 class UserController {
     constructor(queryBus) {
         this.queryBus = queryBus;
         this.getUser = (req, res) => {
             // @ts-ignore
             const { email, password } = req.body;
-            return this.queryBus.dispatch(new UserNameFromUserIdQueryHandler_1.UserExistQuery(email, password));
+            return this.queryBus.dispatch(new UserExistByEmailAndPasswordQuery_1.UserExistByEmailAndPasswordQuery(email, password));
         };
     }
 }

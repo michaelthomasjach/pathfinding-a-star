@@ -4,7 +4,8 @@ exports.DescribeUser = void 0;
 const DomainDescriptionBuilder_1 = require("../../application/core/domain/DomainDescriptionBuilder");
 const CollaboratorType_1 = require("../../application/core/domain/model/collaborator/CollaboratorType");
 const CollaboratorDescriptionBuilder_1 = require("../../application/core/domain/model/collaborator/CollaboratorDescriptionBuilder");
-const UserNameFromUserIdQueryHandler_1 = require("./query/UserNameFromUserIdQueryHandler");
+const UserExistByEmailAndPasswordQuery_1 = require("./query/UserExistByEmailAndPasswordQuery");
+const UserExistByIdQuery_1 = require("./query/UserExistByIdQuery");
 class DescribeUser {
     constructor(queryBus, commandBus, repositories, timer) {
         this.getDomainDescription = () => {
@@ -21,13 +22,14 @@ class DescribeUser {
                     .withName("User")
                     .withType(CollaboratorType_1.CollaboratorType.FRONTEND)
                     /*
-                    .addCommand(
-                        "",
-                        "",
-                        new ChangeBirdHazardLevelCommandHandler(controlDataRepository)
-                    )
-                    */
-                    .addQuery(UserNameFromUserIdQueryHandler_1.USER_EXIST, "Récupère l'utilisateur", new UserNameFromUserIdQueryHandler_1.UserExistQueryHandler(this.repositories.userRepository))
+                            .addCommand(
+                                "",
+                                "",
+                                new ChangeBirdHazardLevelCommandHandler(controlDataRepository)
+                            )
+                            */
+                    .addQuery(UserExistByIdQuery_1.USER_EXIST_BY_ID, "Récupère l'utilisateur par son ID", new UserExistByIdQuery_1.UserExistByIdQueryHandler(this.repositories.userRepository))
+                    .addQuery(UserExistByEmailAndPasswordQuery_1.USER_EXIST_BY_EMAIL_AND_PASSWORD, "Récupère l'utilisateur par son email et son mot de passe", new UserExistByEmailAndPasswordQuery_1.UserExistByEmailAndPasswordQueryHandler(this.repositories.userRepository))
                     .build(),
             ];
         };

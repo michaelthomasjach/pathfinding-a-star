@@ -1,10 +1,17 @@
 <template>
   <div
-    :class="[primary ? 'primary': '']"
-    class="form-check" >
-    <input type="checkbox" :id=idLabel :checked=checked>
+    :class="color"
+    class="form-check">
+    <input
+      :indeterminate=indeterminate
+      type="checkbox"
+      :id=idLabel
+      ref=idLabel
+      :checked=checked>
     <label :for=idLabel>
-      {{ label }}
+      {{ label }} - {{
+        idLabel
+      }}
       <input style="display: none">
     </label>
   </div>
@@ -13,18 +20,37 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 
+// eslint-disable-next-line no-shadow
+enum CheckboxColor {
+  PRIMARY = "primary",
+  COMPLETE = "complete",
+}
+
 @Options({
   components: {},
   props: {
     label: String,
     checked: Boolean,
-    primary: Boolean,
+    color: CheckboxColor,
+    indeterminate: Boolean,
   },
 })
 export default class CheckboxComponent extends Vue {
+  // eslint-disable-next-line no-undef
+  [x: string]: any;
+
   id = 0;
-  mounted() {
+
+  beforeMount() {
+    console.log("MOUNTED");
     this.id = Math.floor(Math.random() * 100000);
+  }
+
+  updated() {
+    if (this.indeterminate) {
+      const input: HTMLInputElement = this.$refs[this.id] as HTMLInputElement;
+      input.indeterminate = true;
+    }
   }
 
   get idLabel() {
@@ -48,25 +74,35 @@ label, input, button, select, textarea {
   font-weight: normal;
   line-height: 20px;
 }
+
 button, input {
   overflow: visible;
 }
+
 button, input, optgroup, select, textarea {
   margin: 0;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
+
 .form-check {
   position: relative;
   display: block;
   word-wrap: break-word;
   margin-bottom: 10px;
   padding-left: 0px;
+
   &.primary input[type="checkbox"]:checked + label::before,
   &.primary input[type="checkbox"]:indeterminate + label::before {
     border-color: #7252D3;
     background-color: #7252D3;
+  }
+
+  &.complete input[type="checkbox"]:checked + label:before,
+  &.complete input[type="checkbox"]:indeterminate + label::before {
+    border-color: #0072EC;
+    background-color: #0072EC;
   }
 
   &.info input[type="checkbox"]:checked + label::after,
@@ -77,6 +113,14 @@ button, input, optgroup, select, textarea {
     background-image: url("./assets/images/checkbox-white.png");
     background-position-x: left;
     background-position-y: center;
+  }
+
+  &.info input[type="checkbox"]:indeterminate + label::after,
+  &.danger input[type="checkbox"]:indeterminate + label::after,
+  &.complete input[type="checkbox"]:indeterminate + label::after,
+  &.primary input[type="checkbox"]:indeterminate + label::after,
+  &.success input[type="checkbox"]:indeterminate + label::after {
+    background-color: #fff;
   }
 
   input[type="checkbox"] {
@@ -90,6 +134,17 @@ button, input, optgroup, select, textarea {
     box-sizing: border-box;
     padding: 0;
   }
+
+  input[type="checkbox"]:indeterminate + label::after {
+    background: none;
+    background-color: #4b4b4b;
+    width: 10px;
+    height: 2px;
+    top: 6px;
+    margin: 3px;
+    border-radius: 2px;
+  }
+
   input[type="checkbox"] + label::after {
     content: "";
     position: absolute;
@@ -101,6 +156,7 @@ button, input, optgroup, select, textarea {
     height: 16px;
     overflow: hidden;
   }
+
   input[type="checkbox" i] {
     background-color: initial;
     cursor: default;
@@ -110,6 +166,7 @@ button, input, optgroup, select, textarea {
     padding: initial;
     border: initial;
   }
+
   input[type="checkbox"]:checked + label::after {
     content: "";
     background-image: url("./assets/images/checkbox.png");
@@ -123,6 +180,7 @@ button, input, optgroup, select, textarea {
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
   }
+
   label {
     transition: border 140ms linear 0s, color 140ms linear 0s, background-color 140ms linear 0s;
     display: inline-block;

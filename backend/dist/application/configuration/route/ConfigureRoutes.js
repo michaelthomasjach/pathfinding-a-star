@@ -7,6 +7,7 @@ const http_status_codes_1 = require("http-status-codes");
 const UserRoles_1 = require("../middleware/UserRoles");
 const configureLoginRoutes_1 = require("./configureLoginRoutes");
 const CreateJsonWebToken_1 = require("../../../infra/authentication/CreateJsonWebToken");
+const UserExistByIdQuery_1 = require("../../../boundedContext/user/query/UserExistByIdQuery");
 class ConfigureRoutes {
     constructor(app, queryBus, commandBus, logger, timer) {
         this.app = app;
@@ -27,8 +28,8 @@ class ConfigureRoutes {
         this.checkUserAuthorisationMiddleware = (queryBus) => (req, res, next) => {
             const user = this.extractHeaderAuthorization(req);
             if (user) {
+                const result = queryBus.dispatch(new UserExistByIdQuery_1.UserExistByIdQuery(user.id));
                 // @ts-ignore
-                console.log("USER :", user);
                 if (this.isAuthorised(queryBus, user)) {
                     req.user = user;
                     return next();

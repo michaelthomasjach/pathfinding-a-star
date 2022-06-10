@@ -11,11 +11,10 @@ class ConfigureAdminRoutes {
         this.queryBus = queryBus;
         this.userAuthorisationMiddleware = userAuthorisationMiddleware;
         this.formatUser = (queryBus, user) => {
-            const userId = user.id;
             const formattedUser = user;
             if (user.role === UserRoles_1.UserRoles.DEV)
                 return formattedUser;
-            if (userId === undefined)
+            if (user.id === undefined)
                 return Object.assign({}, formattedUser);
             return Object.assign({}, formattedUser);
         };
@@ -26,7 +25,7 @@ class ConfigureAdminRoutes {
             const userIsAuthenticated = user !== undefined;
             if (!userIsAuthenticated)
                 return res.sendStatus(http_status_codes_1.StatusCodes.FORBIDDEN);
-            res.status(http_status_codes_1.StatusCodes.OK).send(this.formatUser(queryBus, user));
+            res.sendStatus(http_status_codes_1.StatusCodes.OK);
         });
     }
 }

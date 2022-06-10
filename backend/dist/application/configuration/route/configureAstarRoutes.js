@@ -4,13 +4,12 @@ exports.ConfigureAstarRoutes = void 0;
 const UserRoles_1 = require("../middleware/UserRoles");
 const GridController_1 = require("../../controller/GridController");
 const formatUser = (queryBus, user) => {
-    const userId = user.id;
     const formattedUser = { role: user.role };
     if (user.role === UserRoles_1.UserRoles.DEV)
         return formattedUser;
-    if (userId === undefined)
-        return Object.assign({}, formattedUser);
-    return Object.assign({}, formattedUser);
+    if (user.id === undefined)
+        return formattedUser;
+    return formattedUser;
 };
 class ConfigureAstarRoutes {
     constructor(BASE_ROUTE, app, queryBus) {

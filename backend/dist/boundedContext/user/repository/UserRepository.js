@@ -5,17 +5,17 @@ class UserRepository {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
-    get(userId) {
-        return this.userRepository.get(userId);
+    get(id) {
+        return this.userRepository.get(id);
     }
-    save(userId, firstname, lastname, email, password, role) {
-        this.userRepository.save(userId, {
-            id: userId,
+    save(id, firstname, lastname, email, password, role) {
+        this.userRepository.save(id, {
+            id,
             firstname,
             lastname,
             email,
             password,
-            role
+            role,
         });
     }
 }

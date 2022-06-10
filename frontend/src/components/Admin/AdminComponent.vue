@@ -25,12 +25,17 @@
         label="Default checkbox"/>
       <CheckboxComponent
         label="Primary checkbox"
-        primary
+        color="primary"
       />
       <CheckboxComponent
-        label="Primary checkbox checked"
-        primary
+        label="Complete checkbox checked"
+        color="complete"
         checked
+      />
+      <CheckboxComponent
+        label="Primary checkbox indeterminate"
+        color="primary"
+        indeterminate
       />
     </CardComponent>
     <TextAeraComponent label="test" input-type="text"/>
