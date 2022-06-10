@@ -40,7 +40,6 @@ export default class CheckboxComponent extends Vue {
   id = 0;
 
   beforeMount() {
-    console.log("MOUNTED");
     this.id = Math.floor(Math.random() * 100000);
   }
 
