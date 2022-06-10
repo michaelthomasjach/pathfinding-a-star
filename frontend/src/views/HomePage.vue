@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import JumbotronComponent from "@/components/Home/JumbotronComponent.vue"; // @ is an alias to /src
-import ResumeComponent from "@/components/Home/ResumeComponent.vue"; // @ is an alias to /src
+import JumbotronComponent from "@/components/public/Home/JumbotronComponent.vue"; // @ is an alias to /src
+import ResumeComponent from "@/components/public/Home/ResumeComponent.vue"; // @ is an alias to /src
 
 @Options({
   components: {

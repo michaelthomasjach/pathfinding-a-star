@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import LoginComponent from "@/components/Login/LoginComponent.vue"; // @ is an alias to /src
+import LoginComponent from "@/components/public/Login/LoginComponent.vue"; // @ is an alias to /src
 
 @Options({
   components: {

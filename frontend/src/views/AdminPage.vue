@@ -2,8 +2,8 @@
   <div class="home-page">
     <AdminComponent />
     <button class="btn btn-primary btn-lg m-t-10" v-on:click="logout()">
-                Se déconnecter
-              </button>
+      Se déconnecter
+    </button>
   </div>
 </template>
 
