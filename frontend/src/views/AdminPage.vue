@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import AdminComponent from "@/components/Admin/AdminComponent.vue"; // @ is an alias to /src
+import AdminComponent from "@/components/admin/AdminComponent.vue"; // @ is an alias to /src
 
 import { Action } from "s-vuex-class";
 
