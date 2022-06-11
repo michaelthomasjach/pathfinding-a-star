@@ -6,7 +6,6 @@
     ]"
     class="form-check">
     <input
-      :ref=idLabel
       :value=value
       :name=idLabel
       :indeterminate=indeterminate
