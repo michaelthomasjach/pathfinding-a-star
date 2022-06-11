@@ -5,6 +5,14 @@
 
     <p>Message is: {{ message }}</p>
     <input v-model="message" placeholder="edit me" />
+    <!-- eslint-disable -->
+    <section>
+      <h3>binding value</h3>
+      <input type="radio" v-model="gender" v-bind:value="a">man
+      <input type="radio" v-model="gender" v-bind:value="b">woman
+      <br />
+      <span>value: {{gender}}</span>
+    </section>
   </div>
 </template>
 
@@ -19,5 +27,10 @@ import ResumeComponent from "@/components/public/Home/ResumeComponent.vue"; // @
     ResumeComponent,
   },
 })
-export default class HomePage extends Vue { }
+export default class HomePage extends Vue {
+  message = "";
+  gender = ""
+  a = 0;
+  b = 1;
+}
 </script>

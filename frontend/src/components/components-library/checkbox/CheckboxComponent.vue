@@ -5,35 +5,25 @@
       disabled ? '' : color
     ]"
     class="form-check">
-    <!--
     <input
-      ref=idLabel
+      :ref=idLabel
       :value=value
+      :name=idLabel
       :indeterminate=indeterminate
       :id=idLabel
       :checked=checked
       :disabled=disabled
       :type="typeInput == 'radio' ? 'radio' : 'checkbox'"
-      @change="$parent.$emit('input', value)">
-      -->
+      @change="$parent.$emit('update:modelValue', $event.target.value)">
     <label :for=idLabel>
       {{ label }}
-      <!-- <input style="display: none"> -->
-      <input
-        ref=idLabel
-        :value=value
-        :name=idLabel
-        :indeterminate=indeterminate
-        :id=idLabel
-        :checked=checked
-        :disabled=disabled
-        :type="typeInput == 'radio' ? 'radio' : 'checkbox'"
-        @change="$parent.$emit('input',  $event.target.value)">
+      <input style="display: none">
     </label>
   </div>
 </template>
 
 <script lang="ts">
+import { ref } from "vue";
 import { Options, Vue } from "vue-class-component";
 
 // eslint-disable-next-line no-shadow
@@ -93,10 +83,16 @@ export default class CheckboxComponent extends Vue {
       this.inputType = TypeInput.CHECKBOX;
       break;
     }
+
+    setInterval(() => {
+      console.log("this.$refs", this.$refs);
+    }, 1000);
   }
 
   updated() {
     if (this.indeterminate) {
+      console.log("this.id", this.id);
+      console.log("this.$refs", this.$refs);
       const input: HTMLInputElement = this.$refs[this.id] as HTMLInputElement;
       input.indeterminate = true;
     }
@@ -113,17 +109,6 @@ export default class CheckboxComponent extends Vue {
 </script>
 
 <style lang="scss">
-/*start*/
-.radio input[type=radio] {
-  display: block;
-}
-.form-check input[type=radio] {
-  opacity: 1 !important;
-}
-.form-check label::before {
-  content: none !important;
-}
-/*stop*/
 @keyframes checkbox-check {
   0% {
     background-position: 0px;

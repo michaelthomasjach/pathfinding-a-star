@@ -3,14 +3,15 @@
        class="form-group form-group-default">
     <label for="simple-input">
       {{label}}
-      <input :type=inputType
-             :value=value
-             :placeholder=placeholder
-             :required=required
-             :disabled=disabled
-             class="form-control"
-             name="simple-input"
-             >
+      <input
+        :type=inputType
+        :value=value
+        :placeholder=placeholder
+        :required=required
+        :disabled=disabled
+        class="form-control"
+        name="simple-input"
+      >
     </label>
   </div>
 </template>

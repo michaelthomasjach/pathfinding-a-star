@@ -21,6 +21,7 @@
     </CardComponent>
 
     <CardComponent title="Checkbox">
+
       <CheckboxComponent
         label="Default checkbox"/>
       <CheckboxComponent
@@ -46,6 +47,7 @@
         type="checkbox"
         indeterminate
       />
+      <!--
       <CheckboxComponent
         label="Switch"
         color="primary"
@@ -92,21 +94,21 @@
         checked
         disabled
       />
+    -->
     </CardComponent>
-
-    <div>
-      <div class="radio-button-group">
-        => {{ getDecision }}
-        <InputGroupComponent
-          :options="options"
-          @input="inputEventHandler"/>
-      </div>
-    </div>
-
     <CardComponent title="Infos de l'utilisateur">
       {{ getUser }}
+      <button @click="changeUserInformations()">changeUserInformations</button>
     </CardComponent>
-    <button @click="changeUserInformations()">changeUserInformations</button>
+
+    <CardComponent>
+      selected: {{ selected }}<br/>
+      selectedValue: {{ selectedValue }}
+
+      <BaseRadioButtonGroup
+        :options="decisions"
+        v-model="selected"/>
+    </CardComponent>
   </div>
 </template>
 
@@ -118,25 +120,26 @@ import InputGroupComponent from "@/components/components-library/checkbox/InputG
 import CardComponent from "@/components/components-library/card/CardComponent.vue";
 import CheckboxComponent from "@/components/components-library/checkbox/CheckboxComponent.vue";
 
+import BaseRadioButtonGroup from "@/components/components-library/BaseRadioButtonGroup.vue";
+
 @Options({
   components: {
     InputComponent,
     CardComponent,
     CheckboxComponent,
     InputGroupComponent,
+    BaseRadioButtonGroup,
   },
 })
 export default class AdminComponent extends Vue {
   @Getter("getUser") getUser: any;
   @Action("requestUserInformations") requestUserInformations: any;
 
-  decision = '';
-  options = ['Yes', 'No', 'Undecided'];
+  decisions = ["Yes", "No", "Undecided"];
+  selected = "";
 
-  mounted() {
-    setInterval(() => {
-      console.log("FROM PARENT BOUCLE :", this.decision);
-    }, 1000);
+  get selectedValue() {
+    return this.selected;
   }
 
   changeUserInformations() {
@@ -149,16 +152,6 @@ export default class AdminComponent extends Vue {
     }).then((res: any) => {
       console.log("RESPONSE :", res);
     });
-  }
-
-  get getDecision() {
-    return this.decision;
-  }
-
-  inputEventHandler(value: string) {
-    console.log("FROM PARENT :", value);
-    this.$emit('input', value);
-    this.decision = value;
   }
 }
 </script>

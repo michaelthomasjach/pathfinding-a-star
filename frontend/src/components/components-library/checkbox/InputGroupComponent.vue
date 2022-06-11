@@ -7,7 +7,6 @@
         :label=option
         color="primary"
         :value="option"
-        @input="inputEventHandler(option)"
         type="radio"
       />
     </div>
@@ -26,16 +25,7 @@ import CheckboxComponent from "@/components/components-library/checkbox/Checkbox
     options: Array,
   },
 })
-export default class InputComponent extends Vue {
-  howAreYouFeeling = "";
-  inputEventHandler(value: string) {
-    this.$emit('input', value);
-  }
-
-  get gethowAreYouFeeling() {
-    return this.howAreYouFeeling;
-  }
-}
+export default class InputComponent extends Vue { }
 </script>
 
 <style lang="scss">
