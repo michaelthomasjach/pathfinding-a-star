@@ -6,23 +6,22 @@
     ]"
     class="form-check">
     <input
-      :value=value
-      :name=idLabel
-      :indeterminate=indeterminate
-      :id=idLabel
-      :checked=checked
-      :disabled=disabled
       :type="typeInput == 'radio' ? 'radio' : 'checkbox'"
-      @change="$parent.$emit('update:modelValue', $event.target.value)">
-    <label :for=idLabel>
+      :value="value"
+      :indeterminate=indeterminate
+      :id="idLabel"
+      :checked="checked"
+      :disabled="disabled"
+      @change="$parent.$emit('update:modelValue', $event.target.value)"
+      name="radio-input">
+    <label :for="idLabel">
       {{ label }}
-      <input style="display: none">
+      <input style="display: none;">
     </label>
   </div>
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
 import { Options, Vue } from "vue-class-component";
 
 // eslint-disable-next-line no-shadow

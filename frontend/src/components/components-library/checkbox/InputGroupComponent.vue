@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <div class="radio-button-group">
-      <CheckboxComponent
-        v-for="option in options"
-        :key=option
-        :label=option
-        color="primary"
-        :value="option"
-        type="radio"
-      />
-    </div>
+  <div class="radio-button-group">
+    <CheckboxComponent
+      v-for="option in options"
+      :key=option
+      :label=option
+      :value=option
+      color="primary"
+      type="radio"
+    />
   </div>
 </template>
 
@@ -22,7 +20,10 @@ import CheckboxComponent from "@/components/components-library/checkbox/Checkbox
     CheckboxComponent,
   },
   props: {
-    options: Array,
+    options: {
+      required: true,
+      type: Array,
+    },
   },
 })
 export default class InputComponent extends Vue { }

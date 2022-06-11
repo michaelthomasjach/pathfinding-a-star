@@ -104,10 +104,16 @@
     <CardComponent>
       selected: {{ selected }}<br/>
       selectedValue: {{ selectedValue }}
-
-      <BaseRadioButtonGroup
+      <InputGroupComponent
         :options="decisions"
         v-model="selected"/>
+    </CardComponent>
+    <CardComponent>
+      selected 1: {{ selected1 }}<br/>
+      selectedValue 1: {{ selectedValue1 }}
+      <BaseRadioButtonGroup
+        :options="decisions"
+        v-model="selected1"/>
     </CardComponent>
   </div>
 </template>
@@ -119,7 +125,6 @@ import InputComponent from "@/components/components-library/input/InputComponent
 import InputGroupComponent from "@/components/components-library/checkbox/InputGroupComponent.vue";
 import CardComponent from "@/components/components-library/card/CardComponent.vue";
 import CheckboxComponent from "@/components/components-library/checkbox/CheckboxComponent.vue";
-
 import BaseRadioButtonGroup from "@/components/components-library/BaseRadioButtonGroup.vue";
 
 @Options({
@@ -137,9 +142,14 @@ export default class AdminComponent extends Vue {
 
   decisions = ["Yes", "No", "Undecided"];
   selected = "";
+  selected1 = "";
 
   get selectedValue() {
     return this.selected;
+  }
+
+  get selectedValue1() {
+    return this.selected1;
   }
 
   changeUserInformations() {
