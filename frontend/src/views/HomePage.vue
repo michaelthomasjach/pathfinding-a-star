@@ -2,6 +2,9 @@
   <div class="home-page">
     <JumbotronComponent/>
     <ResumeComponent msg="Mon cv via props" />
+
+    <p>Message is: {{ message }}</p>
+    <input v-model="message" placeholder="edit me" />
   </div>
 </template>
 

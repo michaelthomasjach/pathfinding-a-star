@@ -30,44 +30,78 @@
       <CheckboxComponent
         label="Complete checkbox checked"
         color="complete"
+        type="checkbox"
         checked
       />
       <CheckboxComponent
         label="Complete checkbox checked disabled"
         color="complete"
+        type="checkbox"
         checked
         disabled
       />
       <CheckboxComponent
         label="Primary checkbox indeterminate"
         color="primary"
+        type="checkbox"
         indeterminate
       />
       <CheckboxComponent
         label="Switch"
         color="primary"
-        switch-btn
+        type="switch"
       />
       <CheckboxComponent
         label="Switch large"
         color="primary"
-        switch-btn-large
+        type="switch-lg"
       />
       <CheckboxComponent
         label="Switch large checked"
         color="complete"
-        switch-btn-large
+        type="switch-lg"
         checked
       />
       <CheckboxComponent
         label="Switch large checked disabled"
         color="complete"
-        switch-btn-large
+        type="switch-lg"
+        checked
+        disabled
+      />
+      <CheckboxComponent
+        label="Radio"
+        type="radio"
+      />
+      <CheckboxComponent
+        label="Radio checked"
+        color="complete"
+        type="radio"
+        checked
+      />
+      <CheckboxComponent
+        label="Radio disabled"
+        color="primary"
+        type="radio"
+        checked
+      />
+      <CheckboxComponent
+        label="Radio disabled"
+        color="primary"
+        type="radio"
         checked
         disabled
       />
     </CardComponent>
-    <TextAeraComponent label="test" input-type="text"/>
+
+    <div>
+      <div class="radio-button-group">
+        => {{ getDecision }}
+        <InputGroupComponent
+          :options="options"
+          @input="inputEventHandler"/>
+      </div>
+    </div>
 
     <CardComponent title="Infos de l'utilisateur">
       {{ getUser }}
@@ -80,6 +114,7 @@
 import { Options, Vue } from "vue-class-component";
 import { Action, Getter } from "s-vuex-class";
 import InputComponent from "@/components/components-library/input/InputComponent.vue";
+import InputGroupComponent from "@/components/components-library/checkbox/InputGroupComponent.vue";
 import CardComponent from "@/components/components-library/card/CardComponent.vue";
 import CheckboxComponent from "@/components/components-library/checkbox/CheckboxComponent.vue";
 
@@ -88,11 +123,21 @@ import CheckboxComponent from "@/components/components-library/checkbox/Checkbox
     InputComponent,
     CardComponent,
     CheckboxComponent,
+    InputGroupComponent,
   },
 })
 export default class AdminComponent extends Vue {
   @Getter("getUser") getUser: any;
   @Action("requestUserInformations") requestUserInformations: any;
+
+  decision = '';
+  options = ['Yes', 'No', 'Undecided'];
+
+  mounted() {
+    setInterval(() => {
+      console.log("FROM PARENT BOUCLE :", this.decision);
+    }, 1000);
+  }
 
   changeUserInformations() {
     if (this.$store.getters.getUser === undefined) {
@@ -104,6 +149,16 @@ export default class AdminComponent extends Vue {
     }).then((res: any) => {
       console.log("RESPONSE :", res);
     });
+  }
+
+  get getDecision() {
+    return this.decision;
+  }
+
+  inputEventHandler(value: string) {
+    console.log("FROM PARENT :", value);
+    this.$emit('input', value);
+    this.decision = value;
   }
 }
 </script>

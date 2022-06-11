@@ -1,21 +1,34 @@
 <template>
   <div
     :class="[
-      switchBtn ? 'switch' : '',
-      switchBtnLarge ? 'switch switch-lg' : '',
+      typeInput,
       disabled ? '' : color
     ]"
     class="form-check">
+    <!--
     <input
       ref=idLabel
+      :value=value
       :indeterminate=indeterminate
       :id=idLabel
       :checked=checked
       :disabled=disabled
-      type="checkbox">
+      :type="typeInput == 'radio' ? 'radio' : 'checkbox'"
+      @change="$parent.$emit('input', value)">
+      -->
     <label :for=idLabel>
       {{ label }}
-      <input style="display: none">
+      <!-- <input style="display: none"> -->
+      <input
+        ref=idLabel
+        :value=value
+        :name=idLabel
+        :indeterminate=indeterminate
+        :id=idLabel
+        :checked=checked
+        :disabled=disabled
+        :type="typeInput == 'radio' ? 'radio' : 'checkbox'"
+        @change="$parent.$emit('input',  $event.target.value)">
     </label>
   </div>
 </template>
@@ -29,11 +42,21 @@ enum CheckboxColor {
   COMPLETE = "complete",
 }
 
+// eslint-disable-next-line no-shadow
+export enum TypeInput {
+  CHECKBOX = "checkbox",
+  SWITCH = "switch",
+  SWITCH_LARGE = "switch-lg",
+  RADIO = "radio",
+}
+
 @Options({
   components: {},
   props: {
     label: String,
     checked: Boolean,
+    value: String,
+    type: TypeInput,
     color: CheckboxColor,
     switchBtn: Boolean,
     switchBtnLarge: Boolean,
@@ -46,9 +69,30 @@ export default class CheckboxComponent extends Vue {
   [x: string]: any;
 
   id = 0;
+  inputType = "";
 
   beforeMount() {
     this.id = Math.floor(Math.random() * 100000);
+  }
+
+  mounted() {
+    switch (this.type) {
+    case TypeInput.CHECKBOX:
+      this.inputType = TypeInput.CHECKBOX;
+      break;
+    case TypeInput.RADIO:
+      this.inputType = TypeInput.RADIO;
+      break;
+    case TypeInput.SWITCH:
+      this.inputType = TypeInput.SWITCH;
+      break;
+    case TypeInput.SWITCH_LARGE:
+      this.inputType = `${TypeInput.SWITCH} ${TypeInput.SWITCH_LARGE}`;
+      break;
+    default:
+      this.inputType = TypeInput.CHECKBOX;
+      break;
+    }
   }
 
   updated() {
@@ -58,6 +102,10 @@ export default class CheckboxComponent extends Vue {
     }
   }
 
+  get typeInput() {
+    return this.inputType;
+  }
+
   get idLabel() {
     return this.id;
   }
@@ -65,6 +113,17 @@ export default class CheckboxComponent extends Vue {
 </script>
 
 <style lang="scss">
+/*start*/
+.radio input[type=radio] {
+  display: block;
+}
+.form-check input[type=radio] {
+  opacity: 1 !important;
+}
+.form-check label::before {
+  content: none !important;
+}
+/*stop*/
 @keyframes checkbox-check {
   0% {
     background-position: 0px;
@@ -132,6 +191,7 @@ button, input, optgroup, select, textarea {
     input[type="checkbox"][disabled] + label:after {
       background: #ececec !important;
     }
+
     &.switch-lg {
       input[type="checkbox"] + label {
         padding-left: 42px;
@@ -204,13 +264,47 @@ button, input, optgroup, select, textarea {
     }
   }
 
+  &.primary input[type="radio"]:checked + label:before {
+    border-color: #7252D3;
+  }
+  &.complete input[type="radio"]:checked + label:before {
+    border-color: #0072EC;
+  }
+  input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+    top: 3px;
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+    padding: 0;
+
+    & + label:before {
+      bottom: 2.5px;
+      border-radius: 99px;
+      -webkit-transition: border 0.3s 0s cubic-bezier(0.455, 0.03, 0.215, 1.33);
+      transition: border 0.3s 0s cubic-bezier(0.455, 0.03, 0.215, 1.33);
+    }
+    &:checked + label:before {
+      border-color: #757575;
+      border-width: 5px;
+    }
+
+    & + label:after {
+      content: "";
+      display: none;
+    }
+  }
+
   input[type="checkbox"][disabled] + label:before {
     cursor: not-allowed !important;
     background: #ececec !important;
   }
+
   input[type="checkbox"][disabled] + label:after {
     cursor: not-allowed !important;
   }
+
   input[type="checkbox"] {
     position: absolute;
     margin: 0;
