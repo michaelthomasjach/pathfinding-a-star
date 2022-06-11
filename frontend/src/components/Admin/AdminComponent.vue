@@ -46,52 +46,75 @@
         type="checkbox"
         indeterminate
       />
-      <CheckboxComponent
-        label="Switch"
-        color="primary"
-        type="switch"
-      />
-      <CheckboxComponent
-        label="Switch large"
-        color="primary"
-        type="switch-lg"
-      />
-      <CheckboxComponent
-        label="Switch large checked"
-        color="complete"
-        type="switch-lg"
-        checked
-      />
-      <CheckboxComponent
-        label="Switch large checked disabled"
-        color="complete"
-        type="switch-lg"
-        checked
-        disabled
-      />
-      <CheckboxComponent
-        label="Radio"
-        type="radio"
-      />
-      <CheckboxComponent
-        label="Radio checked"
-        color="complete"
-        type="radio"
-        checked
-      />
-      <CheckboxComponent
-        label="Radio disabled"
-        color="primary"
-        type="radio"
-        checked
-      />
-      <CheckboxComponent
-        label="Radio disabled"
-        color="primary"
-        type="radio"
-        checked
-        disabled
-      />
+      <div class="col-lg-4">
+        <h5>Switch</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, facere.</p>
+        <br>
+        <CheckboxComponent
+          label="Switch"
+          color="primary"
+          type="switch"
+        />
+        <CheckboxComponent
+          label="Switch large"
+          color="primary"
+          type="switch-lg"
+        />
+        <CheckboxComponent
+          label="Switch large checked"
+          color="complete"
+          type="switch-lg"
+          checked
+        />
+        <CheckboxComponent
+          label="Switch large checked disabled"
+          color="complete"
+          type="switch-lg"
+          checked
+          disabled
+        />
+      </div>
+
+      <div class="col-lg-4">
+        <h5>Radio connected</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, facere.</p>
+        <br>
+        <InputGroupComponent
+          :options="decisions"
+          v-model="selected"/>
+      </div>
+
+      <div class="col-lg-4">
+        <h5>States</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, facere.</p>
+        <br>
+        <CheckboxComponent
+          label="Radio"
+          value="Radio"
+          type="radio"
+        />
+        <CheckboxComponent
+          label="Radio checked"
+          color="complete"
+          type="radio"
+          checked
+        />
+        <CheckboxComponent
+          label="Radio checked primary"
+          value="Radio checked primary"
+          color="primary"
+          type="radio"
+          checked
+        />
+        <CheckboxComponent
+          label="Radio checked primary disabled"
+          value="Radio checked primary disabled"
+          color="primary"
+          type="radio"
+          checked
+          disabled
+        />
+      </div>
     </CardComponent>
     <CardComponent title="Infos de l'utilisateur">
       {{ getUser }}
@@ -129,6 +152,7 @@ export default class AdminComponent extends Vue {
 
   decisions = ["Yes", "No", "Undecided"];
   selected = "";
+  az = "";
 
   get selectedValue() {
     return this.selected;

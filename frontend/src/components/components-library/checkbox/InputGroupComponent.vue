@@ -4,6 +4,7 @@
       v-for="option in options"
       :key=option
       :value=option
+      :label=option
       color="primary"
       type="radio"
     />

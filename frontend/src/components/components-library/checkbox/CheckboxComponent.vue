@@ -15,7 +15,7 @@
       @change="$parent.$emit('update:modelValue', $event.target.value)"
       name="radio-input">
     <label :for="idLabel">
-      {{ value }}
+      {{ label }}
       <input style="display: none;">
     </label>
   </div>
@@ -43,6 +43,7 @@ export enum TypeInput {
   props: {
     checked: Boolean,
     value: String,
+    label: String,
     type: TypeInput,
     color: CheckboxColor,
     switchBtn: Boolean,
