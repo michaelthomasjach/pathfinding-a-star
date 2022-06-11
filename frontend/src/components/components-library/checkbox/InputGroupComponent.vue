@@ -3,7 +3,6 @@
     <CheckboxComponent
       v-for="option in options"
       :key=option
-      :label=option
       :value=option
       color="primary"
       type="radio"
