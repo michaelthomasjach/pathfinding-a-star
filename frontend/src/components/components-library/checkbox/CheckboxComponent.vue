@@ -83,19 +83,6 @@ export default class CheckboxComponent extends Vue {
       this.inputType = TypeInput.CHECKBOX;
       break;
     }
-
-    setInterval(() => {
-      console.log("this.$refs", this.$refs);
-    }, 1000);
-  }
-
-  updated() {
-    if (this.indeterminate) {
-      console.log("this.id", this.id);
-      console.log("this.$refs", this.$refs);
-      const input: HTMLInputElement = this.$refs[this.id] as HTMLInputElement;
-      input.indeterminate = true;
-    }
   }
 
   get typeInput() {
