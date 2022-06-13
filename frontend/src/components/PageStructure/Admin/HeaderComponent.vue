@@ -15,5 +15,3 @@ export default class HeaderComponent extends Vue {
   }
 }
 </script>
-
-<style scoped lang="scss"></style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper-public">
     <HeaderComponent/>
     <div class="page-wrapper">
       <div class="page">
@@ -24,7 +24,3 @@ export default class PublicWrapper extends Vue {
 
 }
 </script>
-
-<style lang="scss">
-
-</style>

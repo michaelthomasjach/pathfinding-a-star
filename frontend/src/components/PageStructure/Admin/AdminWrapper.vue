@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper-admin">
     <SideMenuComponent/>
     <HeaderMenuComponent/>
     <div class="page-wrapper">
@@ -30,7 +30,7 @@ export default class AdminWrapper extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .page-wrapper {
   position: relative;
   padding-left: 70px;
