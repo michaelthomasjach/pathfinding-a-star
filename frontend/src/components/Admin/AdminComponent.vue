@@ -21,31 +21,65 @@
     </CardComponent>
 
     <CardComponent title="Checkbox">
-      <CheckboxComponent
-        label="Default checkbox"/>
-      <CheckboxComponent
-        label="Primary checkbox"
-        color="primary"
-      />
-      <CheckboxComponent
-        label="Complete checkbox checked"
-        color="complete"
-        type="checkbox"
-        checked
-      />
-      <CheckboxComponent
-        label="Complete checkbox checked disabled"
-        color="complete"
-        type="checkbox"
-        checked
-        disabled
-      />
-      <CheckboxComponent
-        label="Primary checkbox indeterminate"
-        color="primary"
-        type="checkbox"
-        indeterminate
-      />
+      <div class="col-lg-4">
+        <h5>Checkboxes</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, facere.</p>
+        <br>
+        <CheckboxComponent
+          label="Default checkbox"/>
+        <CheckboxComponent
+          label="Primary checkbox"
+          color="primary"
+        />
+        <CheckboxComponent
+          label="Complete checkbox checked"
+          color="complete"
+          type="checkbox"
+          checked
+        />
+        <CheckboxComponent
+          label="Complete checkbox checked disabled"
+          color="complete"
+          type="checkbox"
+          checked
+          disabled
+        />
+      </div>
+      <div class="col-lg-4">
+        <h5>Checkboxes circle</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, facere.</p>
+        <br>
+        <CheckboxComponent
+          label="Danger checkbox circle checked"
+          color="danger"
+          type="checkbox-circle"
+          checked
+        />
+        <CheckboxComponent
+          label="Complete checkbox circle disabled"
+          color="primary"
+          type="checkbox-circle"
+          checked
+          disabled
+        />
+        <CheckboxComponent
+          label="Complete checkbox circle"
+          color="complete"
+          type="checkbox-circle"
+        />
+      </div>
+      <div class="col-lg-4">
+        <h5>Switch</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, facere.</p>
+        <br>
+        <CheckboxComponent
+          label="Primary checkbox indeterminate"
+          color="primary"
+          type="checkbox"
+          indeterminate
+        />
+      </div>
+      <div class="row"></div>
       <div class="col-lg-4">
         <h5>Switch</h5>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, facere.</p>
@@ -94,12 +128,6 @@
           type="radio"
         />
         <CheckboxComponent
-          label="Radio checked"
-          color="complete"
-          type="radio"
-          checked
-        />
-        <CheckboxComponent
           label="Radio checked primary"
           value="Radio checked primary"
           color="primary"
@@ -111,7 +139,6 @@
           value="Radio checked primary disabled"
           color="primary"
           type="radio"
-          checked
           disabled
         />
       </div>
@@ -152,7 +179,6 @@ export default class AdminComponent extends Vue {
 
   decisions = ["Yes", "No", "Undecided"];
   selected = "";
-  az = "";
 
   get selectedValue() {
     return this.selected;

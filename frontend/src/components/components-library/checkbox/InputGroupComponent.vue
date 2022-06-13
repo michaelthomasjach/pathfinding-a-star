@@ -5,6 +5,7 @@
       :key=option
       :value=option
       :label=option
+      name="radio-options-demo"
       color="primary"
       type="radio"
     />

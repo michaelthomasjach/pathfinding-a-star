@@ -13,7 +13,7 @@
       :checked="checked"
       :disabled="disabled"
       @change="$parent.$emit('update:modelValue', $event.target.value)"
-      name="radio-input">
+      :name=name>
     <label :for="idLabel">
       {{ label }}
       <input style="display: none;">
@@ -33,6 +33,7 @@ enum CheckboxColor {
 // eslint-disable-next-line no-shadow
 export enum TypeInput {
   CHECKBOX = "checkbox",
+  CHECKBOX_CIRCLE = "checkbox-circle",
   SWITCH = "switch",
   SWITCH_LARGE = "switch-lg",
   RADIO = "radio",
@@ -43,6 +44,10 @@ export enum TypeInput {
   props: {
     checked: Boolean,
     value: String,
+    name: {
+      required: true,
+      type: String,
+    },
     label: String,
     type: TypeInput,
     color: CheckboxColor,
@@ -65,6 +70,9 @@ export default class CheckboxComponent extends Vue {
 
   mounted() {
     switch (this.type) {
+    case TypeInput.CHECKBOX_CIRCLE:
+      this.inputType = TypeInput.CHECKBOX_CIRCLE;
+      break;
     case TypeInput.CHECKBOX:
       this.inputType = TypeInput.CHECKBOX;
       break;
@@ -126,13 +134,19 @@ button, input, optgroup, select, textarea {
   word-wrap: break-word;
   margin-bottom: 10px;
   padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 
   &.primary input[type="checkbox"]:checked + label::before,
   &.primary input[type="checkbox"]:indeterminate + label::before {
     border-color: #7252D3;
     background-color: #7252D3;
   }
-
+  &.danger input[type="checkbox"]:checked + label:before,
+  &.danger input[type="checkbox"]:indeterminate + label:before {
+    border-color: #D83C31;
+    background-color: #D83C31;
+  }
   &.complete input[type="checkbox"]:checked + label:before,
   &.complete input[type="checkbox"]:indeterminate + label::before {
     border-color: #0072EC;
@@ -266,6 +280,11 @@ button, input, optgroup, select, textarea {
     }
   }
 
+  &.checkbox-circle {
+    label:before {
+      border-radius: 99px;
+    }
+  }
   input[type="checkbox"][disabled] + label:before {
     cursor: not-allowed !important;
     background: #ececec !important;
