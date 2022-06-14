@@ -46,6 +46,11 @@ export default class Actions {
   };
 
   // eslint-disable-next-line arrow-body-style
+  private refreshUserStoreInformations = ({ commit }: any, user: IUser) => {
+    commit(this.MUTATION_METHODS_NAMES.setUserInformations, user);
+  };
+
+  // eslint-disable-next-line arrow-body-style
   private requestLogout = ({ commit }: any) => {
     localStorage.removeItem("jwt-token");
     commit(this.MUTATION_METHODS_NAMES.setUserInformations, undefined);
@@ -54,6 +59,7 @@ export default class Actions {
   getActions = () => ({
     requestUserInformations: this.requestUserInformations,
     requestLogin: this.requestLogin,
+    refreshUserStoreInformations: this.refreshUserStoreInformations,
     requestLogout: this.requestLogout,
   });
 }
