@@ -31,14 +31,17 @@
           <span class="select2-dropdown select2-dropdown--below"
                 dir="ltr">
             <span class="select2-search select2-search--dropdown">
-              <input class="select2-search__field"
-                     type="search"
-                     tabindex="0"
-                     autocomplete="off"
-                     autocorrect="off"
-                     autocapitalize="off"
-                     spellcheck="false"
-                     role="textbox">
+              <input
+                class="select2-search__field"
+                type="search"
+                tabindex="0"
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                spellcheck="false"
+                role="textbox"
+                @focus="isFocus"
+                @blur="notFocus">
             </span>
             <span class="select2-results">
               <div class="scroll-wrapper select2-results__options"
@@ -144,6 +147,15 @@ import { Options, Vue } from "vue-class-component";
 export default class DropdownComponent extends Vue {
   dropdownIsOpen = false;
   openingDropdown = false;
+  inputFocus = false;
+
+  isFocus() {
+    this.inputFocus = true;
+  }
+
+  notFocus() {
+    this.inputFocus = false;
+  }
 
   openDropdown() {
     this.dropdownIsOpen = true;
@@ -155,8 +167,9 @@ export default class DropdownComponent extends Vue {
   }
 
   closeDropdown() {
-    if (this.openingDropdown === true) return;
+    if (this.openingDropdown === true || this.inputFocus === true) return;
     this.dropdownIsOpen = false;
+    this.inputFocus = false;
   }
 }
 </script>

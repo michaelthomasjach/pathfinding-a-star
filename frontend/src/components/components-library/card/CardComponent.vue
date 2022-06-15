@@ -69,6 +69,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     min-height: 42px;
     margin-bottom: 0;
+    z-index: auto;
     & + .card-body {
       padding-top: 0;
     }
