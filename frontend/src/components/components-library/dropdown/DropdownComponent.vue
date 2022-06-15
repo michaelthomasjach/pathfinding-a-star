@@ -5,8 +5,7 @@
     </label>
     <span
       class="select2 select2-container select2-container--default select2-container--below"
-      dir="ltr"
-      style="width: 500px;">
+      dir="ltr">
       <span class="selection">
         <span
           class="select2-selection select2-selection--single"
@@ -153,9 +152,11 @@ label, input, button, select, textarea {
   z-index: 10;
   &.form-group-default-select2 {
     padding: 0;
-    .select2-container .select2-selection--single {
-      padding-top: 20px;
-      height: 52px;
+    .select2-container {
+      .select2-selection--single {
+        padding-top: 20px;
+        height: 52px;
+      }
     }
   }
   background-color: #fff;
@@ -204,11 +205,11 @@ label, input, button, select, textarea {
   }
   .select2-container {
     position: relative;
+    vertical-align: middle;
     box-sizing: border-box;
     display: inline-block;
     margin: 0;
-    position: relative;
-    vertical-align: middle;
+    width: 100%;
     &.select2-container--default {
       .select2-selection--single {
         background-color: #fff;
@@ -221,8 +222,6 @@ label, input, button, select, textarea {
         .select2-selection__arrow {
           height: 26px;
           position: absolute;
-          top: 1px;
-          right: 1px;
           width: 20px;
 
           b {
@@ -333,9 +332,8 @@ label, input, button, select, textarea {
       }
 
       .select2-selection__arrow {
-        top: auto;
         bottom: 5px;
-        right: 10px !important;
+        right: 10px;
         left: auto;
         background: transparent;
         border-left: 0px;
