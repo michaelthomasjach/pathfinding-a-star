@@ -21,7 +21,6 @@ class ConfigureAdminRoutes {
         this.app.get(`${this.BASE_ROUTE}/admin`, this.userAuthorisationMiddleware, (req, res) => {
             // @ts-ignore
             const user = req.user;
-            // const user: any = req.header;
             const userIsAuthenticated = user !== undefined;
             if (!userIsAuthenticated)
                 return res.sendStatus(http_status_codes_1.StatusCodes.FORBIDDEN);

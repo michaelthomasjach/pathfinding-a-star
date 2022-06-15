@@ -1,5 +1,10 @@
 <template>
   <div>
+    <CardComponent>
+      <DropdownComponent
+        :options="decisions"
+        v-model="selected"/>
+    </CardComponent>
     <CardComponent title="Input">
       <h4>Exemples d'input disponibles</h4>
       <p>Pages Form Elements reshaped the conventional text-fields in aim to improve usability and
@@ -164,6 +169,7 @@ import InputComponent from "@/components/components-library/input/InputComponent
 import InputGroupComponent from "@/components/components-library/checkbox/InputGroupComponent.vue";
 import CardComponent from "@/components/components-library/card/CardComponent.vue";
 import CheckboxComponent from "@/components/components-library/checkbox/CheckboxComponent.vue";
+import DropdownComponent from "@/components/components-library/dropdown/DropdownComponent.vue";
 
 @Options({
   components: {
@@ -171,6 +177,7 @@ import CheckboxComponent from "@/components/components-library/checkbox/Checkbox
     CardComponent,
     CheckboxComponent,
     InputGroupComponent,
+    DropdownComponent,
   },
 })
 export default class AdminComponent extends Vue {
