@@ -1,10 +1,13 @@
 <template>
   <div class="form-group form-group-default form-group-default-select2 full-width required">
-    <label for="input">Project
+    <label for="input">
+      Project
       <input type="text" name="input" style="display: none">
     </label>
+    <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
     <span
       class="select2 select2-container select2-container--default select2-container--below"
+      v-on="dropdownIsOpen ? { click: closeDropdown }: { click: openDropdown } "
       dir="ltr">
       <span class="selection">
         <span
@@ -20,7 +23,10 @@
         </span>
       </span>
       <!-- dropdown start here -->
-      <span class="dropdown-wrapper">
+      <span
+        class="dropdown-wrapper"
+        v-click-outside="closeDropdown"
+        :class="!dropdownIsOpen ? 'dropdown-hide' : ''">
         <span class="select2-container select2-container--default select2-container--open">
           <span class="select2-dropdown select2-dropdown--below"
                 dir="ltr">
@@ -135,7 +141,24 @@ import { Options, Vue } from "vue-class-component";
     title: String,
   },
 })
-export default class DropdownComponent extends Vue { }
+export default class DropdownComponent extends Vue {
+  dropdownIsOpen = false;
+  openingDropdown = false;
+
+  openDropdown() {
+    this.dropdownIsOpen = true;
+    this.openingDropdown = true;
+    // To prevent opening and closing immediately
+    setTimeout(() => {
+      this.openingDropdown = false;
+    }, 10);
+  }
+
+  closeDropdown() {
+    if (this.openingDropdown === true) return;
+    this.dropdownIsOpen = false;
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -347,6 +370,9 @@ label, input, button, select, textarea {
       width: 100%;
       left: 0;
       right: 0;
+      &.dropdown-hide {
+        display: none;
+      }
       .select2-container {
         box-sizing: border-box;
         display: inline-block;
