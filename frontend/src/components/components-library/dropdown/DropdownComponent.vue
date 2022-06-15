@@ -172,7 +172,7 @@ label, input, button, select, textarea {
   line-height: 20px;
 }
 .form-group-default {
-  z-index: 10;
+  z-index: 1;
   &.form-group-default-select2 {
     padding: 0;
     .select2-container {

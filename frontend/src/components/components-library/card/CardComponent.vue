@@ -67,7 +67,6 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 0px;
     padding: 16px 16px 7px 20px;
     position: relative;
-    z-index: 3;
     min-height: 42px;
     margin-bottom: 0;
     & + .card-body {

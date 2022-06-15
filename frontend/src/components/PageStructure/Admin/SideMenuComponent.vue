@@ -32,7 +32,7 @@ export default class SideMenuComponent extends Vue {
   transition: 0.08s ease-in;
   transform: translate3d(-230px, 0, 0);
   font-size: 13px;
-  z-index: 2;
+  z-index: 101;
 
   &:hover  {
     transform: translate3d(0, 0, 0);
