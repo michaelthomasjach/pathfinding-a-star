@@ -6,7 +6,11 @@
     </label>
     <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
     <span
-      class="select2 select2-container select2-container--default select2-container--below"
+      class="select2 select2-container
+      select2-container--default
+      select2-container--below
+      top-container"
+      :class="dropdownIsOpen ? 'select2-container--open' : ''"
       v-on="dropdownIsOpen ? { click: closeDropdown }: { click: openDropdown } "
       dir="ltr">
       <span class="selection">
@@ -27,7 +31,7 @@
         class="dropdown-wrapper"
         v-click-outside="closeDropdown"
         :class="!dropdownIsOpen ? 'dropdown-hide' : ''">
-        <span class="select2-container select2-container--default select2-container--open">
+        <span class="select2-container select2-container--default">
           <span class="select2-dropdown select2-dropdown--below"
                 dir="ltr">
             <span class="select2-search select2-search--dropdown">
@@ -186,6 +190,7 @@ label, input, button, select, textarea {
 }
 .form-group-default {
   z-index: 1;
+  border: 0px !important;
   &.form-group-default-select2 {
     padding: 0;
     .select2-container {
@@ -243,14 +248,16 @@ label, input, button, select, textarea {
     position: relative;
     vertical-align: middle;
     box-sizing: border-box;
-    display: inline-block;
+    display: block;
     margin: 0;
     width: 100%;
+    &.top-container {
+      border: 1px solid rgba(33, 33, 33, 0.14);
+    }
     &.select2-container--default {
       .select2-selection--single {
         background-color: #fff;
-        border: 1px solid #aaa;
-        border-radius: 4px;
+        border-width: 0px;
         .select2-selection__rendered {
           color: #444;
           line-height: 28px;
@@ -351,6 +358,12 @@ label, input, button, select, textarea {
       }
     }
 
+    &.select2-container--open {
+      box-shadow: none;
+      border: 1px solid #7252D3 !important;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+    }
     .select2-selection {
       background-image: none;
       border-radius: 2px;
@@ -381,31 +394,32 @@ label, input, button, select, textarea {
     .dropdown-wrapper {
       position: absolute;
       width: 100%;
-      left: 0;
+      top: 52px;
+      left: -1px;
       right: 0;
+      border: 1px solid rgba(33, 33, 33, 0.14);
+      box-shadow: 0 4px 5px rgb(0 0 0 / 15%);
+      box-sizing: content-box;
       &.dropdown-hide {
         display: none;
       }
       .select2-container {
         box-sizing: border-box;
-        display: inline-block;
+        display: block;
         margin: 0;
         width: 100%;
         position: relative;
         vertical-align: middle;
 
         .select2-dropdown {
+          display: block;
+          position: relative;
           width: 100%;
           background-color: white;
           box-sizing: border-box;
-          display: block;
-          position: absolute;
-          border: 1px solid rgba(33, 33, 33, 0.14);
           border-bottom-right-radius: 2px;
           border-bottom-left-radius: 2px;
           padding-top: 5px;
-          z-index: 790;
-          box-shadow: 0 4px 5px rgb(0 0 0 / 15%);
           .select2-search--dropdown {
             display: block;
             padding: 4px 8px;
