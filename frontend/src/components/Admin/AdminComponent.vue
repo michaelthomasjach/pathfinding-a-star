@@ -7,6 +7,7 @@
           <DropdownComponent
             label="Groupes + input + multiples options"
             :options="dropdownOptions"
+            :defaultOptions="['Alaska']"
             @selectedOptions="updateSelectedOptions"/>
         </div>
         <div class="col-lg-3">
@@ -16,6 +17,7 @@
             :search-input=true
             :search-input-inline="true"
             :options="dropdownOptions"
+            :defaultOptions="['Alaska']"
             @selectedOptions="updateSelectedOptions"/>
         </div>
         <div class="col-lg-3">

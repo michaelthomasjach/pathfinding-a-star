@@ -33,7 +33,7 @@
               <i class="pg-close"></i>
             </span>
             <!-- eslint-enable -->
-            {{ selectedElement }}
+            <span class="selected-value">{{ selectedElement }}</span>
           </span>
           <span
             v-if="searchInput && searchInputInline"
@@ -132,6 +132,11 @@ import { Options, Vue } from "vue-class-component";
       type: String,
       default: "Dropdown",
     },
+    defaultOptions: {
+      required: false,
+      type: Array,
+      default: [],
+    },
     multipleOptions: {
       required: false,
       type: Boolean,
@@ -160,10 +165,15 @@ export default class DropdownComponent extends Vue {
   selectedOptions: string[] = [];
   filteredOptions: any = [];
 
-  mounted() {
+  beforeMount() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this.filteredOptions = JSON.parse(JSON.stringify(this.options));
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.selectedOptions = this.defaultOptions;
+    this.update();
   }
 
   isFocus() {
@@ -306,7 +316,7 @@ label, input, button, select, textarea {
     .select2-container {
       .select2-selection--single {
         padding-top: 20px;
-        height: 52px;
+        height: 100%;
       }
     }
   }
@@ -363,7 +373,7 @@ label, input, button, select, textarea {
     width: 100%;
     &.top-container {
       border: 1px solid rgba(33, 33, 33, 0.14);
-      height: 59px;
+      min-height: 59px;
     }
     &.select2-container--default {
       .select2-selection--single {
@@ -470,19 +480,34 @@ label, input, button, select, textarea {
     }
 
     .select2-selection--single {
+      position: relative;
+      display: block;
       padding-top: 20px;
-      height: 52px;
+      height: 100%;
       box-sizing: border-box;
       cursor: pointer;
       user-select: none;
       -webkit-user-select: none;
+      width: 100%;
+      overflow: scroll;
+
+      &::after {
+        content: "";
+        clear: both;
+      }
       .select2-selection__rendered {
-        display: block;
         padding-left: 8px;
         padding-right: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        float: left;
+        margin-bottom: 5px;
+        margin-top: 8px;
+
+        .selected-value {
+        line-height: 21px;
+        }
       }
     }
 
@@ -493,14 +518,14 @@ label, input, button, select, textarea {
       border-top-right-radius: 2px;
     }
     .select2-selection {
+      position: relative;
+      display: block;
       background-image: none;
       border-radius: 2px;
       border: 1px solid rgba(33, 33, 33, 0.14);
       padding: 2px 9px;
       transition: border 0.2s linear 0s;
       min-height: 35px;
-      display: inline-flex;
-      align-items: center;
 
       .select2-selection__rendered {
         padding: 0;
@@ -561,7 +586,7 @@ label, input, button, select, textarea {
     .dropdown-wrapper {
       position: absolute;
       width: 100%;
-      top: 53px;
+      top: calc(100% + 1px);
       left: -1px;
       right: 0;
       border: 1px solid rgba(33, 33, 33, 0.14);
