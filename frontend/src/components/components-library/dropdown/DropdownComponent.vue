@@ -400,6 +400,7 @@ label, input, button, select, textarea {
       border: 1px solid rgba(33, 33, 33, 0.14);
       box-shadow: 0 4px 5px rgb(0 0 0 / 15%);
       box-sizing: content-box;
+      background-color: #fff;
       &.dropdown-hide {
         display: none;
       }
