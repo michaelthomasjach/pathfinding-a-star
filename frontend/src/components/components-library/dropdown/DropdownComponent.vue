@@ -23,7 +23,16 @@
             :key="idx_selected_element"
             class="select2-selection__rendered"
             id="select2-yuhb-container"
-            :title="selectedElement">
+            :title="selectedElement"
+            :class="multipleOptions ? 'multiple-options' : ''">
+            <!-- eslint-disable -->
+            <span
+              v-if="multipleOptions == true"
+              @click="removeElement(selectedElement)"
+              class="remove-element">
+              <i class="pg-close"></i>
+            </span>
+            <!-- eslint-enable -->
             {{ selectedElement }}
           </span>
           <span class="select2-selection__arrow"
@@ -225,6 +234,10 @@ export default class DropdownComponent extends Vue {
 
   removeSelectedElement(element: string) {
     this.selectedElements = this.selectedElements.filter((item: string) => item !== element);
+  }
+
+  removeElement(element: string) {
+    this.removeSelectedElement(element);
   }
 
   openDropdown() {
@@ -471,6 +484,19 @@ label, input, button, select, textarea {
         display: flex;
         align-items: center;
         margin-right: 10px;
+        &.multiple-options {
+          display: flex;
+          align-items: center;
+          background-color: #e0e0e0;
+          padding-left: 10px;
+          padding-right: 10px;
+          border-radius: 15px;
+          .remove-element {
+            display: flex;
+            margin-right: 0px;
+            margin-top: -3px;
+          }
+        }
       }
 
       .select2-selection__arrow {
