@@ -1,6 +1,10 @@
 <template>
-  <div :class="[required ? 'required' : '', disabled ? 'disabled': '']"
-       class="form-group form-group-default">
+  <div :class="[
+    required ? 'required' : '',
+    disabled ? 'disabled': '',
+    isFocused ? 'is-focused' : ''
+    ]"
+    class="form-group form-group-default">
     <label for="simple-input">
       {{label}}
       <input
@@ -9,6 +13,8 @@
         :placeholder=placeholder
         :required=required
         :disabled=disabled
+        @focus="focus"
+        @blur="blur"
         class="form-control"
         name="simple-input"
       >
@@ -39,7 +45,16 @@ enum InputDefinition {
     disabled: Boolean,
   },
 })
-export default class InputComponent extends Vue { }
+export default class InputComponent extends Vue {
+  isFocused = false;
+  focus() {
+    this.isFocused = true;
+  }
+
+  blur() {
+    this.isFocused = false;
+  }
+}
 </script>
 
 <style lang="scss">
@@ -56,6 +71,12 @@ button, input {
 }
 
 .form-group {
+  &.is-focused {
+    box-shadow: none;
+    border: 1px solid #7252D3 !important;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+  }
   .form-group-default {
     background-color: #fff;
     font-family: -apple-system, BlinkMacSystemFont, "Inter UI",
