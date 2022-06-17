@@ -1,7 +1,7 @@
 <template>
   <div class="form-group form-group-default form-group-default-select2 full-width required">
     <label for="input">
-      Project
+      {{ label }}
       <input type="text" name="input" style="display: none">
     </label>
     <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
@@ -40,7 +40,9 @@
         <span class="select2-container select2-container--default">
           <span class="select2-dropdown select2-dropdown--below"
                 dir="ltr">
-            <span class="select2-search select2-search--dropdown">
+            <span
+              v-if="searchInput"
+              class="select2-search select2-search--dropdown">
               <input
                 class="select2-search__field"
                 type="search"
@@ -109,11 +111,20 @@ import { Options, Vue } from "vue-class-component";
 @Options({
   components: {},
   props: {
-    title: String,
+    label: {
+      required: true,
+      type: String,
+      default: "Dropdown",
+    },
     multipleOptions: {
       required: false,
       type: Boolean,
-      default: false,
+      default: true,
+    },
+    searchInput: {
+      required: false,
+      type: Boolean,
+      default: true,
     },
     options: {
       required: true,
@@ -140,6 +151,24 @@ export default class DropdownComponent extends Vue {
     const selected = event.target.textContent;
     const result = this.selectedElements.filter((item: string) => item === selected);
     if (result.length === 0) {
+      /**
+       * Allow only one item selected
+       */
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      if (this.selectedElements.length !== 0 && this.multipleOptions === false) {
+        // add curent and remove preivous
+        this.selectedElements = [];
+        this.addSelectedElement(selected);
+        return;
+      }
+      console.log(
+        "this.selectedElements.length !== 0 && this.multipleOptions === false",
+        (this.selectedElements.length !== 0
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          && this.multipleOptions === false),
+      );
       this.addSelectedElement(selected);
     } else {
       this.removeSelectedElement(selected);

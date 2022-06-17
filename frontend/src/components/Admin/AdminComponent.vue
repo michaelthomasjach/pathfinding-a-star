@@ -1,16 +1,27 @@
 <template>
   <div>
     <CardComponent>
-      <div class="col-lg-6">
-        <DropdownComponent
-          :options="dropdownOptions"
-          v-model="selected"/>
-      </div>
-      <div class="col-lg-6">
-        <DropdownComponent
-          :multiple-options="true"
-          :options="dropdownOptions2"
-          v-model="selected"/>
+      <div class="row">
+        <div class="col-lg-4">
+          <DropdownComponent
+            label="Groupes + input + multiples options sélectionnable"
+            :options="dropdownOptions"
+            v-model="selected"/>
+        </div>
+        <div class="col-lg-4">
+          <DropdownComponent
+            label="Input + 1 option sélectionnable"
+            :multiple-options="false"
+            :options="dropdownOptions2"
+            v-model="selected"/>
+        </div>
+        <div class="col-lg-4">
+          <DropdownComponent
+            label="Multiples options sélectionnable"
+            :search-input=false
+            :options="dropdownOptions2"
+            v-model="selected"/>
+        </div>
       </div>
     </CardComponent>
     <CardComponent title="Input">
