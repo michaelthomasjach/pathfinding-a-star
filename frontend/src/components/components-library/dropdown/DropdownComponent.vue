@@ -35,6 +35,17 @@
             <!-- eslint-enable -->
             {{ selectedElement }}
           </span>
+          <span
+            v-if="searchInput && searchInputInline"
+            class="input-inline">
+            <input
+              class="select2-search__field"
+              type="text"
+              ref="autofocusInput"
+              @keyup="searching"
+              @focus="isFocus"
+              @blur="notFocus">
+          </span>
           <span class="select2-selection__arrow"
                 role="presentation">
             <b role="presentation"></b>
@@ -50,7 +61,7 @@
           <span class="select2-dropdown select2-dropdown--below"
                 dir="ltr">
             <span
-              v-if="searchInput"
+              v-if="searchInput && !searchInputInline"
               class="select2-search select2-search--dropdown">
               <input
                 class="select2-search__field"
@@ -130,6 +141,11 @@ import { Options, Vue } from "vue-class-component";
       required: false,
       type: Boolean,
       default: true,
+    },
+    searchInputInline: {
+      required: false,
+      type: Boolean,
+      default: false,
     },
     options: {
       required: true,
@@ -476,7 +492,7 @@ label, input, button, select, textarea {
       padding: 2px 9px;
       transition: border 0.2s linear 0s;
       min-height: 35px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
 
       .select2-selection__rendered {
@@ -491,11 +507,36 @@ label, input, button, select, textarea {
           padding-left: 10px;
           padding-right: 10px;
           border-radius: 15px;
+          line-height: 21px;
           .remove-element {
             display: flex;
             margin-right: 0px;
             margin-top: -3px;
           }
+        }
+      }
+
+      .input-inline {
+        display: inline-flex;
+        float: left;
+        input {
+          width: 100%;
+          background: transparent;
+          border: none;
+          outline: 0;
+          box-shadow: none;
+          -webkit-appearance: textfield;
+          box-sizing: border-box;
+          font-size: 100%;
+          margin-top: 5px;
+          padding: 0;
+          background-image: none !important;
+          outline-offset: -2px;
+          font-weight: normal;
+          line-height: 20px;
+          overflow: visible;
+          margin: 0;
+          font-family: inherit;
         }
       }
 

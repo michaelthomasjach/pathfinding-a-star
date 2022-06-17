@@ -2,22 +2,30 @@
   <div>
     <CardComponent>
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <DropdownComponent
-            label="Groupes + input + multiples options sélectionnables"
+            label="Groupes + input + multiples options"
             :options="dropdownOptions"
             v-model="selected"/>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <DropdownComponent
-            label="Input + 1 option sélectionnable"
+            label="Groupes + input inline + multiples options"
+            :search-input=true
+            :search-input-inline="true"
+            :options="dropdownOptions"
+            v-model="selected"/>
+        </div>
+        <div class="col-lg-3">
+          <DropdownComponent
+            label="Input + 1 option"
             :multiple-options="false"
             :options="dropdownOptions2"
             v-model="selected"/>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <DropdownComponent
-            label="Multiples options sélectionnables"
+            label="Multiples options"
             :search-input=false
             :options="dropdownOptions2"
             v-model="selected"/>
