@@ -46,6 +46,7 @@
               <input
                 class="select2-search__field"
                 type="text"
+                ref="autofocusInput"
                 @keyup="searching"
                 @focus="isFocus"
                 @blur="notFocus">
@@ -153,10 +154,7 @@ export default class DropdownComponent extends Vue {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this.filteredOptions = JSON.parse(JSON.stringify(this.options));
-    console.log("optionsTemp", this.filteredOptions);
-    console.log("search", searchString);
     if (this.filteredOptions.length !== 0) {
-      console.log("typeof this.filteredOptions[0]", typeof this.filteredOptions[0]);
       if (typeof this.filteredOptions[0] === "object") {
         this.filterOnObject(searchString);
       } else {
@@ -232,6 +230,10 @@ export default class DropdownComponent extends Vue {
   openDropdown() {
     this.dropdownIsOpen = true;
     this.openingDropdown = true;
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.$nextTick(() => this.$refs.autofocusInput.focus());
     this.preventCloseDropdown();
   }
 
