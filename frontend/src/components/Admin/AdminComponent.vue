@@ -3,32 +3,36 @@
     <CardComponent>
       <div class="row">
         <div class="col-lg-3">
+          Values : {{ selectedOptions }}
           <DropdownComponent
             label="Groupes + input + multiples options"
             :options="dropdownOptions"
-            v-model="selected"/>
+            @selectedOptions="updateSelectedOptions"/>
         </div>
         <div class="col-lg-3">
+          Values : {{ selectedOptions }}
           <DropdownComponent
             label="Groupes + input inline + multiples options"
             :search-input=true
             :search-input-inline="true"
             :options="dropdownOptions"
-            v-model="selected"/>
+            @selectedOptions="updateSelectedOptions"/>
         </div>
         <div class="col-lg-3">
+          Values : {{ selectedOptions2 }}
           <DropdownComponent
             label="Input + 1 option"
             :multiple-options="false"
             :options="dropdownOptions2"
-            v-model="selected"/>
+            @selectedOptions="updateSelectedOptions2"/>
         </div>
         <div class="col-lg-3">
+          Values : {{ selectedOptions2 }}
           <DropdownComponent
             label="Multiples options"
             :search-input=false
             :options="dropdownOptions2"
-            v-model="selected"/>
+            @selectedOptions="updateSelectedOptions2"/>
         </div>
       </div>
     </CardComponent>
@@ -213,6 +217,8 @@ export default class AdminComponent extends Vue {
 
   decisions = ["Yes", "No", "Undecided"];
   selected = "";
+  selectedOptions = "";
+  selectedOptions2 = "";
 
   dropdownOptions = [
     {
@@ -240,6 +246,17 @@ export default class AdminComponent extends Vue {
 
   get selectedValue() {
     return this.selected;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  updateSelectedOptions(event: any) {
+    console.log("event", event);
+    this.selectedOptions = event;
+  }
+
+  updateSelectedOptions2(event: any) {
+    console.log("event", event);
+    this.selectedOptions2 = event;
   }
 
   changeUserInformations() {

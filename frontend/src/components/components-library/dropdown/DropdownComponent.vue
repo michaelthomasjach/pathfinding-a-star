@@ -19,7 +19,7 @@
           class="select2-selection select2-selection--single"
           tabindex="0">
           <span
-            v-for="(selectedElement, idx_selected_element) in selectedElements"
+            v-for="(selectedElement, idx_selected_element) in selectedOptions"
             :key="idx_selected_element"
             class="select2-selection__rendered"
             id="select2-yuhb-container"
@@ -157,7 +157,7 @@ export default class DropdownComponent extends Vue {
   dropdownIsOpen = false;
   openingDropdown = false;
   inputFocus = false;
-  selectedElements: string[] = [];
+  selectedOptions: string[] = [];
   filteredOptions: any = [];
 
   mounted() {
@@ -211,22 +211,22 @@ export default class DropdownComponent extends Vue {
   // eslint-disable-next-line class-methods-use-this
   addOrRemoveItem(event: any) {
     const selected = event.target.textContent;
-    const result = this.selectedElements.filter((item: string) => item === selected);
+    const result = this.selectedOptions.filter((item: string) => item === selected);
     if (result.length === 0) {
       /**
        * Allow only one item selected
        */
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      if (this.selectedElements.length !== 0 && this.multipleOptions === false) {
+      if (this.selectedOptions.length !== 0 && this.multipleOptions === false) {
         // add curent and remove preivous
-        this.selectedElements = [];
+        this.selectedOptions = [];
         this.addSelectedElement(selected);
         return;
       }
       console.log(
         "this.selectedElements.length !== 0 && this.multipleOptions === false",
-        (this.selectedElements.length !== 0
+        (this.selectedOptions.length !== 0
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           && this.multipleOptions === false),
@@ -240,16 +240,23 @@ export default class DropdownComponent extends Vue {
   }
 
   optionIsSelected(element: string) {
-    const isSelected = this.selectedElements.filter((item: string) => item === element);
+    const isSelected = this.selectedOptions.filter((item: string) => item === element);
     return isSelected.length;
   }
 
   addSelectedElement(element: string) {
-    this.selectedElements.push(element);
+    this.selectedOptions.push(element);
+    this.update();
   }
 
   removeSelectedElement(element: string) {
-    this.selectedElements = this.selectedElements.filter((item: string) => item !== element);
+    this.selectedOptions = this.selectedOptions.filter((item: string) => item !== element);
+    this.update();
+  }
+
+  update() {
+    console.log("EMIT :", this.selectedOptions);
+    this.$emit('selectedOptions', this.selectedOptions);
   }
 
   removeElement(element: string) {
@@ -356,10 +363,10 @@ label, input, button, select, textarea {
     width: 100%;
     &.top-container {
       border: 1px solid rgba(33, 33, 33, 0.14);
+      height: 59px;
     }
     &.select2-container--default {
       .select2-selection--single {
-        background-color: #fff;
         border-width: 0px;
         .select2-selection__rendered {
           color: #444;
