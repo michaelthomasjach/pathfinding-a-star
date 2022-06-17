@@ -1,9 +1,17 @@
 <template>
   <div>
     <CardComponent>
-      <DropdownComponent
-        :options="decisions"
-        v-model="selected"/>
+      <div class="col-lg-6">
+        <DropdownComponent
+          :options="dropdownOptions"
+          v-model="selected"/>
+      </div>
+      <div class="col-lg-6">
+        <DropdownComponent
+          :multiple-options="true"
+          :options="dropdownOptions2"
+          v-model="selected"/>
+      </div>
     </CardComponent>
     <CardComponent title="Input">
       <h4>Exemples d'input disponibles</h4>
@@ -186,6 +194,30 @@ export default class AdminComponent extends Vue {
 
   decisions = ["Yes", "No", "Undecided"];
   selected = "";
+
+  dropdownOptions = [
+    {
+      title: "Alaskan / Hawaiian Time Zone",
+      values: [
+        "Alaska",
+        "Hawaii",
+      ],
+    },
+    {
+      title: "Pacific Time Zone",
+      values: [
+        "California",
+        "Nevada",
+        "Oregon",
+        "Washington",
+      ],
+    },
+  ];
+
+  dropdownOptions2 = [
+    "Value 3",
+    "Value 4",
+  ]
 
   get selectedValue() {
     return this.selected;

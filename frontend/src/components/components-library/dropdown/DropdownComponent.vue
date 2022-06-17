@@ -13,13 +13,19 @@
       :class="dropdownIsOpen ? 'select2-container--open' : ''"
       v-on="dropdownIsOpen ? { click: closeDropdown }: { click: openDropdown } "
       dir="ltr">
-      <span class="selection">
+      <span
+        class="selection">
         <span
           class="select2-selection select2-selection--single"
           tabindex="0">
-          <span class="select2-selection__rendered"
-                id="select2-yuhb-container"
-                title="Alaska">Alaska</span>
+          <span
+            v-for="(selectedElement, idx_selected_element) in selectedElements"
+            :key="idx_selected_element"
+            class="select2-selection__rendered"
+            id="select2-yuhb-container"
+            :title="selectedElement">
+            {{ selectedElement }}
+          </span>
           <span class="select2-selection__arrow"
                 role="presentation">
             <b role="presentation"></b>
@@ -51,85 +57,43 @@
               <div class="scroll-wrapper select2-results__options"
                    style="position: relative;">
                 <ul class="select2-results__options scroll-content scroll-scrolly_visible"
-                    role="tree"
-                    id="select2-yuhb-results"
-                    aria-expanded="true"
-                    aria-hidden="false"
                     style="height: auto;
                     margin-bottom: 0px;
                     margin-right: 0px;
                     max-height: 200px;">
-                  <li class="select2-results__option"
-                      role="group"
-                      aria-label="Alaskan/Hawaiian Time Zone">
-                    <strong class="select2-results__group">
-                      Alaskan/Hawaiian Time Zone
-                    </strong>
-                    <ul class="select2-results__options select2-results__options--nested">
-                      <li class="select2-results__option select2-results__option--highlighted"
-                          id="select2-yuhb-result-xx1f-AK"
-                          role="treeitem"
-                          aria-selected="true">
-                        Alaska
-                      </li>
-                      <li class="select2-results__option selected"
-                          id="select2-yuhb-result-tej2-HI"
-                          role="treeitem"
-                          aria-selected="false">
-                        Hawaii
-                      </li>
-                    </ul>
+                  <!-- eslint-disable -->
+                  <template
+                    v-for="(opt, idx) in options"
+                    :key="idx">
+                    <li
+                      v-if="!!opt.title"
+                      class="select2-results__option nested-options">
+                      <strong class="select2-results__group">
+                        {{ opt.title }}
+                      </strong>
+                      <ul class="select2-results__options select2-results__options--nested">
+                        <li
+                          v-for="(value, idx_value) in opt.values"
+                          :key="idx_value"
+                          class="select2-results__option"
+                          :class="optionIsSelected(value) ? 'selected' : ''"
+                          @click="addOrRemoveItem">
+                          {{ value }}
+                        </li>
+                      </ul>
+                    </li>
+                    <li
+                      v-else
+                      class="select2-results__option no-nested-options"
+                      :class="optionIsSelected(opt) ? 'selected' : ''"
+                      @click="addOrRemoveItem">
+                      {{ opt }}
                   </li>
-                  <li class="select2-results__option"
-                      role="group"
-                      aria-label="Pacific Time Zone">
-                    <strong class="select2-results__group">
-                      Pacific Time Zone
-                    </strong>
-                    <ul class="select2-results__options select2-results__options--nested">
-                      <li class="select2-results__option"
-                          id="select2-yuhb-result-5gqq-CA"
-                          role="treeitem"
-                          aria-selected="false">
-                        California
-                      </li>
-                      <li class="select2-results__option"
-                          id="select2-yuhb-result-765i-NV"
-                          role="treeitem"
-                          aria-selected="false">
-                        Nevada
-                      </li>
-                      <li class="select2-results__option"
-                          id="select2-yuhb-result-3p46-OR"
-                          role="treeitem"
-                          aria-selected="false">
-                        Oregon
-                      </li>
-                      <li class="select2-results__option"
-                          id="select2-yuhb-result-qpqq-WA"
-                          role="treeitem"
-                          aria-selected="false">
-                        Washington
-                      </li>
-                    </ul>
-                  </li>
+                  </template>
+
+
+                  <!-- eslint-enable -->
                 </ul>
-                <div class="scroll-element scroll-x scroll-scrolly_visible"
-                     style=""><div class="scroll-element_outer">
-                  <div class="scroll-element_size"></div>
-                  <div class="scroll-element_track"></div>
-                  <div class="scroll-bar"
-                       style="width: 89px;">
-                  </div>
-                </div>
-                </div>
-                <div class="scroll-element scroll-y scroll-scrolly_visible" style="">
-                  <div class="scroll-element_outer">
-                    <div class="scroll-element_size"></div>
-                    <div class="scroll-element_track"></div>
-                    <div class="scroll-bar" style="height: 136px;top: 0px;"></div>
-                  </div>
-                </div>
               </div>
             </span>
           </span>
@@ -146,12 +110,22 @@ import { Options, Vue } from "vue-class-component";
   components: {},
   props: {
     title: String,
+    multipleOptions: {
+      required: false,
+      type: Boolean,
+      default: false,
+    },
+    options: {
+      required: true,
+      type: [],
+    },
   },
 })
 export default class DropdownComponent extends Vue {
   dropdownIsOpen = false;
   openingDropdown = false;
   inputFocus = false;
+  selectedElements: string[] = [];
 
   isFocus() {
     this.inputFocus = true;
@@ -161,9 +135,39 @@ export default class DropdownComponent extends Vue {
     this.inputFocus = false;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  addOrRemoveItem(event: any) {
+    const selected = event.target.textContent;
+    const result = this.selectedElements.filter((item: string) => item === selected);
+    if (result.length === 0) {
+      this.addSelectedElement(selected);
+    } else {
+      this.removeSelectedElement(selected);
+    }
+    // To keep dropdown open
+    this.openDropdown();
+  }
+
+  optionIsSelected(element: string) {
+    const isSelected = this.selectedElements.filter((item: string) => item === element);
+    return isSelected.length;
+  }
+
+  addSelectedElement(element: string) {
+    this.selectedElements.push(element);
+  }
+
+  removeSelectedElement(element: string) {
+    this.selectedElements = this.selectedElements.filter((item: string) => item !== element);
+  }
+
   openDropdown() {
     this.dropdownIsOpen = true;
     this.openingDropdown = true;
+    this.preventCloseDropdown();
+  }
+
+  preventCloseDropdown() {
     // To prevent opening and closing immediately
     setTimeout(() => {
       this.openingDropdown = false;
@@ -322,7 +326,25 @@ label, input, button, select, textarea {
         font-weight: bolder;
       }
       .select2-results__option{
-        .select2-results__option {
+        &.nested-options {
+          .select2-results__option {
+            padding: 6px;
+            user-select: none;
+            -webkit-user-select: none;
+            cursor: pointer;
+            &.selected {
+              background-color: #f4f4f4 !important;
+              border-radius: 3px;
+              color: #4b4b4b !important;
+            }
+            &:hover {
+              background-color: #f4f4f4 !important;
+              border-radius: 3px;
+              color: #4b4b4b !important;
+            }
+          }
+        }
+        &.no-nested-options {
           padding: 6px;
           user-select: none;
           -webkit-user-select: none;
@@ -378,6 +400,7 @@ label, input, button, select, textarea {
         padding: 0;
         display: flex;
         align-items: center;
+        margin-right: 10px;
       }
 
       .select2-selection__arrow {
@@ -394,7 +417,7 @@ label, input, button, select, textarea {
     .dropdown-wrapper {
       position: absolute;
       width: 100%;
-      top: 52px;
+      top: 53px;
       left: -1px;
       right: 0;
       border: 1px solid rgba(33, 33, 33, 0.14);
