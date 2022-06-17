@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-lg-4">
           <DropdownComponent
-            label="Groupes + input + multiples options sélectionnable"
+            label="Groupes + input + multiples options sélectionnables"
             :options="dropdownOptions"
             v-model="selected"/>
         </div>
@@ -17,7 +17,7 @@
         </div>
         <div class="col-lg-4">
           <DropdownComponent
-            label="Multiples options sélectionnable"
+            label="Multiples options sélectionnables"
             :search-input=false
             :options="dropdownOptions2"
             v-model="selected"/>

@@ -45,13 +45,8 @@
               class="select2-search select2-search--dropdown">
               <input
                 class="select2-search__field"
-                type="search"
-                tabindex="0"
-                autocomplete="off"
-                autocorrect="off"
-                autocapitalize="off"
-                spellcheck="false"
-                role="textbox"
+                type="text"
+                @keyup="searching"
                 @focus="isFocus"
                 @blur="notFocus">
             </span>
@@ -65,7 +60,7 @@
                     max-height: 200px;">
                   <!-- eslint-disable -->
                   <template
-                    v-for="(opt, idx) in options"
+                    v-for="(opt, idx) in filteredOptions"
                     :key="idx">
                     <li
                       v-if="!!opt.title"
@@ -137,6 +132,13 @@ export default class DropdownComponent extends Vue {
   openingDropdown = false;
   inputFocus = false;
   selectedElements: string[] = [];
+  filteredOptions: any = [];
+
+  mounted() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.filteredOptions = JSON.parse(JSON.stringify(this.options));
+  }
 
   isFocus() {
     this.inputFocus = true;
@@ -144,6 +146,26 @@ export default class DropdownComponent extends Vue {
 
   notFocus() {
     this.inputFocus = false;
+  }
+
+  searching(event: any) {
+    const searchString = event.target.value.toLowerCase();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.filteredOptions = JSON.parse(JSON.stringify(this.options));
+    console.log("optionsTemp", this.filteredOptions);
+    console.log("search", searchString);
+    this.filteredOptions.filter((option: any, index: number) => {
+      // console.log("option :", option.values);
+      const filteredResults = option.values.filter((value: string) => {
+        console.log("value :", value);
+        return value.toLowerCase().match(searchString);
+      });
+      this.filteredOptions[index].values = filteredResults;
+      // console.log("a", a);
+      return filteredResults;
+    });
+    console.log("optionsTemp", this.filteredOptions);
   }
 
   // eslint-disable-next-line class-methods-use-this
