@@ -155,17 +155,34 @@ export default class DropdownComponent extends Vue {
     this.filteredOptions = JSON.parse(JSON.stringify(this.options));
     console.log("optionsTemp", this.filteredOptions);
     console.log("search", searchString);
+    if (this.filteredOptions.length !== 0) {
+      console.log("typeof this.filteredOptions[0]", typeof this.filteredOptions[0]);
+      if (typeof this.filteredOptions[0] === "object") {
+        this.filterOnObject(searchString);
+      } else {
+        this.filterOnArray(searchString);
+      }
+    }
+  }
+
+  filterOnObject(searchString: string) {
     this.filteredOptions.filter((option: any, index: number) => {
-      // console.log("option :", option.values);
+      // eslint-disable-next-line
       const filteredResults = option.values.filter((value: string) => {
-        console.log("value :", value);
         return value.toLowerCase().match(searchString);
       });
       this.filteredOptions[index].values = filteredResults;
-      // console.log("a", a);
       return filteredResults;
     });
-    console.log("optionsTemp", this.filteredOptions);
+  }
+
+  filterOnArray(searchString: string) {
+    // eslint-disable-next-line
+    const filteredResults = this.filteredOptions.filter((value: string) => {
+      return value.toLowerCase().match(searchString);
+    });
+    this.filteredOptions = filteredResults;
+    return filteredResults;
   }
 
   // eslint-disable-next-line class-methods-use-this
