@@ -23,7 +23,7 @@ import { Options, Vue } from "vue-class-component";
 export default class CardComponent extends Vue { }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 *, ::after, ::before {
   box-sizing: border-box;
 }

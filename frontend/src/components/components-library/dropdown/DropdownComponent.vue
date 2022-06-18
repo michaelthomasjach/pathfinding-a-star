@@ -1,5 +1,6 @@
 <template>
-  <div class="form-group form-group-default form-group-default-select2 full-width required">
+  <div class="form-group form-group-default form-group-default-select2 full-width"
+       :class="required ?  'required' : ''">
     <label for="input">
       {{ label }}
       <input type="text" name="input" style="display: none">
@@ -155,6 +156,11 @@ import { Options, Vue } from "vue-class-component";
     options: {
       required: true,
       type: [],
+    },
+    required: {
+      required: false,
+      type: Boolean,
+      default: false,
     },
   },
 })

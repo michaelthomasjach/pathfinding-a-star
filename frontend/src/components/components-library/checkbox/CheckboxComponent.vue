@@ -101,7 +101,7 @@ export default class CheckboxComponent extends Vue {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @keyframes checkbox-check {
   0% {
     background-position: 0px;

@@ -77,7 +77,7 @@ button, input {
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
   }
-  .form-group-default {
+  &.form-group-default {
     background-color: #fff;
     font-family: -apple-system, BlinkMacSystemFont, "Inter UI",
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",

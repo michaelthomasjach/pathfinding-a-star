@@ -1,35 +1,54 @@
 <template>
-  <div class="form-group form-group-default required">
-    <label for="simple-input">
-      {{label}}
-      <input :type=inputType class="form-control" name="simple-input" required="">
+  <div
+    class="form-group form-group-default"
+    :class="required ?  'required' : ''">
+    <label for="simple-textarea">
+      {{ label }}
+      <textarea
+        class="form-control textarea-simple"
+        name="simple-textarea"
+        required=""
+        :value="defaultValue"
+        @input="sendValue"/>
     </label>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Action, Getter } from "s-vuex-class";
-
-// eslint-disable-next-line no-shadow
-enum InputDefinition {
-  EMAIL = "email",
-  TEXT = "text",
-  NUMBER = "number",
-  PASSWORD = "password",
-}
 
 @Options({
   components: {},
   props: {
     label: String,
-    inputType: InputDefinition,
+    defaultValue: {
+      required: false,
+      type: String,
+      default: "",
+    },
+    required: {
+      required: false,
+      type: Boolean,
+      default: false,
+    },
   },
 })
-export default class InputComponent extends Vue { }
+export default class TextAeraComponent extends Vue {
+  mounted() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.$emit('update:modelValue', this.defaultValue);
+  }
+
+  sendValue(event: any) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.$emit('update:modelValue', event.target.value);
+  }
+}
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 label, input, button, select, textarea {
   font-size: 14px;
   font-weight: normal;
@@ -43,7 +62,7 @@ button, input {
 }
 
 .form-group {
-  .form-group-default {
+  &.form-group-default {
     background-color: #fff;
     font-family: -apple-system, BlinkMacSystemFont, "Inter UI",
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
@@ -90,7 +109,6 @@ button, input {
       display: block;
       width: 100%;
       border: none;
-      height: 25px;
       min-height: 25px;
       padding: 0;
       margin-top: -4px;
@@ -108,6 +126,12 @@ button, input {
       -webkit-appearance: none;
       color: #212121;
       outline: 0;
+
+      &.textarea-simple {
+        min-height: 100px;
+        resize: vertical;
+        margin-top: 8px;
+      }
     }
   }
 }

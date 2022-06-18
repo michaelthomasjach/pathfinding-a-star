@@ -1,11 +1,12 @@
 <template>
   <div>
-    <CardComponent>
+    <CardComponent title="Dropdown">
       <div class="row">
         <div class="col-lg-3">
           Values : {{ selectedOptions }}
           <DropdownComponent
             label="Groupes + input + multiples options"
+            :required="true"
             :options="dropdownOptions"
             :defaultOptions="['Alaska']"
             @selectedOptions="updateSelectedOptions"/>
@@ -35,6 +36,19 @@
             :search-input=false
             :options="dropdownOptions2"
             @selectedOptions="updateSelectedOptions2"/>
+        </div>
+      </div>
+    </CardComponent>
+    <CardComponent title="Textaera">
+      <div class="row">
+        <div class="col-lg-12">
+          Value : {{ contentTextaera }}
+          <TextAeraComponent
+            label="Normal textaera"
+            :required="true"
+            v-model="contentTextaera"
+            default-value="Default text"
+            @content="updateContentTextaera"/>
         </div>
       </div>
     </CardComponent>
@@ -203,9 +217,11 @@ import InputGroupComponent from "@/components/components-library/checkbox/InputG
 import CardComponent from "@/components/components-library/card/CardComponent.vue";
 import CheckboxComponent from "@/components/components-library/checkbox/CheckboxComponent.vue";
 import DropdownComponent from "@/components/components-library/dropdown/DropdownComponent.vue";
+import TextAeraComponent from "@/components/components-library/input/TextAeraComponent.vue";
 
 @Options({
   components: {
+    TextAeraComponent,
     InputComponent,
     CardComponent,
     CheckboxComponent,
@@ -221,6 +237,7 @@ export default class AdminComponent extends Vue {
   selected = "";
   selectedOptions = "";
   selectedOptions2 = "";
+  contentTextaera = "";
 
   dropdownOptions = [
     {
@@ -259,6 +276,11 @@ export default class AdminComponent extends Vue {
   updateSelectedOptions2(event: any) {
     console.log("event", event);
     this.selectedOptions2 = event;
+  }
+
+  updateContentTextaera(event: any) {
+    console.log("event", event);
+    this.contentTextaera = event;
   }
 
   changeUserInformations() {
