@@ -316,6 +316,7 @@ label, input, button, select, textarea {
     .select2-container {
       .select2-selection--single {
         padding-top: 20px;
+        min-height: 58px;
         height: 100%;
       }
     }
@@ -550,6 +551,7 @@ label, input, button, select, textarea {
 
       .input-inline {
         display: inline-flex;
+        margin-top: 8px;
         float: left;
         input {
           width: 100%;
