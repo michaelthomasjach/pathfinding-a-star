@@ -42,12 +42,12 @@
     <CardComponent title="Textaera">
       <div class="row">
         <div class="col-lg-12">
-          Value : {{ contentTextaera }}
+          Value : {{ textaeraValue }}
           <TextAeraComponent
             label="Normal textaera"
             :required="true"
-            v-model="contentTextaera"
-            :default-value="contentTextaera"
+            v-model="textaeraValue"
+            :value="textaeraValue"
             @content="updateContentTextaera"/>
         </div>
       </div>
@@ -62,19 +62,45 @@
       <p>Pages Form Elements reshaped the conventional text-fields in aim to improve usability and
         create a fun, unique and exciting experience.</p>
 
-      <InputComponent label="Normal" input-type="text"/>
-      <InputComponent label="Disabled" input-type="text" disabled/>
-      <InputComponent label="Required" input-type="text" required/>
-      <InputComponent label="Password" input-type="password"/>
-      <InputComponent label="Email" input-type="email"/>
+      Value : {{ inputValue }}
+      <InputComponent
+        label="Normal"
+        input-type="text"
+        :value="inputValue"
+        v-model="inputValue"/>
+      <InputComponent
+        label="Disabled"
+        input-type="text"
+        disabled
+        :value="inputValue"
+        v-model="inputValue"/>
+      <InputComponent
+        label="Required"
+        input-type="text"
+        required
+        :value="inputValue"
+        v-model="inputValue"/>
+      <InputComponent
+        label="Password"
+        input-type="password"
+        :value="inputValue"
+        v-model="inputValue"/>
+      <InputComponent
+        label="Email"
+        input-type="email"
+        :value="inputValue"
+        v-model="inputValue"/>
       <InputComponent
         label="Placeholder"
         placeholder="Lorem ipsum dolor sit amet."
-        input-type="text"/>
+        input-type="text"
+        :value="inputValue"
+        v-model="inputValue"/>
       <InputComponent
         label="Value"
-        value="Lorem ipsum dolor sit amet."
-        input-type="text"/>
+        input-type="text"
+        :value="inputValue"
+        v-model="inputValue"/>
     </CardComponent>
 
     <CardComponent title="Checkbox">
@@ -244,7 +270,8 @@ export default class AdminComponent extends Vue {
   selected = "";
   selectedOptions = "";
   selectedOptions2 = "";
-  contentTextaera = "Default value";
+  textaeraValue = "Default value textaera";
+  inputValue = "Default Value input";
 
   dropdownOptions = [
     {
@@ -287,7 +314,7 @@ export default class AdminComponent extends Vue {
 
   updateContentTextaera(event: any) {
     console.log("event", event);
-    this.contentTextaera = event;
+    this.textaeraValue = event;
   }
 
   changeUserInformations() {

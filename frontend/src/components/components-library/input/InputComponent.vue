@@ -9,10 +9,11 @@
       {{label}}
       <input
         :type=inputType
-        :value=value
+        v-bind:value=value
         :placeholder=placeholder
         :required=required
         :disabled=disabled
+        @input="sendValue"
         @focus="focus"
         @blur="blur"
         class="form-control"
@@ -47,6 +48,18 @@ enum InputDefinition {
 })
 export default class InputComponent extends Vue {
   isFocused = false;
+  mounted() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.$emit('update:modelValue', this.value);
+  }
+
+  sendValue(event: any) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.$emit('update:modelValue', event.target.value);
+  }
+
   focus() {
     this.isFocused = true;
   }

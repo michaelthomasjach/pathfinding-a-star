@@ -7,7 +7,7 @@
       <textarea
         class="form-control textarea-simple"
         name="simple-textarea"
-        v-bind:value="defaultValue"
+        v-bind:value="value"
         @input="sendValue"/>
     </label>
   </div>
@@ -20,7 +20,7 @@ import { Options, Vue } from "vue-class-component";
   components: {},
   props: {
     label: String,
-    defaultValue: {
+    value: {
       required: false,
       type: String,
       default: "",
@@ -36,7 +36,7 @@ export default class TextAeraComponent extends Vue {
   mounted() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    this.$emit('update:modelValue', this.defaultValue);
+    this.$emit('update:modelValue', this.value);
   }
 
   sendValue(event: any) {
