@@ -7,18 +7,32 @@
     class="form-group form-group-default">
     <label for="simple-input">
       {{label}}
-      <input
-        :type=inputType
-        v-bind:value=value
-        :placeholder=placeholder
-        :required=required
-        :disabled=disabled
-        @input="sendValue"
-        @focus="focus"
-        @blur="blur"
-        class="form-control"
-        name="simple-input"
-      >
+      <div class="wrapper">
+        <div class="tag-and-input-wrapper">
+          <div class="tag-wrapper">
+            <span v-for="tag in tagInputList"
+                  :key="tag"
+                  class="tag label"
+                  :class="tagColor">
+              {{ tag }}
+            </span>
+          </div>
+          <input
+            :type=inputType
+            v-bind:value=value
+            :placeholder=placeholder
+            :required=required
+            :disabled=disabled
+            :tag-input=tagInput
+            @keyup.enter="onEnter"
+            @input="sendValue"
+            @focus="focus"
+            @blur="blur"
+            class="form-control"
+            name="simple-input"
+          >
+        </div>
+      </div>
     </label>
   </div>
 </template>
@@ -42,12 +56,19 @@ enum InputDefinition {
     inputType: InputDefinition,
     value: String,
     placeholder: String,
+    tagInput: Boolean,
+    tagColor: {
+      required: false,
+      type: String,
+      default: "primary",
+    },
     required: Boolean,
     disabled: Boolean,
   },
 })
 export default class InputComponent extends Vue {
   isFocused = false;
+  tagInputList: string[] = [];
   mounted() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -66,6 +87,12 @@ export default class InputComponent extends Vue {
 
   blur() {
     this.isFocused = false;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  onEnter(event: any) {
+    console.log(event.target.value);
+    this.tagInputList.push(event.target.value);
   }
 }
 </script>
@@ -108,6 +135,44 @@ button, input {
     -webkit-transition: background-color 0.2s ease;
     transition: background-color 0.2s ease;
     cursor: text;
+    min-height: 59px;
+
+    .wrapper {
+      position: relative;
+      display: block;
+      margin-top: 3px;
+      .tag-and-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        .tag-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+          .tag {
+            display: inline-flex;
+            padding: 2px 9px;
+            line-height: 18px;
+            border-radius: 3px;
+            margin: 0px 3px;
+            color: white;
+            &.label {
+              font-size: 11px;
+              text-shadow: none;
+              font-weight: 600;
+              background-color: transparent;
+            }
+            &.info {
+              background-color: #0072EC;
+              color: #fff;
+            }
+          }
+        }
+        .input {
+          display: inline-flex;
+        }
+      }
+    }
 
     &.required:after {
       color: #D83C31;
@@ -140,18 +205,18 @@ button, input {
       transition: opacity 0.2s ease;
     }
     .form-control {
-      display: block;
+      display: inline-flex;
       width: 100%;
       border: none;
-      height: 25px;
-      min-height: 25px;
+      height: 22px;
+      min-height: 22px;
       padding: 0;
-      margin-top: -4px;
+      margin-top: 0px;
       background: none;
       -webkit-box-shadow: none;
       box-shadow: none;
       transition: background 0.2s linear 0s;
-      line-height: 16px;
+      line-height: 22px;
       font-size: 14px;
       font-weight: normal;
       vertical-align: middle;

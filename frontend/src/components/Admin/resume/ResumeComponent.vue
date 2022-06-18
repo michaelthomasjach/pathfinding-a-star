@@ -11,79 +11,82 @@
         </div>
       </div>
     </CardComponent>
-    <CardComponent title="Information du CV">
-      <h4>Les informations remplies seront affichées sur le CV</h4>
-      <p>Il est possible de rajouter de nouvelles sections sur le CV
-        en cliquant sur le bouton "Ajouter section" en bas de la page.</p>
+    <CardComponent title="Informations générales">
+      <h4>Les informations remplies seront affichées sur le CV.</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, nihil.</p>
 
       Value : {{ inputValue }}
-      <div class="col-lg-6">
-        <InputComponent
-          label="Prénom"
-          input-type="text"
-          :value="inputValue"
-          v-model="inputValue"/>
-        <InputComponent
-          label="Nom"
-          input-type="text"
-          :value="inputValue"
-          v-model="inputValue"/>
-        <InputComponent
-          label="Age"
-          input-type="text"
-          :value="inputValue"
-          v-model="inputValue"/>
+      <div class="row">
+        <div class="col-lg-6">
+          <InputComponent
+            label="Prénom"
+            input-type="text"
+            :value="inputValue"
+            v-model="inputValue"/>
+          <InputComponent
+            label="Nom"
+            input-type="text"
+            :value="inputValue"
+            v-model="inputValue"/>
+          <InputComponent
+            label="Email"
+            input-type="email"
+            :value="inputValue"
+            v-model="inputValue"/>
+        </div>
+        <div class="col-lg-6">
+          <InputComponent
+            label="Linkedin"
+            input-type="text"
+            :value="inputValue"
+            v-model="inputValue"/>
+          <InputComponent
+            label="Github"
+            input-type="text"
+            :value="inputValue"
+            v-model="inputValue"/>
+          <InputComponent
+            label="Youtube"
+            input-type="email"
+            :value="inputValue"
+            v-model="inputValue"/>
+        </div>
       </div>
-      <div class="col-lg-6">
-        <InputComponent
-          label="Email"
-          input-type="email"
-          :value="inputValue"
-          v-model="inputValue"/>
-        <InputComponent
-          label="Linkedin"
-          input-type="text"
-          :value="inputValue"
-          v-model="inputValue"/>
-        <InputComponent
-          label="Github"
-          input-type="text"
-          :value="inputValue"
-          v-model="inputValue"/>
+    </CardComponent>
+
+    <CardComponent title="Expériences">
+      <h4>Les informations sur les différentes expériences professionnelles réalisées.</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur.</p>
+
+      <div class="row m-t-50">
+        <div class="col-lg-3">
+          <InputComponent
+            label="Entreprise"
+            input-type="text"
+            :value="inputValue"
+            v-model="inputValue"/>
+          <InputComponent
+            label="Date début/fin"
+            input-type="text"
+            :value="inputValue"
+            v-model="inputValue"/>
+        </div>
+        <div class="col-lg-9">
+          <InputComponent
+            label="Technologies utilisées"
+            input-type="text"
+            :value="inputValue"
+            :tag-input="true"
+            tag-color="info"
+            v-model="inputValue"/>
+          <TextAeraComponent
+            label="Description de l'expérience"
+            :required="true"
+            v-model="textaeraValue"
+            :value="textaeraValue"
+            @content="updateContentTextaera"/>
+        </div>
       </div>
-      <InputComponent
-        label="Disabled"
-        input-type="text"
-        disabled
-        :value="inputValue"
-        v-model="inputValue"/>
-      <InputComponent
-        label="Required"
-        input-type="text"
-        required
-        :value="inputValue"
-        v-model="inputValue"/>
-      <InputComponent
-        label="Password"
-        input-type="password"
-        :value="inputValue"
-        v-model="inputValue"/>
-      <InputComponent
-        label="Email"
-        input-type="email"
-        :value="inputValue"
-        v-model="inputValue"/>
-      <InputComponent
-        label="Placeholder"
-        placeholder="Lorem ipsum dolor sit amet."
-        input-type="text"
-        :value="inputValue"
-        v-model="inputValue"/>
-      <InputComponent
-        label="Value"
-        input-type="text"
-        :value="inputValue"
-        v-model="inputValue"/>
     </CardComponent>
 
     <CardComponent title="Checkbox">
@@ -254,7 +257,7 @@ export default class ResumeComponent extends Vue {
   selectedOptions = "";
   selectedOptions2 = "";
   textaeraValue = "Default value textaera";
-  inputValue = "Default Value input";
+  inputValue = "";
 
   dropdownOptions = [
     {

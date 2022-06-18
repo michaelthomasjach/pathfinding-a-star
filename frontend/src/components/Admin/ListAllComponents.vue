@@ -68,6 +68,14 @@
         input-type="text"
         :value="inputValue"
         v-model="inputValue"/>
+
+      <InputComponent
+        label="Tag input"
+        input-type="text"
+        :value="inputValue"
+        :tag-input="true"
+        tag-color="info"
+        v-model="inputValue"/>
       <InputComponent
         label="Disabled"
         input-type="text"
