@@ -35,6 +35,7 @@ export default class DropzoneComponent extends Vue {
   position: relative;
   width: 100%;
   height: 300px;
+  background-color: rgba(0,0,0,0.03);
   .dropzone-content {
     height: 100%;
     width: 100%;

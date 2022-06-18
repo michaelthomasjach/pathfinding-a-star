@@ -47,17 +47,15 @@
             label="Normal textaera"
             :required="true"
             v-model="contentTextaera"
-            default-value="Default text"
+            :default-value="contentTextaera"
             @content="updateContentTextaera"/>
         </div>
       </div>
     </CardComponent>
-    <CardComponent title="Dropzone">
-      <div class="row">
-        <div class="col-lg-12">
-          <DropzoneComponent />
-        </div>
-      </div>
+    <CardComponent
+      title="Dropzone"
+      :body-no-padding=true>
+      <DropzoneComponent />
     </CardComponent>
     <CardComponent title="Input">
       <h4>Exemples d'input disponibles</h4>
@@ -246,7 +244,7 @@ export default class AdminComponent extends Vue {
   selected = "";
   selectedOptions = "";
   selectedOptions2 = "";
-  contentTextaera = "";
+  contentTextaera = "Default value";
 
   dropdownOptions = [
     {

@@ -7,8 +7,7 @@
       <textarea
         class="form-control textarea-simple"
         name="simple-textarea"
-        required=""
-        :value="defaultValue"
+        v-bind:value="defaultValue"
         @input="sendValue"/>
     </label>
   </div>

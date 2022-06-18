@@ -5,7 +5,9 @@
         {{title}}
       </div>
     </div>
-    <div class="card-body">
+    <div
+      class="card-body"
+      :class="bodyNoPadding ? 'no-padding' : ''">
       <slot></slot>
     </div>
   </div>
@@ -18,6 +20,11 @@ import { Options, Vue } from "vue-class-component";
   components: {},
   props: {
     title: String,
+    bodyNoPadding: {
+      required: false,
+      type: Boolean,
+      default: false,
+    },
   },
 })
 export default class CardComponent extends Vue { }

@@ -315,7 +315,6 @@ label, input, button, select, textarea {
   line-height: 20px;
 }
 .form-group-default {
-  z-index: 1;
   border: 0px !important;
   &.form-group-default-select2 {
     padding: 0;
@@ -359,9 +358,9 @@ label, input, button, select, textarea {
   }
   & > label {
     position: absolute;
-    z-index: 10;
     padding: 5px 12px 0 9px;
     color: #757575;
+    z-index: auto;
     &:not(.error) {
       color: #4b4b4b;
       transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -601,6 +600,7 @@ label, input, button, select, textarea {
       box-shadow: 0 4px 5px rgb(0 0 0 / 15%);
       box-sizing: content-box;
       background-color: #fff;
+      z-index: 1;
       &.dropdown-hide {
         display: none;
       }
@@ -651,7 +651,6 @@ label, input, button, select, textarea {
           top: 0px;
           left: 0;
           right: 0;
-          z-index: 10;
           .select2-dropdown {
             top: 1px;
             left: 0;
