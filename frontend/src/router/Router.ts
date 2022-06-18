@@ -5,6 +5,8 @@ import { IUser } from "@/store/modules/interfaces";
 import PublicWrapper from "../components/PageStructure/Public/PublicWrapper.vue";
 import AdminWrapper from "../components/PageStructure/Admin/AdminWrapper.vue";
 import HomePage from "../views/HomePage.vue";
+import AdminPage from "../views/AdminPage.vue";
+import AdminResumePage from "../views/AdminResumePage.vue";
 import LoginPage from "../views/LoginPage.vue";
 
 export default class Router {
@@ -78,7 +80,15 @@ export default class Router {
           meta: {
             requiresAuth: true,
           },
-          component: () => import(/* webpackChunkName: "about" */ "../views/AdminPage.vue"),
+          component: AdminPage,
+        },
+        {
+          path: "/admin/resume",
+          name: "admin-resume",
+          meta: {
+            requiresAuth: true,
+          },
+          component: AdminResumePage,
         },
       ],
     },

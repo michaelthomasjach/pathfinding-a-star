@@ -1,24 +1,21 @@
 <template>
   <div class="home-page">
-    <ListAllComponents />
-    <button class="btn btn-primary btn-lg m-t-10" v-on:click="logout()">
-      Se déconnecter
-    </button>
+    <ResumeComponent />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import ListAllComponents from "@/components/admin/ListAllComponents.vue"; // @ is an alias to /src
+import ResumeComponent from "@/components/admin/resume/ResumeComponent.vue"; // @ is an alias to /src
 
 import { Action } from "s-vuex-class";
 
 @Options({
   components: {
-    ListAllComponents,
+    ResumeComponent,
   },
 })
-export default class AdminPage extends Vue {
+export default class AdminResumePage extends Vue {
   @Action("requestLogout") requestLogout: any;
 
   logout() {

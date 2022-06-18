@@ -1,73 +1,56 @@
 <template>
   <div>
-    <CardComponent title="Dropdown">
+    <CardComponent title="Sélectionner le CV a éditer">
       <div class="row">
         <div class="col-lg-3">
-          Values : {{ selectedOptions }}
           <DropdownComponent
-            label="Groupes + input + multiples options"
-            :required="true"
-            :options="dropdownOptions"
-            :defaultOptions="['Alaska']"
-            @selectedOptions="updateSelectedOptions"/>
-        </div>
-        <div class="col-lg-3">
-          Values : {{ selectedOptions }}
-          <DropdownComponent
-            label="Groupes + input inline + multiples options"
-            :search-input=true
-            :search-input-inline="true"
-            :options="dropdownOptions"
-            :defaultOptions="['Alaska']"
-            @selectedOptions="updateSelectedOptions"/>
-        </div>
-        <div class="col-lg-3">
-          Values : {{ selectedOptions2 }}
-          <DropdownComponent
-            label="Input + 1 option"
+            label="Nom du CV"
             :multiple-options="false"
-            :options="dropdownOptions2"
-            @selectedOptions="updateSelectedOptions2"/>
-        </div>
-        <div class="col-lg-3">
-          Values : {{ selectedOptions2 }}
-          <DropdownComponent
-            label="Multiples options"
-            :search-input=false
-            :options="dropdownOptions2"
+            :options="listResumeAvailable"
             @selectedOptions="updateSelectedOptions2"/>
         </div>
       </div>
     </CardComponent>
-    <CardComponent title="Textaera">
-      <div class="row">
-        <div class="col-lg-12">
-          Value : {{ textaeraValue }}
-          <TextAeraComponent
-            label="Normal textaera"
-            :required="true"
-            v-model="textaeraValue"
-            :value="textaeraValue"
-            @content="updateContentTextaera"/>
-        </div>
-      </div>
-    </CardComponent>
-    <CardComponent
-      title="Dropzone"
-      :body-no-padding=true>
-      <DropzoneComponent />
-    </CardComponent>
-    <CardComponent title="Input">
-      <h4>Exemples d'input disponibles</h4>
-      <p>Pages Form Elements reshaped the conventional text-fields in aim to improve usability and
-        create a fun, unique and exciting experience.</p>
+    <CardComponent title="Information du CV">
+      <h4>Les informations remplies seront affichées sur le CV</h4>
+      <p>Il est possible de rajouter de nouvelles sections sur le CV
+        en cliquant sur le bouton "Ajouter section" en bas de la page.</p>
 
       Value : {{ inputValue }}
-      <InputComponent
-        label="Normal"
-        input-type="text"
-        :value="inputValue"
-        v-model="inputValue"/>
+      <div class="col-lg-6">
+        <InputComponent
+          label="Prénom"
+          input-type="text"
+          :value="inputValue"
+          v-model="inputValue"/>
+        <InputComponent
+          label="Nom"
+          input-type="text"
+          :value="inputValue"
+          v-model="inputValue"/>
+        <InputComponent
+          label="Age"
+          input-type="text"
+          :value="inputValue"
+          v-model="inputValue"/>
+      </div>
+      <div class="col-lg-6">
+        <InputComponent
+          label="Email"
+          input-type="email"
+          :value="inputValue"
+          v-model="inputValue"/>
+        <InputComponent
+          label="Linkedin"
+          input-type="text"
+          :value="inputValue"
+          v-model="inputValue"/>
+        <InputComponent
+          label="Github"
+          input-type="text"
+          :value="inputValue"
+          v-model="inputValue"/>
+      </div>
       <InputComponent
         label="Disabled"
         input-type="text"
@@ -262,7 +245,7 @@ import DropzoneComponent from "@/components/components-library/dropzone/Dropzone
     DropdownComponent,
   },
 })
-export default class AdminComponent extends Vue {
+export default class ResumeComponent extends Vue {
   @Getter("getUser") getUser: any;
   @Action("requestUserInformations") requestUserInformations: any;
 
@@ -292,9 +275,9 @@ export default class AdminComponent extends Vue {
     },
   ];
 
-  dropdownOptions2 = [
-    "Value 3",
-    "Value 4",
+  listResumeAvailable = [
+    "Michael Jach",
+    "Ana Villena",
   ]
 
   get selectedValue() {
