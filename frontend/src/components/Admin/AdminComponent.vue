@@ -52,6 +52,13 @@
         </div>
       </div>
     </CardComponent>
+    <CardComponent title="Dropzone">
+      <div class="row">
+        <div class="col-lg-12">
+          <DropzoneComponent />
+        </div>
+      </div>
+    </CardComponent>
     <CardComponent title="Input">
       <h4>Exemples d'input disponibles</h4>
       <p>Pages Form Elements reshaped the conventional text-fields in aim to improve usability and
@@ -218,9 +225,11 @@ import CardComponent from "@/components/components-library/card/CardComponent.vu
 import CheckboxComponent from "@/components/components-library/checkbox/CheckboxComponent.vue";
 import DropdownComponent from "@/components/components-library/dropdown/DropdownComponent.vue";
 import TextAeraComponent from "@/components/components-library/input/TextAeraComponent.vue";
+import DropzoneComponent from "@/components/components-library/dropzone/DropzoneComponent.vue";
 
 @Options({
   components: {
+    DropzoneComponent,
     TextAeraComponent,
     InputComponent,
     CardComponent,
