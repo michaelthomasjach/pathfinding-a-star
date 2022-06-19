@@ -14,6 +14,8 @@
                   :key="tag"
                   class="tag label"
                   :class="tagColor">
+
+            <i class="pg-close"></i>
               {{ tag }}
             </span>
           </div>

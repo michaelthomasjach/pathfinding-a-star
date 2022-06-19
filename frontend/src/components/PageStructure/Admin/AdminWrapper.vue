@@ -5,6 +5,7 @@
     <div class="page-wrapper">
       <div class="page">
         <div class="page-content">
+          <i class="pg-close"></i>
           <router-view/>
         </div>
       </div>
@@ -31,6 +32,11 @@ export default class AdminWrapper extends Vue {
 </script>
 
 <style scoped lang="scss">
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'font-awesome/css/font-awesome.min.css';
+@import '@/assets/global/pages/css/pages.min.css';
+@import '@/assets/global/pages/css/pages-icons.min.css';
+
 .page-wrapper {
   position: relative;
   padding-left: 70px;

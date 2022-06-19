@@ -6,7 +6,7 @@
     <div class="content-menu">
       <div class="item">
         <span class="title">Title</span>
-        <span class="icon">x</span>
+        <i class="pg-close"></i>
       </div>
     </div>
   </div>

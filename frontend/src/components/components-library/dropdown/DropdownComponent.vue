@@ -155,7 +155,8 @@ import { Options, Vue } from "vue-class-component";
     },
     options: {
       required: true,
-      type: [],
+      type: Array,
+      default: [],
     },
     required: {
       required: false,

@@ -24,3 +24,10 @@ export default class PublicWrapper extends Vue {
 
 }
 </script>
+<style scoped lang="scss">
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'font-awesome/css/font-awesome.min.css';
+@import '@/assets/global/swiper/css/swiper.min.css';
+@import '@/assets/global/pages/css/pages.min.css';
+@import '@/assets/global/pages/css/pages-icons.min.css';
+</style>

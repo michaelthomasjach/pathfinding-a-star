@@ -70,6 +70,12 @@
             input-type="text"
             :value="inputValue"
             v-model="inputValue"/>
+          <DropdownComponent
+            label="Groupes + input + multiples options"
+            :required="true"
+            :options="dropdownOptions"
+            :defaultOptions="['Alaska']"
+            @selectedOptions="updateSelectedOptions"/>
         </div>
         <div class="col-lg-9">
           <InputComponent
@@ -258,7 +264,6 @@ export default class ResumeComponent extends Vue {
   selectedOptions2 = "";
   textaeraValue = "Default value textaera";
   inputValue = "";
-
   dropdownOptions = [
     {
       title: "Alaskan / Hawaiian Time Zone",
@@ -281,7 +286,7 @@ export default class ResumeComponent extends Vue {
   listResumeAvailable = [
     "Michael Jach",
     "Ana Villena",
-  ]
+  ];
 
   get selectedValue() {
     return this.selected;

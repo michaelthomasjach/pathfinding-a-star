@@ -45,8 +45,9 @@ export enum TypeInput {
     checked: Boolean,
     value: String,
     name: {
-      required: true,
+      required: false,
       type: String,
+      default: "checkbox",
     },
     label: String,
     type: TypeInput,
