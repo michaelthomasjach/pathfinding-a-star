@@ -14,9 +14,8 @@
                   :key="tag"
                   class="tag label"
                   :class="tagColor">
-
-            <i class="pg-close"></i>
-              {{ tag }}
+              <i class="pg-close"></i>
+              <span>{{ tag }}</span>
             </span>
           </div>
           <input
@@ -153,6 +152,7 @@ button, input {
           align-items: center;
           .tag {
             display: inline-flex;
+            align-items: center;
             padding: 2px 9px;
             line-height: 18px;
             border-radius: 3px;
@@ -167,6 +167,10 @@ button, input {
             &.info {
               background-color: #0072EC;
               color: #fff;
+            }
+            i {
+              margin-top: -1px;
+              margin-right: 5px;
             }
           }
         }

@@ -550,7 +550,7 @@ label, input, button, select, textarea {
           .remove-element {
             display: flex;
             margin-right: 0px;
-            margin-top: -3px;
+            margin-top: -1px;
           }
         }
       }
