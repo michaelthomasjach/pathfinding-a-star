@@ -15,10 +15,7 @@
       </div>
     </section>
     <nav
-      class="header bottom bg-header light-solid"
-      data-pages="header"
-      data-pages-autofixed="true"
-    >
+      class="header bottom bg-header light-solid">
       <img
         src="@/assets/public/images/brush_stroke.png"
         class="demo-brush bottom-left"
@@ -180,5 +177,9 @@ export default class HeaderComponent extends Vue {
 </script>
 
 <style scoped lang="scss">
-
+.header {
+  &.bottom {
+    top: auto !important;
+  }
+}
 </style>

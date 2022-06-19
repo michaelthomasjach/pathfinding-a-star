@@ -60,7 +60,7 @@
 
             <div class="m-t-50">
               <h2 class="m-t-30 p-b-5">Compétences</h2>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">VueJS</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -70,7 +70,7 @@
                   <i class="fa fa-star"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">React</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -80,7 +80,7 @@
                   <i class="fa fa-star-o"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">Angular</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -90,7 +90,7 @@
                   <i class="fa fa-star-o"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">NodeJS</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -100,7 +100,7 @@
                   <i class="fa fa-star"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">Java Spring</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -110,7 +110,7 @@
                   <i class="fa fa-star-o"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">Git</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -120,7 +120,7 @@
                   <i class="fa fa-star"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">Ansible</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -130,7 +130,7 @@
                   <i class="fa fa-star-o"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">Terraform</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -140,7 +140,7 @@
                   <i class="fa fa-star-o"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">Docker</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -150,7 +150,7 @@
                   <i class="fa fa-star-o"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">HTML/CSS/JS</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -164,7 +164,7 @@
 
             <div class="m-t-50">
               <h2 class="m-t-30 p-b-5">Langues</h2>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">Francais</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -174,7 +174,7 @@
                   <i class="fa fa-star"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">Anglais</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -184,7 +184,7 @@
                   <i class="fa fa-star-o"></i>
                 </div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-6 p-l-0">Espagnol</div>
                 <div class="col-sm-6 text-right">
                   <i class="fa fa-star"></i>
@@ -198,11 +198,11 @@
 
             <div class="m-t-50">
               <h2 class="m-t-30 p-b-5">Certifications</h2>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-10 p-l-0">AWS Associate Developper</div>
                 <div class="col-sm-2 text-right">?</div>
               </div>
-              <div class="m-b-10 p-b-20">
+              <div class="row m-l-0 m-r-0 m-b-10">
                 <div class="col-sm-10 p-l-0">TOEIC</div>
                 <div class="col-sm-2 text-right">810</div>
               </div>
