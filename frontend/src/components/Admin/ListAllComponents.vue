@@ -2,6 +2,27 @@
   <div>
     <CardComponent title="Dropdown">
       <div class="row">
+        <div class="col-lg-12">
+          <DraggableComponent class="dragArea w-full row" :list="list" @change="log">
+            <div
+              class="col-lg-6"
+              v-for="element in list"
+              :key="element.name"
+              >
+              <CardComponent
+                :title="element.name"
+                :color="element.color">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, consectetur
+                cumque dolore dolorem eaque esse expedita nemo nobis nostrum quam
+                similique ullam unde? Sapiente, ullam?
+              </CardComponent>
+            </div>
+          </DraggableComponent>
+        </div>
+      </div>
+    </CardComponent>
+    <CardComponent title="Dropdown">
+      <div class="row">
         <div class="col-lg-3">
           Values : {{ selectedOptions }}
           <DropdownComponent
@@ -253,11 +274,14 @@ import { Options, Vue } from "vue-class-component";
 import { Action, Getter } from "s-vuex-class";
 import InputComponent from "@/components/components-library/input/InputComponent.vue";
 import InputGroupComponent from "@/components/components-library/checkbox/InputGroupComponent.vue";
-import CardComponent from "@/components/components-library/card/CardComponent.vue";
+import CardComponent, {
+  ColorDefinition,
+} from "@/components/components-library/card/CardComponent.vue";
 import CheckboxComponent from "@/components/components-library/checkbox/CheckboxComponent.vue";
 import DropdownComponent from "@/components/components-library/dropdown/DropdownComponent.vue";
 import TextAeraComponent from "@/components/components-library/input/TextAeraComponent.vue";
 import DropzoneComponent from "@/components/components-library/dropzone/DropzoneComponent.vue";
+import { VueDraggableNext } from "vue-draggable-next";
 
 @Options({
   components: {
@@ -268,6 +292,7 @@ import DropzoneComponent from "@/components/components-library/dropzone/Dropzone
     CheckboxComponent,
     InputGroupComponent,
     DropdownComponent,
+    DraggableComponent: VueDraggableNext,
   },
 })
 export default class ListAllComponents extends Vue {
@@ -280,6 +305,7 @@ export default class ListAllComponents extends Vue {
   selectedOptions2 = "";
   textaeraValue = "Default value textaera";
   inputValue = "Default Value input";
+  dragging = false;
 
   dropdownOptions = [
     {
@@ -305,8 +331,20 @@ export default class ListAllComponents extends Vue {
     "Value 4",
   ]
 
+  list = [
+    { name: 'John', color: ColorDefinition.PRIMARY, id: 1 },
+    { name: 'Joao', color: ColorDefinition.WARNING, id: 2 },
+    { name: 'Jean', color: ColorDefinition.DANGER, id: 3 },
+    { name: 'Gerard', color: ColorDefinition.INFO, id: 4 },
+  ];
+
   get selectedValue() {
     return this.selected;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  log(event: any) {
+    console.log(event);
   }
 
   // eslint-disable-next-line class-methods-use-this

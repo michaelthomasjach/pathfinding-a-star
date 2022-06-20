@@ -1,5 +1,7 @@
 <template>
-  <div class="card card-default">
+  <div
+    class="card card-default"
+    :class="cardColor()">
     <div v-if="title" class="card-header ">
       <div class="card-title">
         {{title}}
@@ -16,6 +18,15 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 
+// eslint-disable-next-line no-shadow
+export enum ColorDefinition {
+  DANGER = "danger",
+  INFO = "info",
+  PRIMARY = "primary",
+  WARNING = "warning",
+  DEFAULT = "default",
+}
+
 @Options({
   components: {},
   props: {
@@ -25,9 +36,34 @@ import { Options, Vue } from "vue-class-component";
       type: Boolean,
       default: false,
     },
+    color: ColorDefinition,
   },
 })
-export default class CardComponent extends Vue { }
+export default class CardComponent extends Vue {
+  cardColor() {
+    let inputType = ColorDefinition.DEFAULT;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    switch (this.color) {
+    case ColorDefinition.INFO:
+      inputType = ColorDefinition.INFO;
+      break;
+    case ColorDefinition.PRIMARY:
+      inputType = ColorDefinition.PRIMARY;
+      break;
+    case ColorDefinition.WARNING:
+      inputType = ColorDefinition.WARNING;
+      break;
+    case ColorDefinition.DANGER:
+      inputType = ColorDefinition.DANGER;
+      break;
+    default:
+      inputType = ColorDefinition.DEFAULT;
+      break;
+    }
+    return `bg-${inputType}`;
+  }
+}
 </script>
 
 <style scoped lang="scss">
