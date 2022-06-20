@@ -4,8 +4,7 @@
     <HeaderMenuComponent/>
     <div class="page-wrapper">
       <div class="page">
-        <div class="page-content">
-          <i class="pg-close"></i>
+        <div class="page-content row">
           <router-view/>
         </div>
       </div>
@@ -41,9 +40,11 @@ export default class AdminWrapper extends Vue {
   position: relative;
   padding-left: 70px;
   margin-top: 75px;
+  background-color: #f4f4f4;
   .page {
     position: relative;
     padding: 25px;
   }
 }
+
 </style>

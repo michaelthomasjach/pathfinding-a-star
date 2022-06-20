@@ -1,10 +1,8 @@
 <template>
-  <div class="home-page">
-    <ListAllComponents />
-    <button class="btn btn-primary btn-lg m-t-10" v-on:click="logout()">
-      Se déconnecter
-    </button>
-  </div>
+  <ListAllComponents />
+  <button class="btn btn-primary btn-lg m-t-10" v-on:click="logout()">
+    Se déconnecter
+  </button>
 </template>
 
 <script lang="ts">

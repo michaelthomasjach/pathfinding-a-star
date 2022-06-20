@@ -10,12 +10,19 @@
       <div class="wrapper">
         <div class="tag-and-input-wrapper">
           <div class="tag-wrapper">
-            <span v-for="tag in tagInputList"
+            <span v-for="(tag, idx_tag) in tagInputList"
                   :key="tag"
                   class="tag label"
                   :class="tagColor">
-              <i class="pg-close"></i>
-              <span>{{ tag }}</span>
+              <!-- eslint-disable -->
+              <i
+                class="pg-close"
+                @click="removeTagItem(idx_tag)">
+              </i>
+              <!-- eslint-enable -->
+              <span>
+                {{ tag }}
+              </span>
             </span>
           </div>
           <input
@@ -25,7 +32,9 @@
             :required=required
             :disabled=disabled
             :tag-input=tagInput
+            ref="input_tag"
             @keyup.enter="onEnter"
+            @keyup.backspace="onBackspace"
             @input="sendValue"
             @focus="focus"
             @blur="blur"
@@ -40,7 +49,6 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Action, Getter } from "s-vuex-class";
 
 // eslint-disable-next-line no-shadow
 enum InputDefinition {
@@ -69,7 +77,7 @@ enum InputDefinition {
 })
 export default class InputComponent extends Vue {
   isFocused = false;
-  tagInputList: string[] = [];
+  tagInputList: Array<string> = [];
   mounted() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -92,8 +100,20 @@ export default class InputComponent extends Vue {
 
   // eslint-disable-next-line class-methods-use-this
   onEnter(event: any) {
-    console.log(event.target.value);
+    if (event.target.value === "") return;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.$emit('update:modelValue', "");
     this.tagInputList.push(event.target.value);
+  }
+
+  onBackspace(event: any) {
+    this.tagInputList.pop();
+  }
+
+  removeTagItem(idx: number) {
+    console.log("INDEX :", idx);
+    this.tagInputList.splice(idx, 1);
   }
 }
 </script>
@@ -169,6 +189,7 @@ button, input {
               color: #fff;
             }
             i {
+              cursor: pointer;
               margin-top: -1px;
               margin-right: 5px;
             }
