@@ -14,7 +14,11 @@
                 :color="element.color">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, consectetur
                 cumque dolore dolorem eaque esse expedita nemo nobis nostrum quam
-                similique ullam unde? Sapiente, ullam?
+                similique ullam unde? Sapiente, ullam?<br/><br/>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad adipisci
+                assumenda enim magnam molestias, nisi numquam quia quidem,
+                sunt tempore veniam vitae. Debitis harum maiores molestias,
+                nemo ratione repellendus?
               </CardComponent>
             </div>
           </DraggableComponent>
